@@ -1,0 +1,2 @@
+const Publishable_key = 'pk_test_51LqCfkKC9fajG1ReUGtNx1nj42bOCUnDjIAG6XTPXfyqyfsykpWQZiPeW5HCqhNQuS2YECTTia0F1QWzN2U8lDXR00HnTI4UtL';
+const Secret_key = 'sk_test_51LqCfkKC9fajG1RepYfD47OWZG6dxCdDSXiKHVQmqRHefzcl01Rs3s0sPJe8q6TO1ZvIF4Iz8KykraFfQOUwY63F00L2XxbDvi';

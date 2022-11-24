@@ -1,0 +1,7 @@
+//product grid
+check if product with same name exist in db before created it
+
+//variation grid
+check name and color is not duplicated
+date_on_sale_from: '',
+date_on_sale_to: '',
