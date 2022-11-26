@@ -28,13 +28,13 @@ export const create = createAsyncThunk(
 export const update = createAsyncThunk(
     'firestore/update',
     async ({id, collection, data}, {rejectWithValue})  => {
-        let {variation, images, ...rest} = data;
-        images = JSON.stringify(images);
-        variation = JSON.stringify(variation);
-        let tempData = {...rest, images, variation}
+        // let {variation, images, ...rest} = data;
+        // images = JSON.stringify(images);
+        // variation = JSON.stringify(variation);
+        // let tempData = {...rest, images, variation}
         debugger
         try {
-            await updateDoc(doc(firestoreCollection(db, collection), id), data)
+            await setDoc(doc(firestoreCollection(db, collection), id), data, {merge: true})
                 .then(res => {
                     debugger
                 }).catch(err => {
@@ -90,9 +90,9 @@ export const getAll = createAsyncThunk(
 );
 
 
-export const updateCartApi = (uid, cart) => {
+export const updateProductApi = (id, product) => {
     try {
-        setDoc(doc(db, 'users', uid), {cart: {...cart}}, {merge: true})
+        setDoc(doc(firestoreCollection(db, 'products'), id), product, {merge: true})
             .then()
     } catch (err) {
         debugger
@@ -100,25 +100,25 @@ export const updateCartApi = (uid, cart) => {
     }
 };
 
-export const updateWishListApi = (uid, wish_list) => {
-    try {
-        setDoc(doc(db, 'users', uid), {wish_list: [...wish_list]}, {merge: true})
-            .then()
-    } catch (err) {
-        debugger
-        console.log(err);
-    }
-};
-
-export const updateAddressApi = (uid, address) => {
-    try {
-        setDoc(doc(db, 'users', uid), {address: [...address]}, {merge: true})
-            .then()
-    } catch (err) {
-        debugger
-        console.log(err);
-    }
-};
+// export const updateWishListApi = (uid, wish_list) => {
+//     try {
+//         setDoc(doc(db, 'users', uid), {wish_list: [...wish_list]}, {merge: true})
+//             .then()
+//     } catch (err) {
+//         debugger
+//         console.log(err);
+//     }
+// };
+//
+// export const updateAddressApi = (uid, address) => {
+//     try {
+//         setDoc(doc(db, 'users', uid), {address: [...address]}, {merge: true})
+//             .then()
+//     } catch (err) {
+//         debugger
+//         console.log(err);
+//     }
+// };
 
 
 

@@ -1,9 +1,9 @@
 import {useSelector} from "react-redux";
-import {useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 // material
 import {Box, Button, Stack, Tooltip, Typography} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import {DataGrid, GridActionsCellItem} from "@mui/x-data-grid";
+import {DataGrid, GridActionsCellItem, GridRowModes} from "@mui/x-data-grid";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderAllIcon from '@mui/icons-material/BorderAll';
@@ -15,7 +15,10 @@ import VariationGrid from "./variationGrid/VariationGrid";
 import EzModalWithTransition from "../../components/ezComponents/EzModalWithTransition/EzModalWithTransition";
 import EzIconButton from "../../components/ezComponents/EzIconButton/EzIconButton";
 import EzText from "../../components/ezComponents/EzText/EzText";
-import AddProduct from "../../adminDashboard/addProduct/AddProduct";
+import AddProduct from "./addProduct/AddProduct";
+import * as React from "react";
+import EditToolBar from "./editToolBar/EditToolBar";
+import {update, updateProductApi} from "../../helper/FirestoreApi";
 
 //----------------------------------------------------------------
 
@@ -43,17 +46,53 @@ const tableSx = {
 //----------------------------------------------------------------
 
 export default function ProductGrid() {
-    const {product} = useSelector(slice => slice.admin);
+    const {product, productState} = useSelector(slice => slice.admin);
     const [row, setRows] = useState([]);
     const [variationGridData, setVariationGridData] = useState({
         variations: [],
         productName: ''
     });
 
+    //region
+    const [selectedRowParams, setSelectedRowParams] = useState(null);
+    const [rowModesModel, setRowModesModel] = useState({});
+
+    const handleRowFocus = useCallback((event) => {
+        const row = event.currentTarget;
+        const id = row.dataset.id;
+        const field = event.target.dataset.field;
+        setSelectedRowParams({ id, field });
+    }, []);
+
+    const rowMode = useMemo(() => {
+        if (!selectedRowParams) {
+            return 'view';
+        }
+        const { id } = selectedRowParams;
+        return rowModesModel[id]?.mode || 'view';
+    }, [rowModesModel, selectedRowParams]);
+
+    const handleProcessRowUpdateError = useCallback((error) => {
+        window.displayNotification({type: 'info', content: error})
+        console.log(error)
+    }, []);
+
+    const processRowUpdate = useCallback(
+        (newRow, oldRow) => {
+            if(JSON.stringify(newRow) === JSON.stringify(oldRow)) {
+                return oldRow
+            } else {
+                updateProductApi(newRow.id, newRow);
+                window.displayNotification({type: 'info', content: 'Product Updated Successfully'})
+                return newRow
+            }
+        },[]
+    );
+    //endregion
+
     useEffect(_ => {
         setRows(product)
-    }, [product])
-
+    }, [product]);
 
     //modal
     const [open, setOpen] = useState({bool: false, who: ''});
@@ -118,7 +157,7 @@ export default function ProductGrid() {
                     </Stack>
                 )
             }
-        },{
+        }, {
             field: 'size',
             headerName: 'Size',
             flex: 1,
@@ -136,8 +175,26 @@ export default function ProductGrid() {
                 )
             }
         }, {
+            field: 'category',
+            headerName: 'Category',
+            flex: 1,
+            align: 'center',
+            editable: true,
+            renderCell: (params) => {
+                return (
+                    <Stack flexDirection='row' gap='5px'>
+                        {params.row.category.map((c, i) =>
+                            <Typography key={c} variant='span'>
+                                {(i ? ', ' : '') + c}
+                            </Typography>
+                        )}
+                    </Stack>
+                )
+            }
+        }, {
             field: 'price',
             headerName: 'Price',
+            type: 'number',
             flex: 1,
             align: 'center',
             editable: true,
@@ -145,6 +202,7 @@ export default function ProductGrid() {
         }, {
             field: 'discount',
             headerName: 'Discount',
+            type: 'number',
             flex: 1,
             align: 'center',
             editable: true,
@@ -227,19 +285,39 @@ export default function ProductGrid() {
                     />
                     <EzText text='Product' sx={{color: '#fff', fontSize: '14px'}}/>
                 </TableHeader>
-                {row.length && <DataGrid
-                    sx={tableSx}
-                    rows={row}
-                    columns={allProductsGridColumns}
-                    getRowId={row => row.id}
-                    rowHeight={120}
-                    pageSize={10}
-                    rowsPerPageOptions={[10, 20]}
-                    editMode='row'
-                    // onEditRowsModelChange={handleEditRowsModelChange}
-                    // onRowEditStop={handleRowEditStop}
-                    // onCellDoubleClick={({row}, e) => {}}
-                />}
+                {row.length &&
+                    <DataGrid
+                        sx={tableSx}
+                        rows={row}
+                        columns={allProductsGridColumns}
+                        getRowId={row => row.id}
+                        rowHeight={120}
+                        pageSize={10}
+                        rowsPerPageOptions={[10, 20]}
+                        //to edit function in v5 editMode and experimentalFeatures are required
+                        editMode='row'
+                        experimentalFeatures={{ newEditingApi: true }}
+                        onRowModesModelChange={model => setRowModesModel(model)}
+                        rowModesModel={rowModesModel}
+                        components={{
+                            Toolbar: EditToolBar
+                        }}
+                        componentsProps={{
+                            toolbar: {
+                                rowMode,
+                                rowModesModel,
+                                setRowModesModel,
+                                selectedRowParams
+                            },
+                            row: {
+                                onFocus: handleRowFocus
+                            }
+                        }}
+                        processRowUpdate={processRowUpdate}
+                        onProcessRowUpdateError={handleProcessRowUpdateError}
+                        // loading={productState.loading}
+                    />
+                }
             </Box>
         </ChildLocal>
     );

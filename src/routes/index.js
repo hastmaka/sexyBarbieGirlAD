@@ -5,6 +5,7 @@ import Layout from "../layout/Layout";
 import Dashboard from "../section/dashboard/Dashboard";
 import ProductGrid from "../section/productGrid/ProductGrid";
 import Order from "../section/Order/Order";
+import Test from "../section/test/Test";
 
 //----------------------------------------------------------------
 
@@ -27,6 +28,9 @@ export default function Router() {
         }, {
             path: '/order',
             element: <Order/>
+        }, {
+            path: '/test',
+            element: <Test/>
         }]
     }, {
             path: '/error',

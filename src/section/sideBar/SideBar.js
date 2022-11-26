@@ -29,6 +29,7 @@ export default function SideBar() {
                 <NavLink to={'/admin-dashboard'}>Admin Dashboard</NavLink>
                 <NavLink to={'/product-grid'}>product</NavLink>
                 <NavLink to={'/order'}>order</NavLink>
+                <NavLink to={'/test'}>test</NavLink>
             </ul>
         </RootStyle>
     );

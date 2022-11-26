@@ -4,14 +4,14 @@ import {styled} from '@mui/material/styles';
 import {Box, Button, Input, MenuItem, Select, Stack, TextareaAutosize, TextField, Typography,} from "@mui/material";
 //firestore
 import {deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage";
-import {db, storage} from "../../helper/FirebaseConfig"; //sometime work other don't. have to use getStorage
-import {create} from "../../helper/FirestoreApi";
+import {db, storage} from "../../../helper/FirebaseConfig"; //sometime work other don't. have to use getStorage
+import {create} from "../../../helper/FirestoreApi";
 import {collection, getDocs, setDoc, doc} from "firebase/firestore";
 //
 import CheckboxGroup from "./checkboxGroup/CheckboxGroup";
 import PrevImages from "./prevImages/PrevImages";
 import VariantsGrid from "./variantsGrid/VariantsGrid";
-import {createId, handleDecimalsOnValue} from "../../helper/Helper";
+import {createId, handleDecimalsOnValue} from "../../../helper/Helper";
 
 //----------------------------------------------------------------
 

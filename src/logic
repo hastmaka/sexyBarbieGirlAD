@@ -5,3 +5,14 @@ check if product with same name exist in db before created it
 check name and color is not duplicated
 date_on_sale_from: '',
 date_on_sale_to: '',
+
+
+
+//grid
+make a row in edit mode after double click or with edit btn
+edit only one row at a time
+prevent lost focus on row when edit mode is on
+if (params.reason === GridCellEditStopReasons.cellFocusOut) {
+            event.defaultMuiPrevented = true;
+          }
+ask before save data if all change was correct
