@@ -56,6 +56,12 @@ const adminSlice = createSlice({
                 ...state.confirmDialog,
                 open: false,
             }
+        },
+        updateProduct(state, {payload}) {
+            const product = [...state.product];
+            const indexToUpdate = product.findIndex(item => item.id === payload.id);
+            product[indexToUpdate] = payload;
+            state.product = product;
         }
     },
     extraReducers: (builder) => {

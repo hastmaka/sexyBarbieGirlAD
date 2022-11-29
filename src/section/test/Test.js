@@ -1,184 +1,252 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { DataGrid, GridCellModes } from '@mui/x-data-grid';
-import {
-    randomCreatedDate,
-    randomTraderName,
-    randomUpdatedDate,
-} from '@mui/x-data-grid-generator';
+// material
+import {Box, Button, Stack, Tooltip, Typography} from "@mui/material";
+import {styled} from '@mui/material/styles';
+import EzMuiGrid from "../../components/ezComponents/EzMuiGrid/EzMuiGrid";
+import {useSelector} from "react-redux";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import {formatSizeArray} from "../../helper/Helper";
+import {GridActionsCellItem, GridRowModes} from "@mui/x-data-grid";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel";
+import BorderAllIcon from "@mui/icons-material/BorderAll";
+import EditIcon from "@mui/icons-material/Edit";
+import ChildLocal from "../dashboard/childLocal/ChildLocal";
 
-function EditToolbar(props) {
-    const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } = props;
+//----------------------------------------------------------------
 
-    const handleSaveOrEdit = () => {
-        if (!selectedCellParams) {
-            return;
-        }
-        const { id, field } = selectedCellParams;
-        if (cellMode === 'edit') {
-            setCellModesModel({
-                ...cellModesModel,
-                [id]: { ...cellModesModel[id], [field]: { mode: GridCellModes.View } },
-            });
-        } else {
-            setCellModesModel({
-                ...cellModesModel,
-                [id]: { ...cellModesModel[id], [field]: { mode: GridCellModes.Edit } },
-            });
-        }
-    };
+const RootStyle = styled(Stack)(({theme}) => ({}));
 
-    const handleCancel = () => {
-        if (!selectedCellParams) {
-            return;
-        }
-        const { id, field } = selectedCellParams;
-        setCellModesModel({
-            ...cellModesModel,
-            [id]: {
-                ...cellModesModel[id],
-                [field]: { mode: GridCellModes.View, ignoreModifications: true },
-            },
-        });
-    };
+//----------------------------------------------------------------
 
-    const handleMouseDown = (event) => {
-        // Keep the focus in the cell
-        event.preventDefault();
-    };
+export default function Test() {
+    const {product, productState} = useSelector(slice => slice.admin);
+    const [rowModesModel, setRowModesModel] = useState({});
 
-    return (
-        <Box
-            sx={{
-                borderBottom: 1,
-                borderColor: 'divider',
-                p: 1,
-            }}
-        >
-            <Button
-                onClick={handleSaveOrEdit}
-                onMouseDown={handleMouseDown}
-                disabled={!selectedCellParams}
-                variant="outlined"
-            >
-                {cellMode === 'edit' ? 'Save' : 'Edit'}
-            </Button>
-            <Button
-                onClick={handleCancel}
-                onMouseDown={handleMouseDown}
-                disabled={cellMode === 'view'}
-                variant="outlined"
-                sx={{ ml: 1 }}
-            >
-                Cancel
-            </Button>
-        </Box>
-    );
-}
+    const handleEditClick = useCallback((id) => {
+        setRowModesModel({...rowModesModel,[id]: {mode: GridRowModes.Edit}})
+    }, [rowModesModel]);
 
-EditToolbar.propTypes = {
-    cellMode: PropTypes.oneOf(['edit', 'view']).isRequired,
-    cellModesModel: PropTypes.object.isRequired,
-    selectedCellParams: PropTypes.shape({
-        field: PropTypes.string.isRequired,
-        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    }),
-    setCellModesModel: PropTypes.func.isRequired,
-};
+    const handleSaveClick = useCallback((id) => {
+        setRowModesModel({...rowModesModel,[id]: {mode: GridRowModes.View}})
+    }, [rowModesModel]);
 
-export default function StartEditButtonGrid() {
-    const [selectedCellParams, setSelectedCellParams] = React.useState(null);
-    const [cellModesModel, setCellModesModel] = React.useState({});
+    const handleCancelClick = useCallback((id) => {
+        setRowModesModel({...rowModesModel, [id]: {mode: GridRowModes.View, ignoreModifications: true}})
+    }, [rowModesModel]);
 
-    const handleCellFocus = React.useCallback((event) => {
-        const row = event.currentTarget.parentElement;
-        const id = row.dataset.id;
-        const field = event.currentTarget.dataset.field;
-        setSelectedCellParams({ id, field });
-    }, []);
+    const allProductsGridColumns = useMemo(
+        () => [
+            {
+                field: 'id',
+                headerName: '#',
+                width: 40,
+                align: 'center',
+                filterable: false,
+                renderCell: (index) => index.api.getRowIndex(index.row.id) + 1
+            }, {
+                field: 'name',
+                headerName: 'Name',
+                flex: 1,
+                align: 'center',
+                editable: true,
+                renderCell: (params) => {
+                    return <Typography variant='span'>{params.row.name}</Typography>
+                }
+            }, {
+                field: 'image',
+                headerName: 'Image',
+                flex: 3,
+                align: 'center',
+                renderCell: (params) => {
+                    let addImgBtn = params.row.image.length === 4;
+                    return (
+                        <Stack flexDirection='row' justifyContent='space-between' alignItems='center' sx={{width: 'fit-content'}} gap='10px'>
+                            <Stack flexDirection='row' sx={{height: '100%'}}>
+                                {params.row.image.map(i =>
+                                    <img key={i.id} src={i.url} alt='1' style={{height: '100%', width: '80px'}}/>
+                                )}
+                            </Stack>
+                            <Button disabled={addImgBtn} variant="outlined" component="label" sx={{marginRight: '20px', minWidth: '46px', cursor: 'pointer'}}>
+                                <input hidden accept="image/*" multiple type="file" />
+                                <CameraAltIcon/>
+                            </Button>
+                        </Stack>
+                    )
+                }
+            }, {
+                field: 'color',
 
-    const cellMode = React.useMemo(() => {
-        // debugger
-        if (!selectedCellParams) {
-            return 'view';
-        }
-        const { id, field } = selectedCellParams;
-        return cellModesModel[id]?.[field]?.mode || 'view';
-    }, [cellModesModel, selectedCellParams]);
+                headerName: 'Color',
+                flex: 1,
+                align: 'center',
+                renderCell: (params) => {
+                    let color = [];
+                    color = color.length ? params.row.color.map(c => color += `${c} `) : params.row.color;
+                    return (
+                        <Stack flexDirection='row' gap='5px'>
+                            {color.map((c, i) =>
+                                <Typography key={c} variant='span'>
+                                    {(i ? ', ' : '') + c}
+                                </Typography>
+                            )}
+                        </Stack>
+                    )
+                }
+            }, {
+                field: 'size',
+                headerName: 'Size',
+                flex: 1,
+                align: 'center',
+                renderCell: (params) => {
+                    return (
+                        <Stack flexDirection='row' gap='5px'>
+                            {params.row.size.map((s, i) =>
+                                <Typography key={s} variant='span'>
+                                    {formatSizeArray(s, i)}
+                                </Typography>
+                            )}
+                        </Stack>
+                    )
+                }
+            }, {
+                field: 'category',
+                headerName: 'Category',
+                flex: 1,
+                align: 'center',
+                editable: true,
+                renderCell: (params) => {
+                    return (
+                        <Stack flexDirection='row' gap='5px'>
+                            {params.row.category.map((c, i) =>
+                                <Typography key={c} variant='span'>
+                                    {(i ? ', ' : '') + c}
+                                </Typography>
+                            )}
+                        </Stack>
+                    )
+                }
+            }, {
+                field: 'price',
+                headerName: 'Price',
+                type: 'number',
+                flex: 1,
+                align: 'center',
+                editable: true,
+                valueFormatter: ({value}) => `$ ${value}`
+            }, {
+                field: 'discount',
+                headerName: 'Discount',
+                type: 'number',
+                flex: 1,
+                align: 'center',
+                editable: true,
+                renderCell: (params) => {
+                    let tempColor = params.row.discount > 0 ? 'green' : 'red';
+                    return (
+                        <Box sx={{color: tempColor}}>{params.row.discount}</Box>
+                    )
+                }
+            }, {
+                field: 'active',
+                headerName: 'Active',
+                flex: 1,
+                align: 'center',
+                type: 'boolean',
+                editable: true,
+                renderCell: (params) => {
+                    let tempColor = params.row.active === true ? 'green' : 'red';
+                    return <Typography sx={{color: tempColor }} variant='span'>{params.row.active? 'true' : 'false'}</Typography>
+                }
+            }, {
+                field: 'action',
+                headerName: 'Action',
+                align: 'center',
+                type: 'actions',
+                sortable: false,
+                getActions: (params) => {
+                    const isInEditMode = rowModesModel[params.id]?.mode === GridRowModes.Edit;
+                    // debugger
 
-    const handleCellKeyDown = React.useCallback(
-        (params, event) => {
-            if (cellMode === 'edit') {
-                // Prevents calling event.preventDefault() if Tab is pressed on a cell in edit mode
-                event.defaultMuiPrevented = true;
+                    if(isInEditMode) {
+                        return [
+                            <GridActionsCellItem
+                                icon={<SaveIcon />}
+                                label="Save"
+                                onClick={_ => handleSaveClick(params.id)}
+                            />,
+                            <GridActionsCellItem
+                                icon={<CancelIcon />}
+                                label="Cancel"
+                                className="textPrimary"
+                                onClick={_ => handleCancelClick(params.id)}
+                                color="inherit"
+                            />,
+                        ];
+                    }
+                    return [
+                        <Tooltip title="Variants">
+                            <GridActionsCellItem
+                                icon={<BorderAllIcon/>}
+                                label="Variants"
+                                // onClick={_ => {
+                                //     setVariationGridData({
+                                //         ...variationGridData,
+                                //         variations: params.row.variation,
+                                //         productName: params.row.name
+                                //     });
+                                //     setOpen({bool: true, who: 'variation'})
+                                // }}
+                                // showInMenu
+                            />
+                        </Tooltip>,
+                        <Tooltip title="Edit">
+                            <GridActionsCellItem
+                                icon={<EditIcon/>}
+                                label="Edit"
+                                // disabled={true}
+                                onClick={_ => handleEditClick(params.id)}
+                                // showInMenu
+                            />
+                        </Tooltip>,
+                        // <Tooltip title="Delete">
+                        //     <GridActionsCellItem
+                        //         icon={<DeleteIcon/>}
+                        //         label="Delete"
+                        //         onClick={_ => {
+                        //             window.confirm({type: 'warning', content: 'Sure want to delete this Product?'})
+                        //                 .then(res => {
+                        //                     if (res) {
+                        //                         setRows(prev => prev.filter(item => item.id !== params.id))
+                        //                         window.displayNotification({
+                        //                             title: 'Done',
+                        //                             type: 'success',
+                        //                             content: 'Product Deleted Successfully'
+                        //                         })
+                        //                     }
+                        //                 })
+                        //
+                        //         }}
+                        //
+                        //     />
+                        // </Tooltip>,
+                    ]
+                },
             }
-        },
-        [cellMode],
-    );
+        ], []);
 
     return (
-        <div style={{ height: 800, width: '100%' }}>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                onCellKeyDown={handleCellKeyDown}
-                cellModesModel={cellModesModel}
-                onCellModesModelChange={(model) => setCellModesModel(model)}
-                components={{
-                    Toolbar: EditToolbar,
-                }}
-                componentsProps={{
-                    toolbar: {
-                        cellMode,
-                        selectedCellParams,
-                        setSelectedCellParams,
-                        cellModesModel,
-                        setCellModesModel,
-                    },
-                    cell: {
-                        onFocus: handleCellFocus,
-                    },
-                }}
-                experimentalFeatures={{ newEditingApi: true }}
-            />
-        </div>
+        <ChildLocal sx={{height: 'calc(100vh - 80px)', padding: 0}}>
+            {productState.loaded &&
+                <EzMuiGrid
+                    row={product}
+                    columns={allProductsGridColumns}
+                    GridContainerSx={{height: 'calc(100vh - 130px)', width: '100%'}}
+                    rowModesModel={rowModesModel}
+                    setRowModesModel={setRowModesModel}
+                    headerText='Test environment'
+                />
+            }
+        </ChildLocal>
     );
 }
-
-const columns = [
-    { field: 'name', headerName: 'Name', width: 180, editable: true },
-    { field: 'age', headerName: 'Age', type: 'number', editable: true },
-    {
-        field: 'dateCreated',
-        headerName: 'Date Created',
-        type: 'date',
-        width: 180,
-        editable: true,
-    },
-    {
-        field: 'lastLogin',
-        headerName: 'Last Login',
-        type: 'dateTime',
-        width: 220,
-        editable: true,
-    },
-];
-
-const rows = [
-    {
-        id: 1,
-        name: randomTraderName(),
-        age: 25,
-        dateCreated: randomCreatedDate(),
-        lastLogin: randomUpdatedDate(),
-    },
-    {
-        id: 2,
-        name: randomTraderName(),
-        age: 36,
-        dateCreated: randomCreatedDate(),
-        lastLogin: randomUpdatedDate(),
-    },
-];

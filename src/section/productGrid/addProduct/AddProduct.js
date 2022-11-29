@@ -10,8 +10,8 @@ import {collection, getDocs, setDoc, doc} from "firebase/firestore";
 //
 import CheckboxGroup from "./checkboxGroup/CheckboxGroup";
 import PrevImages from "./prevImages/PrevImages";
-import VariantsGrid from "./variantsGrid/VariantsGrid";
 import {createId, handleDecimalsOnValue} from "../../../helper/Helper";
+import VariationGrid from "../variationGrid/VariationGrid";
 
 //----------------------------------------------------------------
 
@@ -39,7 +39,7 @@ export default function AddProduct({handleClose}) {
     const [image, setImage] = useState([]);
     const [url, setUrl] = useState([]);
     const [progress, setProgress] = useState(0);
-    const [product, setProduct] = useState({product: {}});
+    const [product, setProduct] = useState({});
     const [saveBtn, setSaveBtn] = useState(true);
     const [decimal, setDecimal] = useState(0);
     // debugger
@@ -176,6 +176,7 @@ export default function AddProduct({handleClose}) {
     }
 
     const onSaveProduct = async (product) => {
+        debugger
         const {size, color, price, category} = product;
         try{
             let filter = {};
@@ -292,7 +293,7 @@ export default function AddProduct({handleClose}) {
                             />
                         </Stack>
                         <Stack flexDirection='row' alignItems='center' gap='10px'>
-                            <Typography variant='span'>Colors</Typography>
+                            <Typography variant='span'>Colors (red,blue,pink)</Typography>
                             <TextField name='colors' size='small' sx={{width: '200px'}}/>
                         </Stack>
 
@@ -312,21 +313,17 @@ export default function AddProduct({handleClose}) {
                             > Save </Button>
                         </Stack>
                         <Stack>
-                            <VariantsGrid
-                                dataToUpdateProducts={vari => {
-                                    const {variation, ...rest} = product;
-                                    let tempV = [];
-                                    product.variation.forEach((d, i) => tempV[i] = {...d})
-                                    const {id} = variation.row;
-                                    const indexToUpdate = tempV.findIndex(object => {return object.id === id});
-                                    tempV[indexToUpdate] = variation.row;
-                                    rest.variation = tempV;
-                                    setProduct(rest)
-                                    // debugger
-                                }}
+                            {Object.keys(product).length ? <VariationGrid
                                 variation={product.variation}
-                                product_name={product.name}
-                            />
+                                product={product}
+                                productName={product.name}
+                                dataToUpdateProducts={tempVariation => {
+                                    const {variation, ...rest} = product;
+                                    const updatedProduct = {variation: tempVariation, ...rest}
+                                    setProduct(updatedProduct)
+                                }}
+
+                            /> : <Stack sx={{height: '500px'}}>No Variation Yet</Stack>}
                         </Stack>
                     </Stack>
 

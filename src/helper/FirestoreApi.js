@@ -17,10 +17,12 @@ export const create = createAsyncThunk(
     async ({collection, data}, {rejectWithValue})  => {
         try {
             const res = await addDoc(firestoreCollection(db, collection), data);
+            window.displayNotification({type: 'info', content: 'Product Created Successfully'})
             return res.id;
-        } catch (error) {
+        } catch (err) {
             debugger
-            return rejectWithValue(error.response.data);
+            window.displayNotification({type: 'error', content: `There was some error ${err.response.data}`})
+            return rejectWithValue(err.response.data);
         }
     }
 );
@@ -93,9 +95,12 @@ export const getAll = createAsyncThunk(
 export const updateProductApi = (id, product) => {
     try {
         setDoc(doc(firestoreCollection(db, 'products'), id), product, {merge: true})
-            .then()
+            .then(_ => {
+                window.displayNotification({type: 'info', content: 'Product Updated Successfully'})
+            })
     } catch (err) {
         debugger
+        window.displayNotification({type: 'error', content: `There was some error ${err}`})
         console.log(err);
     }
 };

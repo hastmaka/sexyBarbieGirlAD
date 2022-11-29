@@ -1,26 +1,36 @@
 // material
-import {Box, Stack, Typography} from "@mui/material";
+import {Box, Stack, Tooltip, Typography} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import {DataGrid} from "@mui/x-data-grid";
+import {DataGrid, GridActionsCellItem, GridRowModes} from "@mui/x-data-grid";
 import EzIconButton from "../../../components/ezComponents/EzIconButton/EzIconButton";
 import AddIcon from "@mui/icons-material/Add";
 import EzText from "../../../components/ezComponents/EzText/EzText";
-import {useMemo} from "react";
+import {useCallback, useMemo, useState} from "react";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel";
+import BorderAllIcon from "@mui/icons-material/BorderAll";
+import EditIcon from "@mui/icons-material/Edit";
+import {updateProductApi} from "../../../helper/FirestoreApi";
+import {adminSliceActions} from "../../../store/adminSlice";
+import AddProduct from "../addProduct/AddProduct";
+import EzModalWithTransition from "../../../components/ezComponents/EzModalWithTransition/EzModalWithTransition";
+import AddVariation from "../addVariation/AddVariation";
 
 //----------------------------------------------------------------
 
-const RootStyle = styled(Stack)(({theme}) => ({
-    height: '700px',
+const RootStyle = styled(Stack)(({datatoupdateproducts, theme}) => ({
+    height: datatoupdateproducts === 'true' ? '500px' : '700px',
     width: '100%',
     '& > div': {
-        height: 'calc(100% - 60px)',
+        height: 'calc(100% - 50px)',
         width: '100%'
     }
 }));
 
 const TableHeader = styled(Stack)(({theme}) => ({
     color: theme.palette.grey[0],
-    padding: '10px 20px',
+    padding: '0 20px',
+    height: '50px',
     fontSize: '14px',
     fontWeight: 700,
     borderRadius: '4px 4px 0 0',
@@ -41,9 +51,60 @@ const tableSx = {
 
 //----------------------------------------------------------------
 
-export default function VariationGrid({variationGridData}) {
+export default function VariationGrid({variation, product, productName, dataToUpdateProducts}) {
+    const [rowModesModel, setRowModesModel] = useState({});
+    const handleEditClick = useCallback((id) => {
+        setRowModesModel({...rowModesModel,[id]: {mode: GridRowModes.Edit}})
+    }, [rowModesModel]);
 
-    const allProductsVariantsGridColumns = useMemo(() => [{
+    const handleSaveClick = useCallback((id) => {
+        setRowModesModel({...rowModesModel,[id]: {mode: GridRowModes.View}})
+    }, [rowModesModel]);
+
+    const handleCancelClick = useCallback((id) => {
+        setRowModesModel({...rowModesModel, [id]: {mode: GridRowModes.View, ignoreModifications: true}})
+    }, [rowModesModel]);
+
+    const handleRowEditStart = (params, event) => {
+        event.defaultMuiPrevented = true;
+    };
+
+    const handleRowEditStop = (params, event) => {
+        event.defaultMuiPrevented = true;
+    };
+
+    const handleProcessRowUpdateError = useCallback((error) => {
+        window.displayNotification({type: 'info', content: error})
+        console.log(error)
+    }, []);
+
+    const processRowUpdate = useCallback(
+        (newRow, oldRow) => {
+            if(JSON.stringify(newRow) === JSON.stringify(oldRow)) {
+                return oldRow
+            } else {
+                let {variation, id, ...rest} = {...product},
+                    tempV = [...variation],
+                    indexTempVariation = variation.findIndex(item => item.id === newRow.id);
+                tempV[indexTempVariation] = newRow;
+                if(dataToUpdateProducts) {
+                    dataToUpdateProducts(tempV)
+                } else {
+                    window.dispatch(adminSliceActions.updateProduct({variation: tempV, id, ...rest}))
+                    updateProductApi(id, {id, variation: tempV, ...rest});
+                }
+                return newRow
+            }
+        },[]
+    );
+
+    //modal
+    const [open, setOpen] = useState(false);
+    const handleClose = () => setOpen(false);
+
+    const allProductsVariantsGridColumns = useMemo(
+        () => [
+            {
             field: 'id',
             headerName: '#',
             width: 40,
@@ -99,29 +160,76 @@ export default function VariationGrid({variationGridData}) {
                     </Typography>
                 )
             }
-        }
-    ], []);
+        }, {
+        field: 'action',
+        headerName: 'Action',
+        align: 'center',
+        type: 'actions',
+        sortable: false,
+        getActions: (params) => {
+            const isInEditMode = rowModesModel[params.id]?.mode === GridRowModes.Edit;
+            // debugger
+            if(isInEditMode) {
+                return [
+                    <GridActionsCellItem
+                        icon={<SaveIcon />}
+                        label="Save"
+                        onClick={_ => handleSaveClick(params.id)}
+                    />,
+                    <GridActionsCellItem
+                        icon={<CancelIcon />}
+                        label="Cancel"
+                        className="textPrimary"
+                        onClick={_ => handleCancelClick(params.id)}
+                        color="inherit"
+                    />,
+                ];
+            }
+            return [
+                <Tooltip title="Edit">
+                    <GridActionsCellItem
+                        icon={<EditIcon/>}
+                        label="Edit"
+                        disabled={isInEditMode === true}
+                        onClick={_ => handleEditClick(params.id)}
+                        // showInMenu
+                    />
+                </Tooltip>
+            ]
+        },
+    }], [rowModesModel, handleSaveClick, handleCancelClick, handleEditClick]);
 
     return (
-        <RootStyle>
+        <RootStyle datatoupdateproducts={(!!dataToUpdateProducts).toString()}>
+            {open && <EzModalWithTransition open={open} handleClose={handleClose}>
+                <AddVariation/>
+            </EzModalWithTransition>}
             <Box>
-                {variationGridData.variations.length &&
+                {variation?.length &&
                     <>
                         <TableHeader>
                             <EzIconButton
                                 toolTipTitle='Add Variation'
                                 icon={<AddIcon/>}
+                                onClick={_ => setOpen(true)}
                             />
-                            Variants of: {variationGridData.productName}
+                            <EzText text={`Variants of: ${productName}`} sx={{color: '#fff', fontSize: '14px'}}/>
                         </TableHeader>
                         <DataGrid
                             sx={tableSx}
-                            rows={variationGridData.variations}
+                            rows={variation}
                             columns={allProductsVariantsGridColumns}
                             getRowId={row => row.id}
                             editMode='row'
                             pageSize={10}
                             rowsPerPageOptions={[10]}
+                            onRowEditStart={handleRowEditStart}//disable edit with dbclick
+                            onRowEditStop={handleRowEditStop}//disable edit with dbclick
+                            experimentalFeatures={{ newEditingApi: true }}
+                            onRowModesModelChange={model => setRowModesModel(model)}
+                            rowModesModel={rowModesModel}
+                            processRowUpdate={processRowUpdate}
+                            onProcessRowUpdateError={handleProcessRowUpdateError}
                         />
                     </>}
             </Box>

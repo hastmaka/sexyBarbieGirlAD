@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 
 //----------------------------------------------------------------
 
-export default function EditToolBar({rowMode, rowModesModel, setRowModesModel, selectedRowParams}) {
+export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowParams}) {
 
     const handleSaveOrEdit = () => {
         if (!selectedRowParams) {

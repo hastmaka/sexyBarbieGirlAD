@@ -46,6 +46,9 @@ export default function EzModalWithTransition({open, handleClose, children}) {
                     position: 'absolute',
                     right: 0,
                     zIndex: 1000,
+                    '& > svg': {
+                        fill: '#999'
+                    }
                 }}
             />
             {children}
