@@ -1,6 +1,7 @@
 // material
 import {Checkbox, FormControlLabel, FormGroup, Stack, Typography} from "@mui/material";
 import {styled} from '@mui/material/styles';
+import EzText from "../../../../components/ezComponents/EzText/EzText";
 
 //----------------------------------------------------------------
 
@@ -20,7 +21,7 @@ export default function CheckboxGroup() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     return (
         <RootStyle>
-            <Typography variant='span'>Sizes</Typography>
+            <EzText text='Sizes'/>
             <FormGroup row>
                 <FormControlLabel control={<CustomCheckbox name='xs' {...label}/>} label="XS" />
                 <FormControlLabel control={<CustomCheckbox name='s' {...label}/>} label="S" />

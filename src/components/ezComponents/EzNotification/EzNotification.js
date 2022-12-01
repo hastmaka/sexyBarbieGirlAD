@@ -50,3 +50,26 @@ export default function EzNotification() {
         </Snackbar>
     );
 }
+
+/**
+ * Different parameters to know where the notification comes from
+ * @fromDb
+ * @param title
+ * @param type - 'error, info, success, warning'
+ * @param content
+ *
+ * window.displayNotification({
+ *   title: 'Done',
+ *   type: 'info',
+ *   content: 'Image Deleted Successfully'
+ *})
+ *
+ * @local
+ * @param type - 'error, info, success, warning'
+ * @param content
+ *
+ * window.displayNotification({
+ *   type: 'info',
+ *   content: 'Image Deleted Successfully'
+ * })
+ */

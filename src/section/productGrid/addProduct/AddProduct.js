@@ -1,89 +1,89 @@
 import {useState} from "react";
 // material
 import {styled} from '@mui/material/styles';
-import {Box, Button, Input, MenuItem, Select, Stack, TextareaAutosize, TextField, Typography,} from "@mui/material";
+import {Button, MenuItem, Select, Stack, TextareaAutosize, Typography,} from "@mui/material";
 //firestore
-import {deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage";
-import {db, storage} from "../../../helper/FirebaseConfig"; //sometime work other don't. have to use getStorage
+import {db} from "../../../helper/FirebaseConfig"; //sometime work other don't. have to use getStorage
 import {create} from "../../../helper/FirestoreApi";
 import {collection, getDocs, setDoc, doc} from "firebase/firestore";
 //
 import CheckboxGroup from "./checkboxGroup/CheckboxGroup";
 import PrevImages from "./prevImages/PrevImages";
-import {createId, handleDecimalsOnValue} from "../../../helper/Helper";
+import {
+    deleteFileFromFirebaseStore,
+    handleDecimalsOnValue,
+    uploadToFirebaseStorage
+} from "../../../helper/Helper";
 import VariationGrid from "../variationGrid/VariationGrid";
+import EzText from "../../../components/ezComponents/EzText/EzText";
+import NameInputField from "./nameInputField/NameInputField";
+import EzFileInput from "../../../components/ezComponents/EzFileInput/EzFileInput";
 
 //----------------------------------------------------------------
 
 const RootStyle = styled(Stack)(({theme}) => ({
     width: '100%',
-    // height: 'calc(100vh - 60px)',
-    padding: '10px',
+    minWidth: '1122px',
     '& form': {
         position: 'relative'
     }
 }));
 
-const TopContainer = styled(Stack)(({theme}) => ({
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: '50px',
-    borderBottom: '1px solid lightgrey',
+const GeneralContainer = styled(Stack)(({theme}) => ({
+    flex: 1,
+    gap: '10px',
+    '& > div': {
+        justifyContent: 'space-between',
+        '& > span': {
+            color: '#6e6e73'
+        }
+    }
+}));
+
+const TableHeader = styled(Stack)(({theme}) => ({
+    color: theme.palette.grey[0],
     padding: '0 20px',
-    gap: '15px'
-}))
+    height: '50px',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderRadius: '4px 4px 0 0',
+    backgroundColor: theme.palette.grey[700],
+    flexDirection: 'row',
+    alignItems: 'center'
+}));
 
 //----------------------------------------------------------------
 
 export default function AddProduct({handleClose}) {
     const [image, setImage] = useState([]);
-    const [url, setUrl] = useState([]);
-    const [progress, setProgress] = useState(0);
     const [product, setProduct] = useState({});
     const [saveBtn, setSaveBtn] = useState(true);
     const [decimal, setDecimal] = useState(0);
+    //firebase storage
+    const [url, setUrl] = useState([]);
+    const [error, setError] = useState([]);
+    const [progress, setProgress] = useState(0);
     // debugger
     const checkValue = (event) => {
         setDecimal(handleDecimalsOnValue(event.target.value));
     }
 
-    const handleChange = (e) => {
-        setImage([]);
-        for (let i = 0; i < e.target.files.length; i++) {
-            const newImage = e.target.files[i];
-            // if(newImage.size > 50000) return alert('Img size must be less than 50k');
-            newImage['id'] = `${Date.now() * Math.random()}`;
-            setImage((prevState) => [...prevState, newImage]);
-        }
-    };
-
-    const handleUpload = () => {
-        const folder_name = image[0].name.split('.')[0];
-        const promises = [];
-        image.map((image) => {
-            const storageRef = ref(storage, `products/${folder_name}/${image.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, image);
-            promises.push(uploadTask);
-            uploadTask.on('state_changed', (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
-                    setProgress(progress);
-                },
-                (error) => {
-                    console.log(error);
-                },
-                async () => {
-                    await getDownloadURL(uploadTask.snapshot.ref)
-                        .then((url) => {
-                            setUrl((prevState) => [...prevState, url]);
-                        });
+    const handleChange = (e, img) => {
+        if(Object.keys(e.target.files).length > 0) {
+            let tempImg = [];
+            for (let i = 0; i < img.length; i++) {
+                //check if image was already added
+                if(image.length) {
+                    if(!!image.find(item => item.name === img[i].name)) continue;
                 }
-            );
-        });
+                const newImage = img[i];
+                // if(newImage.size > 50000) return alert('Img size must be less than 50k');
+                newImage['id'] = `${Date.now() * Math.random()}`;
+                tempImg.push(newImage)
+            }
 
-        Promise.all(promises)
-            .then()
-            .catch((err) => console.log(err));
+            setImage(prev => [...prev, ...tempImg])
+        }
     };
 
     const onSubmit = (e) => {
@@ -93,13 +93,13 @@ export default function AddProduct({handleClose}) {
             description = data.get('description'),
             category = data.get('category').split(','),
             price = parseFloat(data.get('price')),
-            color = data.get('colors'),
+            color = data.get('color'),
             size = [
-                data.get('xs') === 'on' ? 1 : '',
-                data.get('s') === 'on' ? 2 : '',
-                data.get('m') === 'on' ? 3 : '',
-                data.get('l') === 'on' ? 4 : '',
-                data.get('xl') === 'on' ? 5 : '',
+                data.get('xs') === 'on' ? 'XS' : '',
+                data.get('s') === 'on' ? 'S' : '',
+                data.get('m') === 'on' ? 'M' : '',
+                data.get('l') === 'on' ? 'L' : '',
+                data.get('xl') === 'on' ? "XL" : '',
             ].filter(s => s !== ''),
             active = data.get('active');
         let fix_description = {};
@@ -117,62 +117,42 @@ export default function AddProduct({handleClose}) {
             sales: 0,
             total_review: 0
         }
-        if (url.length) {
-            let urlWithIds = [];
-            url.map(u => urlWithIds.push({url: u, id: u.slice(-27)}))
-            color = color.split(',');
-            let variant = [];
-            for (const col of color) {
-                for (const siz of size) {
-                    variant.push({
-                        id: createId(),
-                        price: price,
-                        color: col,
-                        size: siz,
-                        stock: 10,
-                        active: true,
-                        discount: 0
-                    })
-                }
-            }
-            setProduct({
-                active: active === 'true',
-                category: category,
-                color: color,
-                description: fix_description,
-                discount: 0,
-                image: urlWithIds,
-                name: name,
-                price: price,
-                size: size,
-                statistic: statistic,
-                stock: true,
-                variation: [...variant]
-            })
-            setSaveBtn(false)
-        } else {
-            alert('Please Save Images first')
-        }
-    }
-
-    const handleDeleteImg = (img) => {
-        window.confirm({type: 'warning', content: 'Want to delete this img'})
-            .then(res => {
-                if (res) {
-                    let actualImages = url.filter(i => i !== img);
-                    setUrl(actualImages);
-                    setProgress(0);
-                    const storage = getStorage();
-                    deleteObject(ref(storage, img))
-                        .then(_ => {
-                            window.displayNotification({
-                                title: 'Done',
-                                type: 'info',
-                                content: 'Image Deleted Successfully'
-                            })
-                        }).catch(err => console.log(err))
-                }
-            })
+        // if (url.length) {
+        //     let urlWithIds = [];
+        //     url.map(u => urlWithIds.push({url: u, id: u.slice(-27)}))
+        //     color = color.split(',');
+        //     let variant = [];
+        //     for (const col of color) {
+        //         for (const siz of size) {
+        //             variant.push({
+        //                 id: createId(),
+        //                 price: price,
+        //                 color: col,
+        //                 size: siz,
+        //                 stock: 10,
+        //                 active: true,
+        //                 discount: 0
+        //             })
+        //         }
+        //     }
+        //     setProduct({
+        //         active: active === 'true',
+        //         category: category,
+        //         color: color,
+        //         description: fix_description,
+        //         discount: 0,
+        //         image: urlWithIds,
+        //         name: name,
+        //         price: price,
+        //         size: size,
+        //         statistic: statistic,
+        //         stock: true,
+        //         variation: SortArray([...variant])
+        //     })
+        //     setSaveBtn(false)
+        // } else {
+        //     alert('Please Save Images first')
+        // }
     }
 
     const onSaveProduct = async (product) => {
@@ -231,30 +211,28 @@ export default function AddProduct({handleClose}) {
 
     return (
         <RootStyle>
-            <Box component='form' onSubmit={onSubmit}>
+            <TableHeader>
+                <EzText text='Add Product' sx={{color: '#FFF', fontSize: '12px'}}/>
+            </TableHeader>
+            <Stack component='form' onSubmit={onSubmit} p='10px'>
                 <Stack flexDirection='row' gap='20px' sx={{padding: '5px'}}>
-                    <Stack
-                        flex={1}
-                        gap='20px'
-                        sx={{
-                            '& > div': {
-                                justifyContent: 'space-between',
-                                '& > span': {
-                                    color: '#6e6e73'
-                                }
-                            }
-                        }}>
-
-                        <Stack flexDirection='row' alignItems='center' gap='10px'>
-                            <Typography variant='span'>Product Name</Typography>
-                            <TextField
-                                name='name'
-                                size='small'
-                                required
-                                autoFocus
-                                sx={{width: '200px'}}/>
+                    <GeneralContainer>
+                        <Stack width='100%' alignItems='center'>
+                            <EzText text='Product Properties' sx={{fontSize: '20px'}}/>
                         </Stack>
-
+                        <Stack flexDirection='row' alignItems='center' gap='10px'>
+                            <EzText text='Product Active'/>
+                            <Select
+                                variant="standard"
+                                name='active'
+                                defaultValue='true'
+                                sx={{width: '100px'}}
+                            >
+                                <MenuItem value='true'>True</MenuItem>
+                                <MenuItem value='false'>False</MenuItem>
+                            </Select>
+                        </Stack>
+                        <NameInputField name='name' text='Product Name (check if product exist)' sx={{width: '200px'}} autoFocus/>
                         <Stack
                             flexDirection='row'
                             alignItems='center'
@@ -271,31 +249,21 @@ export default function AddProduct({handleClose}) {
                                     }
                                 }
                             }}>
-                            <Typography variant='span'>Product Description</Typography>
+                            <EzText text='Product Description'/>
                             <TextareaAutosize
                                 name='description'
                                 size='small'
                             />
                         </Stack>
-
-                        <Stack flexDirection='row' alignItems='center' gap='10px'>
-                            <Typography variant='span'>Product Category</Typography>
-                            <TextField name='category' size='small' sx={{width: '200px'}}/>
-                        </Stack>
-                        <Stack flexDirection='row' alignItems='center' gap='10px'>
-                            <Typography variant='span'>Product price ($)</Typography>
-                            <TextField
-                                value={decimal}
-                                onChange={(event) => checkValue(event, 'change')}
-                                name='price'
-                                size='small'
-                                sx={{width: '200px'}}
-                            />
-                        </Stack>
-                        <Stack flexDirection='row' alignItems='center' gap='10px'>
-                            <Typography variant='span'>Colors (red,blue,pink)</Typography>
-                            <TextField name='colors' size='small' sx={{width: '200px'}}/>
-                        </Stack>
+                        <NameInputField name='category' text='Product Category' sx={{width: '200px'}}/>
+                        <NameInputField
+                            name='price'
+                            text='Product price ($)'
+                            value={decimal}
+                            onChange={(event) => checkValue(event, 'change')}
+                            sx={{width: '200px'}}
+                        />
+                        <NameInputField name='color' text='Colors (red,blue,pink)' sx={{width: '200px'}}/>
 
                         <CheckboxGroup/>
 
@@ -313,32 +281,25 @@ export default function AddProduct({handleClose}) {
                             > Save </Button>
                         </Stack>
                         <Stack>
-                            {Object.keys(product).length ? <VariationGrid
-                                variation={product.variation}
-                                product={product}
-                                productName={product.name}
-                                dataToUpdateProducts={tempVariation => {
-                                    const {variation, ...rest} = product;
-                                    const updatedProduct = {variation: tempVariation, ...rest}
-                                    setProduct(updatedProduct)
-                                }}
-
-                            /> : <Stack sx={{height: '500px'}}>No Variation Yet</Stack>}
+                            {Object.keys(product).length ?
+                                <VariationGrid
+                                    variation={product.variation}
+                                    product={product}
+                                    productName={product.name}
+                                    dataToUpdateProducts={tempVariation => {
+                                        const {variation, ...rest} = product;
+                                        const updatedProduct = {variation: tempVariation, ...rest}
+                                        setProduct(updatedProduct)
+                                    }}
+                                /> :
+                                <Stack sx={{height: '500px'}}>No Variation Yet</Stack>
+                            }
                         </Stack>
-                    </Stack>
+                    </GeneralContainer>
 
                     <Stack flex={1} gap='20px'>
-                        <Stack flexDirection='row' alignItems='center' gap='10px'>
-                            <Typography variant='span'>Product Active</Typography>
-                            <Select
-                                variant="standard"
-                                name='active'
-                                defaultValue='true'
-                                sx={{width: '100px'}}
-                            >
-                                <MenuItem value='true'>True</MenuItem>
-                                <MenuItem value='false'>False</MenuItem>
-                            </Select>
+                        <Stack width='100%' alignItems='center'>
+                            <EzText text='Product Media' sx={{fontSize: '20px'}}/>
                         </Stack>
                         <Stack alignItems='center'>
                             {progress === 100 ?
@@ -347,26 +308,34 @@ export default function AddProduct({handleClose}) {
                             <progress value={progress} max='100' style={{width: '100%'}}/>
                         </Stack>
 
-                        <Stack flexDirection='row' alignItems='center' gap='10px'>
-                            <Typography variant='span'>Images</Typography>
-                            <Input type='file' onChange={handleChange} inputProps={{multiple: true}}/>
+                        <Stack flexDirection='row' alignItems='flex-start' justifyContent='space-between' gap='10px'>
+                            <EzFileInput
+                                image={image}
+                                setImage={setImage}
+                                url={url}
+                                setUrl={setUrl}
+                                setProgress={setProgress}
+                                onChange={(e, img) => handleChange(e, img)}
+                            />
                             <Button
                                 disabled={progress === 100}
-                                onClick={handleUpload}
+                                onClick={_ => uploadToFirebaseStorage(image, 'upload', setProgress, setUrl)}
                                 variant='outlined'
                                 sx={{width: 100}}
                             > Upload </Button>
                         </Stack>
                         <Stack gap='20px'>
-                            <Typography variant='span'>Images Preview</Typography>
+                            <Stack width='100%' alignItems='center'>
+                                <EzText text='Image Preview' sx={{fontSize: '20px'}}/>
+                            </Stack>
                             <PrevImages
                                 urls={url}
-                                onClick={handleDeleteImg}
+                                onClick={imgUrl => deleteFileFromFirebaseStore(imgUrl, image, setImage, url, setUrl)}
                             />
                         </Stack>
                     </Stack>
                 </Stack>
-            </Box>
+            </Stack>
         </RootStyle>
     );
 }

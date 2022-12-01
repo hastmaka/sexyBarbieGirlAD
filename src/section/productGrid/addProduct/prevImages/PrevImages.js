@@ -22,16 +22,16 @@ export default function PrevImages({onClick, urls}) {
                         gridGap: '5px 5px',
                         grid: 'auto / repeat(2, 1fr)',
                     }}>
-                    {urls.map((img) =>
+                    {urls.map(url =>
                         <Box
-                            onClick={_ => onClick(img)}
-                            key={img}
+                            onClick={_ => onClick(url)}
+                            key={url}
                             sx={{
                                 cursor: 'pointer',
                                 '&:hover': {
                                     transform: 'scale(1.005)'
                                 }}}>
-                            <img src={img} alt='preview'/>
+                            <img src={url} alt='preview'/>
                         </Box>
                     )}
                 </Box>

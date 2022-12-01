@@ -32,7 +32,7 @@ export default function EzModalWithTransition({open, handleClose, children}) {
                 '& .MuiDialog-paper': {
                     margin: 0,
                     borderRadius: '4px',
-                    width: '100%'
+                    // width: '100%'
                 }
             }}
         >
@@ -44,10 +44,11 @@ export default function EzModalWithTransition({open, handleClose, children}) {
                 sx={{
                     fontSize: '14px',
                     position: 'absolute',
-                    right: 0,
+                    right: '3px',
+                    top: '3px',
                     zIndex: 1000,
                     '& > svg': {
-                        fill: '#999'
+                        fill: '#fff'
                     }
                 }}
             />

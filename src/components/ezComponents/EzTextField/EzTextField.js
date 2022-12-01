@@ -7,13 +7,13 @@ import {styled} from '@mui/material/styles';
 const RootStyle = styled(TextField)(({theme}) => ({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: theme.palette.ecommerce.pink,
+            borderColor: theme.palette.grey[400],
         },
         '&:hover fieldset': {
-            borderColor: theme.palette.ecommerce.pink,
+            borderColor: theme.palette.grey[800],
         },
         '&.Mui-focused fieldset': {
-            borderColor: theme.palette.ecommerce.pink_3,
+            borderColor: theme.palette.grey[800],
             borderWidth: 1,
         },
     },
@@ -24,14 +24,12 @@ const RootStyle = styled(TextField)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function EzTextField({required, autoFocus, ...field}) {
+export default function EzTextField({required, ...field}) {
     return (
         <RootStyle
             required
             autoFocus
             {...field}
-        >
-
-        </RootStyle>
+        />
     );
 }

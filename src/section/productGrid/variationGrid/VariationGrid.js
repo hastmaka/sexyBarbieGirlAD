@@ -1,58 +1,49 @@
+import {useCallback, useEffect, useMemo, useState} from "react";
 // material
 import {Box, Stack, Tooltip, Typography} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import {DataGrid, GridActionsCellItem, GridRowModes} from "@mui/x-data-grid";
-import EzIconButton from "../../../components/ezComponents/EzIconButton/EzIconButton";
-import AddIcon from "@mui/icons-material/Add";
-import EzText from "../../../components/ezComponents/EzText/EzText";
-import {useCallback, useMemo, useState} from "react";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
-import BorderAllIcon from "@mui/icons-material/BorderAll";
 import EditIcon from "@mui/icons-material/Edit";
-import {updateProductApi} from "../../../helper/FirestoreApi";
-import {adminSliceActions} from "../../../store/adminSlice";
-import AddProduct from "../addProduct/AddProduct";
+//
 import EzModalWithTransition from "../../../components/ezComponents/EzModalWithTransition/EzModalWithTransition";
 import AddVariation from "../addVariation/AddVariation";
+import {updateProductApi} from "../../../helper/FirestoreApi";
+import EzEditToolBar from "../EzEditToolBar/EzEditToolBar";
+import {adminSliceActions} from "../../../store/adminSlice";
+import {SortArray} from "../../../helper/Helper";
+import EzText from "../../../components/ezComponents/EzText/EzText";
 
 //----------------------------------------------------------------
 
 const RootStyle = styled(Stack)(({datatoupdateproducts, theme}) => ({
-    height: datatoupdateproducts === 'true' ? '500px' : '700px',
+    height: datatoupdateproducts === 'true' ? '500px' : '689px',
     width: '100%',
     '& > div': {
-        height: 'calc(100% - 50px)',
+        height: '100%',
         width: '100%'
     }
 }));
 
-const TableHeader = styled(Stack)(({theme}) => ({
-    color: theme.palette.grey[0],
-    padding: '0 20px',
-    height: '50px',
-    fontSize: '14px',
-    fontWeight: 700,
-    borderRadius: '4px 4px 0 0',
-    backgroundColor: theme.palette.grey[700],
-    flexDirection: 'row',
-    alignItems: 'center'
-}));
-
-const border = '#adadad';
 const tableSx = {
-    borderBottom: `1px solid ${border}`,
-    borderLeft: `1px solid ${border}`,
-    borderRight: `1px solid ${border}`,
-    borderRadius: '0 0 4px 4px',
-    borderTopRightRadius: 0,
-    borderTopLeftRadius: 0
+    borderRadius: '4px',
+    border: 0
 };
 
 //----------------------------------------------------------------
 
 export default function VariationGrid({variation, product, productName, dataToUpdateProducts}) {
     const [rowModesModel, setRowModesModel] = useState({});
+    const [rows, setRows] = useState([]);
+
+    useEffect(_ => {
+        if (variation.length){
+            setRows(variation)
+        }
+    }, [variation])
+
+
     const handleEditClick = useCallback((id) => {
         setRowModesModel({...rowModesModel,[id]: {mode: GridRowModes.Edit}})
     }, [rowModesModel]);
@@ -62,7 +53,12 @@ export default function VariationGrid({variation, product, productName, dataToUp
     }, [rowModesModel]);
 
     const handleCancelClick = useCallback((id) => {
-        setRowModesModel({...rowModesModel, [id]: {mode: GridRowModes.View, ignoreModifications: true}})
+        setRowModesModel({...rowModesModel, [id]: {mode: GridRowModes.View, ignoreModifications: true}});
+
+        const editedRow = rows.find(item => item.id === id);
+        if(editedRow.isNew) {
+            setRows(rows.filter(item => item.id !== id))
+        }
     }, [rowModesModel]);
 
     const handleRowEditStart = (params, event) => {
@@ -74,25 +70,59 @@ export default function VariationGrid({variation, product, productName, dataToUp
     };
 
     const handleProcessRowUpdateError = useCallback((error) => {
-        window.displayNotification({type: 'info', content: error})
+        window.displayNotification({type: error.type, content: error.content})
         console.log(error)
     }, []);
 
     const processRowUpdate = useCallback(
-        (newRow, oldRow) => {
+        async (newRow, oldRow, rows) => {
+            await new Promise((resolve, reject) => {
+                //check empty field
+                if(!(!!newRow.color) || !(!!newRow.size)) {
+                    return reject({type: 'error', content: 'No empty field allowed'});
+                }
+                //check if variation exist
+                if(newRow.isNew) {
+                    let tempRows = [...rows];
+                    tempRows.splice(0,1);
+                    const existVariation = tempRows.find(item => (
+                        item.color.toLowerCase() === newRow.color.toLowerCase()) &&
+                        item.size.toLowerCase() === newRow.size.toLowerCase()
+                    );
+                    if(!!existVariation) {
+                        return reject({type: 'error', content: 'Variant already exit'});
+                    }
+                }
+                resolve()
+            })
+
             if(JSON.stringify(newRow) === JSON.stringify(oldRow)) {
                 return oldRow
             } else {
-                let {variation, id, ...rest} = {...product},
-                    tempV = [...variation],
-                    indexTempVariation = variation.findIndex(item => item.id === newRow.id);
-                tempV[indexTempVariation] = newRow;
-                if(dataToUpdateProducts) {
-                    dataToUpdateProducts(tempV)
+                let {id, variation, ...rest} = {...product},
+                    tempRows = [];
+                if(newRow.isNew) {
+                    tempRows = [...rows]
+                    tempRows.splice(0,1);
                 } else {
-                    window.dispatch(adminSliceActions.updateProduct({variation: tempV, id, ...rest}))
-                    updateProductApi(id, {id, variation: tempV, ...rest});
+                    tempRows = [...rows]
                 }
+                let indexTempVariation = tempRows.findIndex(item => item.id === newRow.id);
+                if(indexTempVariation >= 0) {
+                    tempRows[indexTempVariation] = newRow;
+                    if(dataToUpdateProducts) {
+                        debugger
+                        //update variation when product is in creating mode
+                        dataToUpdateProducts(SortArray(tempRows))
+                    }
+                } else {
+                    //new variation
+                    const {isNew, ...rest} = newRow;
+                    tempRows = [...tempRows, rest];
+                }
+                setRows(SortArray(tempRows))
+                window.dispatch(adminSliceActions.updateProduct({variation: SortArray(tempRows), id, ...rest}))
+                updateProductApi(id, {id, variation: tempRows, ...rest});
                 return newRow
             }
         },[]
@@ -123,7 +153,6 @@ export default function VariationGrid({variation, product, productName, dataToUp
             flex: 1,
             align: 'center',
             editable: true,
-            valueFormatter: ({value}) => value === 1 ? 'XS' : value === 2 ? 'S' : value === 3 ? 'M' : value === 4 ? 'L' : value === 5 ? 'XL' : ''
         }, {
             field: 'price',
             headerName: 'Price',
@@ -145,6 +174,19 @@ export default function VariationGrid({variation, product, productName, dataToUp
                 )
             }
         }, {
+            field: 'discount',
+            headerName: 'Discount',
+            type: 'number',
+            flex: 1,
+            align: 'center',
+            editable: true,
+            renderCell: (params) => {
+                let tempColor = params.row.discount > 0 ? 'green' : 'red';
+                return (
+                    <EzText text={params.row.discount} sx={{fontSize: '13px', color: tempColor}}/>
+                )
+            }
+        },{
             field: 'active',
             headerName: 'Active',
             flex: 1,
@@ -161,42 +203,42 @@ export default function VariationGrid({variation, product, productName, dataToUp
                 )
             }
         }, {
-        field: 'action',
-        headerName: 'Action',
-        align: 'center',
-        type: 'actions',
-        sortable: false,
-        getActions: (params) => {
-            const isInEditMode = rowModesModel[params.id]?.mode === GridRowModes.Edit;
-            // debugger
-            if(isInEditMode) {
+            field: 'action',
+            headerName: 'Action',
+            align: 'center',
+            type: 'actions',
+            sortable: false,
+            getActions: (params) => {
+                const isInEditMode = rowModesModel[params.id]?.mode === GridRowModes.Edit;
+                // debugger
+                if(isInEditMode) {
+                    return [
+                        <GridActionsCellItem
+                            icon={<SaveIcon />}
+                            label="Save"
+                            onClick={_ => handleSaveClick(params.id)}
+                        />,
+                        <GridActionsCellItem
+                            icon={<CancelIcon />}
+                            label="Cancel"
+                            className="textPrimary"
+                            onClick={_ => handleCancelClick(params.id)}
+                            color="inherit"
+                        />,
+                    ];
+                }
                 return [
-                    <GridActionsCellItem
-                        icon={<SaveIcon />}
-                        label="Save"
-                        onClick={_ => handleSaveClick(params.id)}
-                    />,
-                    <GridActionsCellItem
-                        icon={<CancelIcon />}
-                        label="Cancel"
-                        className="textPrimary"
-                        onClick={_ => handleCancelClick(params.id)}
-                        color="inherit"
-                    />,
-                ];
-            }
-            return [
-                <Tooltip title="Edit">
-                    <GridActionsCellItem
-                        icon={<EditIcon/>}
-                        label="Edit"
-                        disabled={isInEditMode === true}
-                        onClick={_ => handleEditClick(params.id)}
-                        // showInMenu
-                    />
-                </Tooltip>
-            ]
-        },
+                    <Tooltip title="Edit">
+                        <GridActionsCellItem
+                            icon={<EditIcon/>}
+                            label="Edit"
+                            disabled={isInEditMode === true}
+                            onClick={_ => handleEditClick(params.id)}
+                            // showInMenu
+                        />
+                    </Tooltip>
+                ]
+            },
     }], [rowModesModel, handleSaveClick, handleCancelClick, handleEditClick]);
 
     return (
@@ -206,32 +248,41 @@ export default function VariationGrid({variation, product, productName, dataToUp
             </EzModalWithTransition>}
             <Box>
                 {variation?.length &&
-                    <>
-                        <TableHeader>
-                            <EzIconButton
-                                toolTipTitle='Add Variation'
-                                icon={<AddIcon/>}
-                                onClick={_ => setOpen(true)}
-                            />
-                            <EzText text={`Variants of: ${productName}`} sx={{color: '#fff', fontSize: '14px'}}/>
-                        </TableHeader>
-                        <DataGrid
-                            sx={tableSx}
-                            rows={variation}
-                            columns={allProductsVariantsGridColumns}
-                            getRowId={row => row.id}
-                            editMode='row'
-                            pageSize={10}
-                            rowsPerPageOptions={[10]}
-                            onRowEditStart={handleRowEditStart}//disable edit with dbclick
-                            onRowEditStop={handleRowEditStop}//disable edit with dbclick
-                            experimentalFeatures={{ newEditingApi: true }}
-                            onRowModesModelChange={model => setRowModesModel(model)}
-                            rowModesModel={rowModesModel}
-                            processRowUpdate={processRowUpdate}
-                            onProcessRowUpdateError={handleProcessRowUpdateError}
-                        />
-                    </>}
+                    <DataGrid
+                        sx={tableSx}
+                        rows={rows}
+                        columns={allProductsVariantsGridColumns}
+                        getRowId={row => row.id}
+                        editMode='row'
+                        pageSize={10}
+                        rowsPerPageOptions={[10]}
+                        onRowEditStart={handleRowEditStart}//disable edit with dbclick
+                        onRowEditStop={handleRowEditStop}//disable edit with dbclick
+                        experimentalFeatures={{ newEditingApi: true }}
+                        onRowModesModelChange={model => setRowModesModel(model)}
+                        rowModesModel={rowModesModel}
+                        processRowUpdate={(newRow, oldRow) => processRowUpdate(newRow, oldRow, rows)}
+                        onProcessRowUpdateError={handleProcessRowUpdateError}
+                        components={{
+                            Toolbar: EzEditToolBar
+                        }}
+                        componentsProps={{
+                            toolbar: {
+                                // rowMode,
+                                // selectedRowParams
+                                setOpen,
+                                rowModesModel,
+                                setRowModesModel,
+                                setRows,
+                                rows,
+                                from: 'variation'
+                            },
+                            // row: {
+                            //     onFocus: handleRowFocus
+                            // }
+                        }}
+                    />
+                }
             </Box>
 
         </RootStyle>

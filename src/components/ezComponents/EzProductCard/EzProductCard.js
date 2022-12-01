@@ -7,16 +7,14 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 //
 import EzButton from "../EzButton/EzButton";
 import EzRating from "../EzRating/EzRating";
-import img_1 from '../../../resources/Barbie Bikinis/web_optimized/nob.jpg';
-import img_2 from '../../../resources/Barbie Bikinis/web_optimized/nob_1.jpg';
+import Login from '../../../section/login/Login'
+import img_1 from '../../../resources/nob.jpg';
+import img_2 from '../../../resources/nob_1.jpg';
 import EzFormatPrice from "../EzFormatPrice/EzFormatPrice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import Login from "../../../sections/login/Login";
 import EzModalWithTransition from "../EzModalWithTransition/EzModalWithTransition";
-import {userSliceActions} from "../../../store/userSlice";
 import EzIconButton from "../EzIconButton/EzIconButton";
-import EzProductDetails from "../../../sections/productDetail/EzProductDetails";
 import {AddToWishlist} from "../../../helper/Helper";
 import EzWishlistBtn from "../EzWishlistBtn/EzWishlistBtn";
 import {useLocation} from "react-router-dom";
@@ -149,8 +147,8 @@ export default function EzProductCard({product}) {
     const {user} = useSelector(slice => slice.user);
     const [active, setActive] = useState(image[0].url);
     const [isHovered, setIsHovered] = useState(false);
-    const isProductInWishlist = user.dummy ? false : user.wish_list.some(item => item.id === product.id);
-    const {screen} = useSelector(slice => slice.generalState);
+    // const isProductInWishlist = user.dummy ? false : user.wish_list.some(item => item.id === product.id);
+    // const {screen} = useSelector(slice => slice.generalState);
     // debugger
 
     //modal
@@ -162,7 +160,7 @@ export default function EzProductCard({product}) {
     return (
         <RootStyle>
             {open.bool && <EzModalWithTransition open={open.bool} handleClose={handleClose}>
-                {open.who === 'quickView' && <EzProductDetails product={product} modal handleCloseCard={handleClose}/>}
+                {/*{open.who === 'quickView' && <EzProductDetails product={product} modal handleCloseCard={handleClose}/>}*/}
                 {open.who === 'login' && <Login handleClose={handleClose} modal/>}
             </EzModalWithTransition>}
             <ImageContainer
@@ -194,7 +192,7 @@ export default function EzProductCard({product}) {
                     <EzWishlistBtn
                         product={product}
                         user={user}
-                        isProductInWishlist={isProductInWishlist}
+                        // isProductInWishlist={isProductInWishlist}
                         setOpen={setOpen}
                     />
                 </HeartContainer>
@@ -243,7 +241,8 @@ export default function EzProductCard({product}) {
                     startIcon={<AddShoppingCartIcon sx={{padding: 0}}/>}
                     onClick={_ => setOpen({bool: true, who: 'quickView'})}
                 >
-                    {screen >= 1366 ? 'Add to Cart' : ''}
+                    {/*{screen >= 1366 ? 'Add to Cart' : ''}*/}
+                    Add to cart
                 </EzButton>
             </InfoContainer>
         </RootStyle>

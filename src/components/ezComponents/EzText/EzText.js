@@ -1,10 +1,10 @@
 // material
-import {Stack} from "@mui/material";
+import {Typography} from "@mui/material";
 import {styled} from '@mui/material/styles';
 
 //----------------------------------------------------------------
 
-const RootStyle = styled(Stack)(({theme}) => ({
+const RootStyle = styled(Typography)(({theme}) => ({
     fontSize: '12px',
     fontWeight: 600,
     textTransform: 'capitalize',
@@ -13,9 +13,9 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function EzText({text, sx}) {
+export default function EzText({text, sx, ...rest}) {
     return (
-        <RootStyle sx={{...sx}}>
+        <RootStyle sx={{...sx}} {...rest} variant='span'>
             {text}
         </RootStyle>
     );
