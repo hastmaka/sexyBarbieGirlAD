@@ -6,6 +6,7 @@ import Dashboard from "../section/dashboard/Dashboard";
 import ProductGrid from "../section/productGrid/ProductGrid";
 import Order from "../section/Order/Order";
 import Test from "../section/test/Test";
+import Shipping from "../section/shipping/Shipping";
 
 //----------------------------------------------------------------
 
@@ -28,6 +29,9 @@ export default function Router() {
         }, {
             path: '/order',
             element: <Order/>
+        }, {
+            path: '/shipping',
+            element: <Shipping/>
         }, {
             path: '/test',
             element: <Test/>

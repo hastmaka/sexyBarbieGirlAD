@@ -12,7 +12,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 //----------------------------------------------------------------
 
-export default function EzModalWithTransition({open, handleClose, children}) {
+export default function EzModalWithTransition({open, handleClose, children, who}) {
     // debugger
     return (
         <Dialog
@@ -32,7 +32,7 @@ export default function EzModalWithTransition({open, handleClose, children}) {
                 '& .MuiDialog-paper': {
                     margin: 0,
                     borderRadius: '4px',
-                    // width: '100%'
+                    width: who === 'variation' ? '100%' : 'fit-content'
                 }
             }}
         >

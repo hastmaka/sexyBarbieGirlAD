@@ -16,6 +16,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 //----------------------------------------------------------------
 
 export default function EzFileInput({ image, onChange, url, setUrl, setImage, setProgress }) {
+    debugger
     return (
         <RootStyle>
             <FormControlLabel

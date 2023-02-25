@@ -17,7 +17,6 @@ root.render(
                       <App/>
                       <EzNotification/>
                       <EzConfirmDialog/>
-                      {/*<EzModalWithTransition/>*/}
                   </ThemeProvider>
           </Provider>
       </BrowserRouter>

@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import EzIconButton from "../../../components/ezComponents/EzIconButton/EzIconButton";
 import AddIcon from "@mui/icons-material/Add";
 import EzText from "../../../components/ezComponents/EzText/EzText";
-import {createId} from "../../../helper/Helper";
+import {createId, openModal} from "../../../helper/Helper";
+import AddProduct from "../addProduct/AddProduct";
 
 //----------------------------------------------------------------
 
@@ -24,7 +25,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowParams, setOpen, setRows, rows, from}) {
+export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowParams, setRows, rows, from, productName}) {
     // debugger
     const handleSaveOrEdit = () => {
         if (!selectedRowParams) {
@@ -71,14 +72,14 @@ export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowPar
                     disabled={!!(rows?.find(item => item.isNew))}
                     onClick={_ => {
                         if(from === 'product') {
-                            setOpen({bool: true, who: 'addProduct'})
+                            openModal(<AddProduct/>)
                         } else {
                             handleAddRow()
                         }
                     }}
                 />
                 <EzText
-                    text={from === 'product' ? 'Product' : from === 'variation' ? 'Variation' : ''}
+                    text={from === 'product' ? 'Product' : from === 'variation' ? `Variations of ${productName}` : ''}
                     sx={{color: '#fff', fontSize: '14px'}}
                 />
             </Stack>

@@ -16,7 +16,6 @@ import EzProductCard from "../EzProductCard/EzProductCard";
 //----------------------------------------------------------------
 
 export default function EzSwiper({data, show, freeMode, allowTouchMove = false, ...others}) {
-
     const slides = [];
         data.map(item => {
             return slides.push(

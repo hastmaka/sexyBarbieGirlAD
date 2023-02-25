@@ -1,7 +1,7 @@
 // material
 import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import ChildLocal from "./childLocal/ChildLocal";
+import Wrapper from "../../components/Wrapper/Wrapper";
 
 //----------------------------------------------------------------
 
@@ -34,26 +34,26 @@ export default function Dashboard() {
 
                 {/*first section*/}
                 <SectionContainer>
-                    <ChildLocal sx={{width: '65%'}}>
+                    <Wrapper sx={{width: '65%'}}>
                         Total Revenue
-                    </ChildLocal>
-                    <ChildLocal sx={{width: '35%'}}>
+                    </Wrapper>
+                    <Wrapper sx={{width: '35%'}}>
                         Customers
-                    </ChildLocal>
+                    </Wrapper>
                 </SectionContainer>
 
                 {/*second section*/}
                 <SectionContainer>
-                    <ChildLocal sx={{width: '65%'}}>Top Products</ChildLocal>
-                    <ChildLocal sx={{width: '35%'}}>Stats Overview</ChildLocal>
+                    <Wrapper sx={{width: '65%'}}>Top Products</Wrapper>
+                    <Wrapper sx={{width: '35%'}}>Stats Overview</Wrapper>
                 </SectionContainer>
             </Stack>
 
             {/*notificationArea area*/}
             <NotificationAreaContainer>
-                <ChildLocal sx={{flex: 1}}>notification</ChildLocal>
-                <ChildLocal sx={{flex: 1}}>daily activities</ChildLocal>
-                <ChildLocal sx={{flex: 1}}>notes</ChildLocal>
+                <Wrapper sx={{flex: 1}}>notification</Wrapper>
+                <Wrapper sx={{flex: 1}}>daily activities</Wrapper>
+                <Wrapper sx={{flex: 1}}>notes</Wrapper>
             </NotificationAreaContainer>
         </RootStyle>
     );

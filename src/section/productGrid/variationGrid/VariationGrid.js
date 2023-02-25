@@ -19,16 +19,20 @@ import EzText from "../../../components/ezComponents/EzText/EzText";
 
 const RootStyle = styled(Stack)(({datatoupdateproducts, theme}) => ({
     height: datatoupdateproducts === 'true' ? '500px' : '689px',
-    width: '100%',
     '& > div': {
         height: '100%',
-        width: '100%'
     }
 }));
 
 const tableSx = {
     borderRadius: '4px',
-    border: 0
+    border: 0,
+    '&.MuiDataGrid-main': {
+        backgroundColor: 'red'
+    },
+    '&.MuiDataGrid-columnHeaderTitleContainer': {
+        justifyContent: 'center'
+    }
 };
 
 //----------------------------------------------------------------
@@ -76,6 +80,7 @@ export default function VariationGrid({variation, product, productName, dataToUp
 
     const processRowUpdate = useCallback(
         async (newRow, oldRow, rows) => {
+            debugger
             await new Promise((resolve, reject) => {
                 //check empty field
                 if(!(!!newRow.color) || !(!!newRow.size)) {
@@ -139,6 +144,7 @@ export default function VariationGrid({variation, product, productName, dataToUp
             headerName: '#',
             width: 40,
             align: 'center',
+            headerAlign: 'center',
             filterable: false,
             renderCell: (index) => index.api.getRowIndex(index.row.id) + 1
         }, {
@@ -146,25 +152,30 @@ export default function VariationGrid({variation, product, productName, dataToUp
             headerName: 'Color',
             flex: 1,
             align: 'center',
+            headerAlign: 'center',
             editable: true,
         }, {
             field: 'size',
             headerName: 'Size',
             flex: 1,
             align: 'center',
+            headerAlign: 'center',
             editable: true,
         }, {
             field: 'price',
             headerName: 'Price',
             flex: 1,
             align: 'center',
+            headerAlign: 'center',
             editable: true,
             valueFormatter: ({value}) => `$ ${value}`
         }, {
             field: 'stock',
             headerName: 'Stock',
             flex: 1,
+            type: 'number',
             align: 'center',
+            headerAlign: 'center',
             editable: true,
             renderCell: (params) => {
                 let s = params.row.stock,
@@ -179,27 +190,12 @@ export default function VariationGrid({variation, product, productName, dataToUp
             type: 'number',
             flex: 1,
             align: 'center',
+            headerAlign: 'center',
             editable: true,
             renderCell: (params) => {
                 let tempColor = params.row.discount > 0 ? 'green' : 'red';
                 return (
                     <EzText text={params.row.discount} sx={{fontSize: '13px', color: tempColor}}/>
-                )
-            }
-        },{
-            field: 'active',
-            headerName: 'Active',
-            flex: 1,
-            align: 'center',
-            type: 'boolean',
-            editable: true,
-            renderCell: (params) => {
-                let tempColor = params.row.active === true ? 'green' : 'red';
-                return (
-                    <Typography
-                        sx={{color: tempColor}}
-                        variant='span'>{params.row.active ? 'true' : 'false'}
-                    </Typography>
                 )
             }
         }, {
@@ -275,7 +271,8 @@ export default function VariationGrid({variation, product, productName, dataToUp
                                 setRowModesModel,
                                 setRows,
                                 rows,
-                                from: 'variation'
+                                from: 'variation',
+                                productName
                             },
                             // row: {
                             //     onFocus: handleRowFocus

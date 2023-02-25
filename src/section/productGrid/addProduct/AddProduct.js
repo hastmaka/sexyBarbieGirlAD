@@ -10,14 +10,16 @@ import {collection, getDocs, setDoc, doc} from "firebase/firestore";
 import CheckboxGroup from "./checkboxGroup/CheckboxGroup";
 import PrevImages from "./prevImages/PrevImages";
 import {
+    createId,
     deleteFileFromFirebaseStore,
-    handleDecimalsOnValue,
+    handleDecimalsOnValue, SortArray,
     uploadToFirebaseStorage
 } from "../../../helper/Helper";
 import VariationGrid from "../variationGrid/VariationGrid";
 import EzText from "../../../components/ezComponents/EzText/EzText";
 import NameInputField from "./nameInputField/NameInputField";
 import EzFileInput from "../../../components/ezComponents/EzFileInput/EzFileInput";
+import {adminSliceActions} from "../../../store/adminSlice";
 
 //----------------------------------------------------------------
 
@@ -54,7 +56,7 @@ const TableHeader = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function AddProduct({handleClose}) {
+export default function AddProduct() {
     const [image, setImage] = useState([]);
     const [product, setProduct] = useState({});
     const [saveBtn, setSaveBtn] = useState(true);
@@ -93,7 +95,7 @@ export default function AddProduct({handleClose}) {
             description = data.get('description'),
             category = data.get('category').split(','),
             price = parseFloat(data.get('price')),
-            color = data.get('color'),
+            color = data.get('color').split(','),
             size = [
                 data.get('xs') === 'on' ? 'XS' : '',
                 data.get('s') === 'on' ? 'S' : '',
@@ -114,45 +116,43 @@ export default function AddProduct({handleClose}) {
             average_rating: 0,
             date_on_sale_from: '',
             date_on_sale_to: '',
-            sales: 0,
+            sales: {},
             total_review: 0
         }
-        // if (url.length) {
-        //     let urlWithIds = [];
-        //     url.map(u => urlWithIds.push({url: u, id: u.slice(-27)}))
-        //     color = color.split(',');
-        //     let variant = [];
-        //     for (const col of color) {
-        //         for (const siz of size) {
-        //             variant.push({
-        //                 id: createId(),
-        //                 price: price,
-        //                 color: col,
-        //                 size: siz,
-        //                 stock: 10,
-        //                 active: true,
-        //                 discount: 0
-        //             })
-        //         }
-        //     }
-        //     setProduct({
-        //         active: active === 'true',
-        //         category: category,
-        //         color: color,
-        //         description: fix_description,
-        //         discount: 0,
-        //         image: urlWithIds,
-        //         name: name,
-        //         price: price,
-        //         size: size,
-        //         statistic: statistic,
-        //         stock: true,
-        //         variation: SortArray([...variant])
-        //     })
-        //     setSaveBtn(false)
-        // } else {
-        //     alert('Please Save Images first')
-        // }
+        if (url.length) {
+            let urlWithIds = [];
+            url.map(u => urlWithIds.push({url: u, id: u.slice(-27)}));
+            let variant = [];
+            for (const col of color) {
+                for (const siz of size) {
+                    variant.push({
+                        id: createId(),
+                        price: price,
+                        color: col,
+                        size: siz,
+                        stock: 10,
+                        discount: 0,
+                        checked: true
+                    })
+                }
+            }
+            setProduct({
+                active: active === 'true',
+                category: category,
+                color: color,
+                description: fix_description,
+                image: urlWithIds,
+                name: name,
+                price: price,
+                size: size,
+                statistic: statistic,
+                stock: true,
+                variation: SortArray([...variant])
+            })
+            setSaveBtn(false)
+        } else {
+            alert('Please Save Images first')
+        }
     }
 
     const onSaveProduct = async (product) => {
@@ -202,7 +202,7 @@ export default function AddProduct({handleClose}) {
 
             await setDoc(doc(db, 'filters', 'filters'), filter, {merge: true});
             window.dispatch(create({collection: 'products', data: product}));
-            handleClose()
+            window.dispatch(adminSliceActions.closeModal())
         } catch (err) {
             console.log(err);
         }

@@ -1,8 +1,15 @@
 import {deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable, getMetadata} from "firebase/storage";
 import {storage} from './FirebaseConfig';
+import {adminSliceActions} from "../store/adminSlice";
 
 export const createId = _ => {
-    return Date.now() * Math.random()
+    let result           = '';
+    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for ( let i = 0; i < 20; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 };
 
 export const handleDecimalsOnValue = (value) => {
@@ -114,4 +121,9 @@ export const deleteFileFromFirebaseStore = (item, image, setImage, url, setUrl, 
                 }
             })
     }
+}
+
+export const openModal = (children, who = null) => {
+    window.dispatch(adminSliceActions.openModal(who));
+    window.setChildren(children)
 }

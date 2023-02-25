@@ -6,8 +6,13 @@ const adminSlice = createSlice({
     initialState: {
         screen: '',
         product: [],
+        order: [],
         user: {},
 
+        modal: {
+            open: false,
+            who: null
+        },
         notification: {
             open: false,
             type: 'info',
@@ -23,12 +28,19 @@ const adminSlice = createSlice({
         },
 
         productState: {loaded: false, loading: false},
+        orderState: {loaded: false, loading: false},
         userStatus: {loaded: false, loading: false},
     },
     reducers: {
         setScreen(state, {payload}) {
             state.screen = payload
         },
+
+        openModal(state, {payload}) {
+            state.modal.open = true;
+            state.modal.who = payload
+        },
+        closeModal(state){state.modal.open = false},
 
         showNotification(state, {payload}) {
             state.notification = {
@@ -71,6 +83,9 @@ const adminSlice = createSlice({
                 case 'products':
                     state.productState.loading = true;
                     break;
+                case 'orders':
+                    state.orderState.loading = true;
+                    break;
                 default:
                     return
             }
@@ -81,6 +96,11 @@ const adminSlice = createSlice({
                     state.product = payload;
                     state.productState.loading = false;
                     state.productState.loaded = true;
+                    break;
+                case 'orders':
+                    state.order = payload;
+                    state.orderState.loading = false;
+                    state.orderState.loaded = true;
                     break;
                 default:
                     return

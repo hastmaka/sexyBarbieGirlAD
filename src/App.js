@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {lazy, Suspense, useEffect, useState} from "react";
 // material
 import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
@@ -8,7 +8,8 @@ import {useCheckScreen, useConfirmDialog, useNotification} from "./helper/Hooks"
 import {useDispatch, useSelector} from "react-redux";
 import Routes from './routes/index';
 import ScrollToTop from "./components/scrollToTop/ScrollToTop";
-import {getAll} from "./helper/FirestoreApi";
+//async import
+const EzModal = lazy(() => import('./components/ezComponents/EzModal/EzModal'))
 
 //----------------------------------------------------------------
 
@@ -21,13 +22,9 @@ export default function App() {
     const {confirm} = useConfirmDialog();
     const {displayNotification} = useNotification();
     const {user, userStatus} = useSelector(slice => slice.admin);
+    const [children, setChildren] = useState(null);
 
-    useEffect(() => {
-        if (!userStatus.loading && !userStatus.loaded) {
-            dispatch(getAll({collection: 'products'}))
-            // dispatch(getAll({collection: 'filters'}))
-        }
-    }, [dispatch, userStatus]);
+    //check if user is authenticated
 
     //get screen size
     const screenSize = useCheckScreen();
@@ -38,13 +35,17 @@ export default function App() {
     useEffect(_ => {
         window.dispatch = dispatch;
         window.confirm = confirm;
+        window.setChildren = setChildren;
         window.displayNotification = displayNotification;
     }, [])
 
     return (
         <RootStyle>
             <ScrollToTop/>
-            <Routes/>
+            {window.dispatch && <Routes/>}
+            <Suspense fallback={<div>Loading Login...</div>}>
+                <EzModal children={children}/>
+            </Suspense>
         </RootStyle>
     );
 }
