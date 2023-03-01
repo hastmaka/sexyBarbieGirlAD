@@ -8,6 +8,7 @@ export default function CssBaseline() {
         MuiCssBaseline: {
             styleOverrides: {
                 '*': {
+                    fontWeight: '500 !important',
                     margin: 0,
                     padding: 0,
                     boxSizing: 'border-box',
@@ -35,7 +36,7 @@ export default function CssBaseline() {
                     height: '100%',
                     position: 'relative',
                     lineHeight: 1.3,
-                    color: '#767193'
+                    color: '#323232'
                 },
                 '#root': {
                     width: '100%',

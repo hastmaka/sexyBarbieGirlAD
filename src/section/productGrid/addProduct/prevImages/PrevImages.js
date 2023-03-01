@@ -1,6 +1,7 @@
 // material
 import {Box, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 //----------------------------------------------------------------
 
@@ -12,7 +13,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function PrevImages({onClick, urls}) {
+export default function PrevImages({image, onClick}) {
     return (
         <RootStyle>
                 <Box
@@ -22,16 +23,24 @@ export default function PrevImages({onClick, urls}) {
                         gridGap: '5px 5px',
                         grid: 'auto / repeat(2, 1fr)',
                     }}>
-                    {urls.map(url =>
-                        <Box
-                            onClick={_ => onClick(url)}
-                            key={url}
+                    {image.map(item => <Box
+                            onClick={_ => onClick(item)}
+                            key={item.File.name}
                             sx={{
+                                position: 'relative',
                                 cursor: 'pointer',
                                 '&:hover': {
                                     transform: 'scale(1.005)'
-                                }}}>
-                            <img src={url} alt='preview'/>
+                                }
+                            }}>
+                            {item.uploaded && <Box
+                                sx={{
+                                    position: 'absolute'
+                                }}
+                            >
+                                <CheckCircleIcon sx={{color: '#008000'}}/>
+                            </Box>}
+                            <img src={URL.createObjectURL(item.File)} alt={item.File.name}/>
                         </Box>
                     )}
                 </Box>

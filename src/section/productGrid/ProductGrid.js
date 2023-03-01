@@ -48,7 +48,7 @@ const tableSx = {
 //----------------------------------------------------------------
 
 export default function ProductGrid() {
-    const {product, productState} = useSelector(slice => slice.admin);
+    const {product, productState} = useSelector(slice => slice.product);
     const [row, setRows] = useState([]);
     const addBtnRef = useRef();
     const [rowModesModel, setRowModesModel] = useState({});
@@ -187,10 +187,6 @@ export default function ProductGrid() {
         if(productState.loaded)
         setRows(product)
     }, [product, productState]);
-
-    //modal
-    const [open, setOpen] = useState({bool: false, who: ''});
-    const handleClose = () => setOpen({bool: false, who: ''});
 
     const allProductsGridColumns = useMemo(
         () => [
@@ -407,31 +403,6 @@ export default function ProductGrid() {
 
     return (
         <Wrapper sx={{height: 'calc(100vh - 80px)', padding: 0}}>
-            {/*{open.bool && <EzModalWithTransition open={open.bool} handleClose={handleClose} who={open.who}>*/}
-            {/*    {open.who === 'variation' &&*/}
-            {/*        <VariationGrid*/}
-            {/*            variation={variationGridData.variations}*/}
-            {/*            product={variationGridData.product}*/}
-            {/*            productName={variationGridData.productName}*/}
-            {/*        />*/}
-            {/*    }*/}
-            {/*    {open.who === 'addProduct' && <AddProduct handleClose={handleClose}/>}*/}
-            {/*    {open.who === 'swiper' &&*/}
-            {/*        <Stack*/}
-            {/*            sx={{*/}
-            {/*                height: 'calc(90vh)',*/}
-            {/*                width: '60vw',*/}
-            {/*                maxHeight: '950px',*/}
-            {/*                maxWidth: '768px',*/}
-            {/*                '& .swiper': {*/}
-            {/*                    width: '100%',*/}
-            {/*                    height: '100%',*/}
-            {/*                }*/}
-            {/*            }}>*/}
-            {/*            <EzSwiper allowTouchMove show data={swiperData} />*/}
-            {/*        </Stack>*/}
-            {/*    }*/}
-            {/*</EzModalWithTransition>}*/}
             <Box sx={{height: '100%', width: '100%'}}>
                 {row.length ?
                     <DataGrid
@@ -456,7 +427,6 @@ export default function ProductGrid() {
                             toolbar: {
                                 // rowMode,
                                 // selectedRowParams
-                                setOpen,
                                 rowModesModel,
                                 setRowModesModel,
                                 from: 'product'

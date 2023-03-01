@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 // material
 import {styled} from '@mui/material/styles';
 import {Button, MenuItem, Select, Stack, TextareaAutosize, Typography,} from "@mui/material";
@@ -20,6 +20,8 @@ import EzText from "../../../components/ezComponents/EzText/EzText";
 import NameInputField from "./nameInputField/NameInputField";
 import EzFileInput from "../../../components/ezComponents/EzFileInput/EzFileInput";
 import {adminSliceActions} from "../../../store/adminSlice";
+import {useSelector} from "react-redux";
+import {productSliceActions} from "../../../store/productSlice";
 
 //----------------------------------------------------------------
 
@@ -57,35 +59,40 @@ const TableHeader = styled(Stack)(({theme}) => ({
 //----------------------------------------------------------------
 
 export default function AddProduct() {
-    const [image, setImage] = useState([]);
-    const [product, setProduct] = useState({});
+    const {image, progress, tempProduct} = useSelector(slice => slice.product);
     const [saveBtn, setSaveBtn] = useState(true);
     const [decimal, setDecimal] = useState(0);
     //firebase storage
-    const [url, setUrl] = useState([]);
     const [error, setError] = useState([]);
-    const [progress, setProgress] = useState(0);
+    // const [progress, setProgress] = useState(0);
     // debugger
     const checkValue = (event) => {
         setDecimal(handleDecimalsOnValue(event.target.value));
     }
+    const hiddenInputRef = useRef(null);
 
-    const handleChange = (e, img) => {
-        if(Object.keys(e.target.files).length > 0) {
-            let tempImg = [];
-            for (let i = 0; i < img.length; i++) {
-                //check if image was already added
-                if(image.length) {
-                    if(!!image.find(item => item.name === img[i].name)) continue;
-                }
-                const newImage = img[i];
-                // if(newImage.size > 50000) return alert('Img size must be less than 50k');
-                newImage['id'] = `${Date.now() * Math.random()}`;
-                tempImg.push(newImage)
+    /**
+     * use cases
+     * check if image is local or, it was uploaded
+     * upload 1 photo *
+     * same as before plus another one
+     * upload 1 pic click btn Upload and then rey to add the same
+     * upload 1 pic click btn Upload and then rey to add a new one
+     * @param e
+     */
+    const handleChange = (e) => {
+        let tempImg = [];
+        for (let i = 0; i < e.target.files.length; i++) {
+            //check if image was already added
+            if(image.length) {
+                if(!!image.find(item => item.File.name === e.target.files[i].name)) continue;
             }
-
-            setImage(prev => [...prev, ...tempImg])
+            // if(newImage.size > 50000) return alert('Img size must be less than 50k');
+            tempImg.push({File: e.target.files[i], id: createId(), uploaded: false})
         }
+        //be sure always simple name goes first to name folder on firestore
+        let temp = [...image, ...tempImg].sort((a,b) => a.File.name > b.File.name ? 1 : -1);
+        window.dispatch(productSliceActions.setImage(temp))
     };
 
     const onSubmit = (e) => {
@@ -119,45 +126,40 @@ export default function AddProduct() {
             sales: {},
             total_review: 0
         }
-        if (url.length) {
-            let urlWithIds = [];
-            url.map(u => urlWithIds.push({url: u, id: u.slice(-27)}));
-            let variant = [];
-            for (const col of color) {
-                for (const siz of size) {
-                    variant.push({
-                        id: createId(),
-                        price: price,
-                        color: col,
-                        size: siz,
-                        stock: 10,
-                        discount: 0,
-                        checked: true
-                    })
-                }
+        let urlWithIds = [];
+        image.map(u => urlWithIds.push({url: u.url, id: u.id}));
+        let variant = [];
+        for (const col of color) {
+            for (const siz of size) {
+                variant.push({
+                    id: createId(),
+                    price: price,
+                    color: col,
+                    size: siz,
+                    stock: 10,
+                    discount: 0,
+                    checked: true
+                })
             }
-            setProduct({
-                active: active === 'true',
-                category: category,
-                color: color,
-                description: fix_description,
-                image: urlWithIds,
-                name: name,
-                price: price,
-                size: size,
-                statistic: statistic,
-                stock: true,
-                variation: SortArray([...variant])
-            })
-            setSaveBtn(false)
-        } else {
-            alert('Please Save Images first')
         }
+        window.dispatch(productSliceActions.setTempProduct({
+            active: active === 'true',
+            category: category,
+            color: color,
+            description: fix_description,
+            image: urlWithIds,
+            name: name,
+            price: price,
+            size: size,
+            statistic: statistic,
+            stock: true,
+            variation: SortArray([...variant])
+        }))
+        setSaveBtn(false)
     }
 
-    const onSaveProduct = async (product) => {
-        debugger
-        const {size, color, price, category} = product;
+    const onSaveProduct = async (tempProduct) => {
+        const {size, color, price, category} = tempProduct;
         try{
             let filter = {};
             const response = await getDocs(collection(db, 'filters'));
@@ -201,7 +203,7 @@ export default function AddProduct() {
             }
 
             await setDoc(doc(db, 'filters', 'filters'), filter, {merge: true});
-            window.dispatch(create({collection: 'products', data: product}));
+            window.dispatch(create({collection: 'products', data: tempProduct}));
             window.dispatch(adminSliceActions.closeModal())
         } catch (err) {
             console.log(err);
@@ -269,27 +271,28 @@ export default function AddProduct() {
 
                         <Stack flexDirection='row'>
                             <Button
+                                disabled={!(image.every(i => i.uploaded) && image.length)}
                                 type='submit'
                                 variant='outlined'
-                                color="success"
+                                color="primary"
                             > Create Variations </Button>
                             <Button
-                                onClick={_ => onSaveProduct(product)}
+                                onClick={_ => onSaveProduct(tempProduct)}
                                 variant='outlined'
                                 sx={{width: 100}}
                                 disabled={saveBtn}
                             > Save </Button>
                         </Stack>
                         <Stack>
-                            {Object.keys(product).length ?
+                            {Object.keys(tempProduct).length ?
                                 <VariationGrid
-                                    variation={product.variation}
-                                    product={product}
-                                    productName={product.name}
+                                    variation={tempProduct.variation}
+                                    product={tempProduct}
+                                    productName={tempProduct.name}
                                     dataToUpdateProducts={tempVariation => {
-                                        const {variation, ...rest} = product;
+                                        const {variation, ...rest} = tempProduct;
                                         const updatedProduct = {variation: tempVariation, ...rest}
-                                        setProduct(updatedProduct)
+                                        window.dispatch(productSliceActions.setTempProduct(updatedProduct))
                                     }}
                                 /> :
                                 <Stack sx={{height: '500px'}}>No Variation Yet</Stack>
@@ -303,35 +306,50 @@ export default function AddProduct() {
                         </Stack>
                         <Stack alignItems='center'>
                             {progress === 100 ?
-                                <Typography variant='span' sx={{color: 'green'}}>Images Upload Complete {progress}%</Typography> :
-                                <Typography variant='span' sx={{color: 'red'}}>Please Upload the Images</Typography>}
+                                <EzText text={`Images Upload Complete ${progress}%`} sx={{color: 'green'}}/> :
+                                <EzText text='Please Upload the Images' sx={{color: 'red'}}/>}
                             <progress value={progress} max='100' style={{width: '100%'}}/>
                         </Stack>
 
                         <Stack flexDirection='row' alignItems='flex-start' justifyContent='space-between' gap='10px'>
                             <EzFileInput
+                                hiddenInputRef={hiddenInputRef}
                                 image={image}
-                                setImage={setImage}
-                                url={url}
-                                setUrl={setUrl}
-                                setProgress={setProgress}
                                 onChange={(e, img) => handleChange(e, img)}
                             />
                             <Button
-                                disabled={progress === 100}
-                                onClick={_ => uploadToFirebaseStorage(image, 'upload', setProgress, setUrl)}
+                                disabled={progress === 100 || !image.length}
+                                onClick={_ => uploadToFirebaseStorage(image)}
                                 variant='outlined'
                                 sx={{width: 100}}
                             > Upload </Button>
                         </Stack>
                         <Stack gap='20px'>
-                            <Stack width='100%' alignItems='center'>
+                            <Stack alignItems='center'>
                                 <EzText text='Image Preview' sx={{fontSize: '20px'}}/>
                             </Stack>
-                            <PrevImages
-                                urls={url}
-                                onClick={imgUrl => deleteFileFromFirebaseStore(imgUrl, image, setImage, url, setUrl)}
-                            />
+                            {image.length > 0 && <PrevImages
+                                image={image}
+                                onClick={item => {
+                                    window.confirm({type: 'warning', content: 'Want to delete this Image'})
+                                        .then(res => {
+                                            if (res) {
+                                                debugger
+                                                if (res) {
+                                                    deleteFileFromFirebaseStore(item, image)
+                                                } else {
+                                                    //reset input value
+                                                    if (image.length === 1) hiddenInputRef.current.lastChild.value = null
+                                                    window.dispatch(productSliceActions.setImage(image.filter(i => i.id !== item.id)));
+                                                    window.displayNotification({
+                                                        type: 'info',
+                                                        content: 'Image was Deleted'
+                                                    })
+                                                }
+                                            }
+                                        })
+                                }}
+                            />}
                         </Stack>
                     </Stack>
                 </Stack>
