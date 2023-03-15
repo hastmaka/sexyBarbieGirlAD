@@ -8,7 +8,7 @@ const RootStyle = styled(Stack)(({theme}) => ({}));
 
 //----------------------------------------------------------------
 
-export default function EzHelpText({alignment, children, sx, top, ...other}) {
+export default function EzHelpText({alignment, text, sx, top, ...other}) {
     return (
         <RootStyle
             sx={{
@@ -27,7 +27,7 @@ export default function EzHelpText({alignment, children, sx, top, ...other}) {
                 }}
                 {...other}
             >
-                {children}
+                {text}
             </Typography>
         </RootStyle>
     );

@@ -1,43 +1,42 @@
+import PropTypes from "prop-types";
 // material
 import {FormControlLabel, Input, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import EzText from "../EzText/EzText";
-import EzButton from "../EzButton/EzButton";
-import {deleteFileFromFirebaseStore} from "../../../helper/Helper";
-import {useRef} from "react";
-import {productSliceActions} from "../../../store/productSlice";
+//
+import {withIcon, withoutIconSx} from "../../../helper/sx/Sx";
 
 //----------------------------------------------------------------
 
 const RootStyle = styled(Stack)(({theme}) => ({
     gap: '10px',
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
+    '& 	.MuiFormControlLabel-label': {
+        display: 'flex',
+        color: 'red'
+    }
 }));
 
 //----------------------------------------------------------------
-
-export default function EzFileInput({ image, onChange, hiddenInputRef }) {
+/**
+ *
+ * @param icon - icon to show
+ * @param image - array of images to disable button conditionally
+ * @param onChange - onChange func
+ * @param hiddenInputRef - ref to the input to reset lastChild value and prevent bugs
+ * when delete an img
+ * @param setProgress - to reset progress in case of use it
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export default function EzFileInput({icon, image, onChange, hiddenInputRef, setProgress}) {
     return (
         <RootStyle>
             <FormControlLabel
-                label='Add Files...'
+                label={icon || 'Add Files...'}
                 //limit for now to only 4 images per product
                 disabled={image.length >= 4}
-                sx={{
-                    width: 'fit-content',
-                    height: 'fit-content',
-                    minWidth: '110px',
-                    border: `1px solid ${'#cecdcd'}`,
-                    color: '#2065D1',
-                    padding: '5px 14px',
-                    borderRadius: '8px',
-                    transition: 'all 200ms',
-                    '&:hover': {
-                        border: image.length >= 4 ? '' : `1px solid ${'#2065D1'}`,
-                        backgroundColor: image.length >= 4 ? '' : 'rgba(158,187,245,0.26)'
-                    }
-                }}
+                sx={!!icon ? withIcon() : withoutIconSx(image)}
                 control={
                     <Input
                         ref={hiddenInputRef}
@@ -45,80 +44,21 @@ export default function EzFileInput({ image, onChange, hiddenInputRef }) {
                         inputProps={{multiple: true}}
                         sx={{ display: "none" }}
                         type="file"
-                        onChange={e => {
-                            onChange(e);
-                            window.dispatch(productSliceActions.setProgress(0))
-                        }}
+                        onChange={e => {onChange(e);if(setProgress)setProgress(0)}}
                     />
                 }
             />
-            {image.length > 0 && (
-                <Stack width='100%' gap='5px'>
-                    <Stack flexDirection='row' justifyContent='space-between'>
-                        <EzText text='Selected Files:'/>
-                        <EzText
-                            text='Clear All'
-                            sx={{
-                                color: '#2065D1',
-                                borderBottom: '1px solid transparent',
-                                '&:hover': {
-                                    cursor: 'pointer',
-                                    borderBottom: '1px solid #999'
-                                }
-                            }}
-                            onClick={_ => {
-                                window.confirm({type: 'warning', content: 'Want to clear all Images'})
-                                    .then(res => {
-                                        if(res) {
-                                            debugger
-                                            if (res) {
-                                                deleteFileFromFirebaseStore(null, image)
-                                            } else {
-                                                //reset input value
-                                                hiddenInputRef.current.lastChild.value = null
-                                                window.dispatch(productSliceActions.setImage([]))
-                                                window.displayNotification({type: 'info', content: 'All images was cleared'})
-                                            }
-                                        }
-                                    })
-                            }}
-                        />
-                    </Stack>
-                    <Stack width='100%' gap='5px'>
-                        {image.map(item =>
-                            <Stack key={item.File.name} flexDirection='row' justifyContent='space-between'>
-                                <EzText text={item.File.name}/>
-                                {image.length && <EzText
-                                    text='delete'
-                                    sx={{
-                                        borderBottom: '1px solid transparent',
-                                        '&:hover': {
-                                            cursor: 'pointer',
-                                            borderBottom: '1px solid #999'
-                                        }
-                                    }}
-                                    onClick={_ => {
-                                        window.confirm({type: 'warning', content: 'Want to delete this Image'})
-                                            .then(res => {
-                                                if(res) {
-                                                    debugger
-                                                    if (res) {
-                                                        deleteFileFromFirebaseStore(item, image)
-                                                    } else {
-                                                        //reset input value
-                                                        if(image.length === 1) hiddenInputRef.current.lastChild.value = null
-                                                        window.dispatch(productSliceActions.setImage(image.filter(i => i.id !== item.id)))
-                                                        window.displayNotification({type: 'info', content: 'All images was cleared'})
-                                                    }
-                                                }
-                                            })
-                                    }}
-                                />}
-                            </Stack>
-                        )}
-                    </Stack>
-                </Stack>
-            )}
         </RootStyle>
     );
+}
+
+EzFileInput.prototype = {
+    icon: PropTypes.elementType,
+    image: PropTypes.array,
+    onChange: PropTypes.func.isRequired,
+    hiddenInputRef: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.shape({ current: PropTypes.any })
+    ]),
+    setProgress: PropTypes.func
 }

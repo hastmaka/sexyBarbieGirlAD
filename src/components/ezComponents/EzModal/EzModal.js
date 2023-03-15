@@ -32,13 +32,14 @@ export default function EzModal({children}) {
                 '& .MuiDialog-paper': {
                     margin: 0,
                     borderRadius: '4px',
-                    width: !modal.who ? '100%' : null
+                    width: !modal.who ? '100%' : null,
+                    maxWidth: '90%'
                 }
             }}
         >
             <EzCustomIconButton
-                icon={<CloseIcon/>}
-                // toolTipTitle='Close'
+                icon={<CloseIcon sx={{fontSize: '2rem'}}/>}
+                toolTipTitle='Close'
                 onClick={_ => window.dispatch(adminSliceActions.closeModal())}
                 sx={{
                     position: 'fixed',

@@ -105,6 +105,19 @@ export const updateProductApi = (id, product) => {
     }
 };
 
+export const checkProductNameApi = async (name) => {
+    const productRef = firestoreCollection(db, 'products')
+    const q = query(productRef, where('name', '==', name))
+    try {
+        const querySnapshot = await getDocs(q)
+        return querySnapshot.empty
+    } catch (err) {
+        debugger
+        window.displayNotification({type: 'error', content: `There was some error ${err}`})
+        console.log(err);
+    }
+};
+
 // export const updateWishListApi = (uid, wish_list) => {
 //     try {
 //         setDoc(doc(db, 'users', uid), {wish_list: [...wish_list]}, {merge: true})

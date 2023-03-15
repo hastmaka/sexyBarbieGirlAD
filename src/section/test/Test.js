@@ -1,41 +1,38 @@
-// material
-import {Stack} from "@mui/material";
-import {styled} from '@mui/material/styles';
-import {useState} from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { DataGrid, GridToolbarContainer, useGridApiContext } from '@mui/x-data-grid';
+import { useDemoData } from '@mui/x-data-grid-generator';
 
-//----------------------------------------------------------------
+const CustomToolbar = () => {
+    const apiRef = useGridApiContext();
+    // debugger
+    const handleGoToPage1 = () => apiRef.current.setPage(1);
 
-const RootStyle = styled(Stack)(({theme}) => ({}));
-
-//----------------------------------------------------------------
-const FileInput = ({ value, onChange, ...rest }) => (
-    <div>
-        {Boolean(value.length) && (
-            <div>Selected files: {value.map(f => f.name).join(", ")}</div>
-        )}
-        <label>
-            Click to select some files...
-            <input
-                {...rest}
-                multiple={true}
-                style={{ display: "none" }}
-                type="file"
-                onChange={e => {
-                    onChange([...e.target.files]);
-                }}
-            />
-        </label>
-    </div>
-);
-
-export default function Test() {
-    const [value, setValue] = useState([]);
-    const handleChange = (v) => {
-        setValue(v)
-    }
     return (
-        <RootStyle>
-            <FileInput value={value} onChange={handleChange}/>
-        </RootStyle>
+        <GridToolbarContainer>
+            <Button onClick={handleGoToPage1}>Go to page 1</Button>
+        </GridToolbarContainer>
+    );
+};
+
+export default function UseGridApiContext() {
+    const { data } = useDemoData({
+        dataSet: 'Commodity',
+        rowLength: 100,
+        maxColumns: 6,
+        rowsPerPageOptions: 10
+    });
+
+    return (
+        <Box sx={{ height: 400, width: '100%' }}>
+            <DataGrid
+                {...data}
+                components={{
+                    Toolbar: CustomToolbar,
+                }}
+                pageSize={10}
+            />
+        </Box>
     );
 }

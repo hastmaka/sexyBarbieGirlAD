@@ -11,7 +11,6 @@ import "swiper/css/lazy";
 import "swiper/css/thumbs";
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import EzProductCard from "../EzProductCard/EzProductCard";
 
 //----------------------------------------------------------------
 
@@ -20,9 +19,9 @@ export default function EzSwiper({data, show, freeMode, allowTouchMove = false, 
         data.map(item => {
             return slides.push(
                 <SwiperSlide key={item.id}>
-                    {show ? item.el : <EzProductCard
-                        product={item}
-                    />}
+                    {/*{show ? item.el : <EzProductCard*/}
+                    {/*    product={item}*/}
+                    {/*/>}*/}
                 </SwiperSlide>
             )
         })

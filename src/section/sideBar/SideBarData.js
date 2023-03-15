@@ -30,7 +30,7 @@ export const item = [{
 }, {
     id: 5,
     icon: <QuizIcon/>,
-    text: 'Test',
+    text: 'FileInput',
     to: '/test',
     element: '',
 }]

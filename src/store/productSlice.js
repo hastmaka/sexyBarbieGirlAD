@@ -1,21 +1,14 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {create, getAll} from "../helper/FirestoreApi";
+import {create, getAll} from "../helper/firebase/FirestoreApi";
 
 const productSlice = createSlice({
-    name: 'admin',
+    name: 'product',
     initialState: {
         product: [],
-        tempProduct: {},
-
-        //states
-        image: [],
-        progress: 0,
-
+        unsavedProduct: [],
         productState: {loaded: false, loading: false},
     },
     reducers: {
-        setImage(state, {payload}){state.image = [...payload]},
-        setProgress(state, {payload}){state.progress = payload},
         setTempProduct(state, {payload}){state.tempProduct = {...payload}},
         updateProduct(state, {payload}) {
             const product = [...state.product];

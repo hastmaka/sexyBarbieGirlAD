@@ -5,8 +5,8 @@ import Layout from "../layout/Layout";
 import Dashboard from "../section/dashboard/Dashboard";
 import ProductGrid from "../section/productGrid/ProductGrid";
 import Order from "../section/Order/Order";
-import Test from "../section/test/Test";
 import Shipping from "../section/shipping/Shipping";
+import Test from "../section/test/Test";
 
 //----------------------------------------------------------------
 
@@ -41,7 +41,7 @@ export default function Router() {
         // element: <Error/>,
     }, {
         path: '/test',
-        // element: <Test/>,
+        // element: <FileInput/>,
     },
         //     {
         //     path: '*',

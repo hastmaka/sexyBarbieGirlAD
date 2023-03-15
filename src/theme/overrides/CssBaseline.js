@@ -21,7 +21,7 @@ export default function CssBaseline() {
                         backgroundColor: '#cccccc'
                     },
                     '&::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#c203ab',
+                        backgroundColor: '#454F5B',
                         borderBottom: '1px solid #999'
                     }
                 },

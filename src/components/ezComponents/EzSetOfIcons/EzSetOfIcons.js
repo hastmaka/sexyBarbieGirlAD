@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 // material
 import {IconButton, Tooltip} from '@mui/material';
 import styled from 'styled-components';
@@ -13,7 +14,20 @@ const IconContainer = styled(IconButton)(({visibleonmobile, theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function EzSetOfIcons({tooltip, toolTipPosition = 'bottom', badgeValue, icon, functionality, refComponent, visibleOnMobile}) {
+/**
+ *
+ * @param tooltip - tooltip title (required)
+ * @param toolTipPosition
+ * @param badgeValue
+ * @param icon
+ * @param functionality
+ * @param refComponent - anchorEl for menu (required)
+ * @param visibleOnMobile
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+export default function EzSetOfIcons({tooltip, toolTipPosition, badgeValue, icon, functionality, refComponent, visibleOnMobile}) {
     return (
         <>
             <Tooltip title={tooltip} arrow placement={toolTipPosition}>
@@ -28,4 +42,22 @@ export default function EzSetOfIcons({tooltip, toolTipPosition = 'bottom', badge
             </Tooltip>
         </>
     );
+}
+
+EzSetOfIcons.defaultProps = {
+    toolTipPosition: 'bottom'
+}
+EzSetOfIcons.propTypes = {
+    tooltip: PropTypes.string.isRequired,
+    icon: PropTypes.element.isRequired,
+    toolTipPosition: PropTypes.string,
+    badgeValue: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.number
+    ]),
+    functionality: PropTypes.objectOf(PropTypes.func),
+    refComponent: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.shape({ current: PropTypes.any })
+    ]),
 }

@@ -7,7 +7,7 @@ import {styled} from '@mui/material/styles';
 const RootStyle = styled(IconButton)(({theme}) => ({
     cursor: 'pointer',
     '& > svg': {
-        fill: theme.palette.ecommerce.pink
+        fill: theme.palette.ecommerce.swatch_8
     },
     '&:hover': {
         backgroundColor: 'transparent',

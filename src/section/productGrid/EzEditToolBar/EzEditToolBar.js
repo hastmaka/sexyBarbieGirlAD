@@ -1,13 +1,15 @@
+import {lazy, Suspense} from "react";
 // material
 import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import {GridRowModes} from "@mui/x-data-grid";
-import Button from "@mui/material/Button";
-import EzIconButton from "../../../components/ezComponents/EzIconButton/EzIconButton";
 import AddIcon from "@mui/icons-material/Add";
+//
+import EzIconButton from "../../../components/ezComponents/EzIconButton/EzIconButton";
 import EzText from "../../../components/ezComponents/EzText/EzText";
-import {createId, openModal} from "../../../helper/Helper";
-import AddProduct from "../addProduct/AddProduct";
+import {staticData} from "../../../helper/staticData/StaticData";
+//dynamic import
+const AddOrEditProduct = lazy(() => import("../addProduct/AddOrEditProduct"))
 
 //----------------------------------------------------------------
 
@@ -52,8 +54,8 @@ export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowPar
         event.preventDefault();
     };
 
-    const handleAddRow = () => {
-        const id = createId();
+    const handleAddRow = async () => {
+        const id = await import('../../../helper').then(module => {return module.createId(20)});
         setRows(prev => [{id, color: '', size: '', price: 0, stock: 0, discount: 0, active: false, isNew: true}, ...prev]);
         setRowModesModel(prev => {
             return {
@@ -70,11 +72,13 @@ export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowPar
                     toolTipTitle={from === 'product' ? 'Add Product' : 'Add Variation'}
                     icon={<AddIcon/>}
                     disabled={!!(rows?.find(item => item.isNew))}
-                    onClick={_ => {
+                    onClick={async _ => {
                         if(from === 'product') {
-                            openModal(<AddProduct/>)
+                            await import('../../../helper').then(module =>
+                                module.openModal(<Suspense fallback={<div>'...loading'</div>}><AddOrEditProduct tempData={staticData}/></Suspense>)
+                            )
                         } else {
-                            handleAddRow()
+                            handleAddRow().then()
                         }
                     }}
                 />

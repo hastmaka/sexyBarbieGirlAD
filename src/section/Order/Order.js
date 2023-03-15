@@ -2,7 +2,7 @@
 import {Box, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import {useEffect, useMemo, useState} from "react";
-import {getAll} from "../../helper/FirestoreApi";
+import {getAll} from "../../helper/firebase/FirestoreApi";
 import {useSelector} from "react-redux";
 import Wrapper from "../../components/Wrapper/Wrapper";
 import EzMuiGrid from "../../components/EzMuiGrid/EzMuiGrid";

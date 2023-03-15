@@ -4,7 +4,7 @@ import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
 //
 import {adminSliceActions} from "./store/adminSlice";
-import {useCheckScreen, useConfirmDialog, useNotification} from "./helper/Hooks";
+import {useCheckScreen, useConfirmDialog, useNotification} from "./helper/hooks/Hooks";
 import {useDispatch, useSelector} from "react-redux";
 import Routes from './routes/index';
 import ScrollToTop from "./components/scrollToTop/ScrollToTop";

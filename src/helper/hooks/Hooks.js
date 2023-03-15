@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {adminSliceActions} from "../store/adminSlice";
+import {adminSliceActions} from "../../store/adminSlice";
 
 export const useOnClickOutside = (ref, handler) => {
     useEffect(() => {

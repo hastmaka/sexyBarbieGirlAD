@@ -1,13 +1,13 @@
 import {useSelector} from "react-redux";
 // material
-import {Alert, AlertTitle, Grow, Snackbar, Typography} from "@mui/material";
+import {Alert, AlertTitle, Slide, Snackbar, Typography} from "@mui/material";
 //
-import {useNotification} from "../../../helper/Hooks";
+import {useNotification} from "../../../helper/hooks/Hooks";
 
 //----------------------------------------------------------------
 
 function GrowTransition(props) {
-    return <Grow {...props} />;
+    return <Slide {...props} direction="down" />;
 }
 
 export default function EzNotification() {
@@ -18,6 +18,7 @@ export default function EzNotification() {
         <Snackbar
             open={notification.open}
             autoHideDuration={notification.timeout}
+            anchorOrigin={{vertical: 'top', horizontal: 'center'}}
             onClose={(e, reason) => {
                 if(!(reason === 'clickaway')) {
                     clearNotification()

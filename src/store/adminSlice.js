@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {create, getAll} from "../helper/FirestoreApi";
+import {create, getAll} from "../helper/firebase/FirestoreApi";
 
 const adminSlice = createSlice({
     name: 'admin',
