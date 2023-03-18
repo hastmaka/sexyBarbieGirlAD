@@ -4,6 +4,7 @@ import {styled} from '@mui/material/styles';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {useState} from "react";
 import EzText from "../../../../../components/ezComponents/EzText/EzText";
+import PropTypes from "prop-types";
 
 //----------------------------------------------------------------
 
@@ -15,7 +16,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function PrevImages({image, onClick}) {
+export default function PrevImages({image, onClick, table = false}) {
     const [isHovering, setIsHovering] = useState(false);
     return (
         <RootStyle>
@@ -69,11 +70,17 @@ export default function PrevImages({image, onClick}) {
                             <img
                                 src={image.every(i => i.uploaded) ? item.url : URL.createObjectURL(item.File)}
                                 alt={item.File.name}
-                                style={{borderRadius: '4px'}}
+                                style={{borderRadius: '4px', maxHeight: table ? '105px' : ''}}
                             />
                         </Box>
                     )}
                 </Box>
         </RootStyle>
     );
+}
+
+PrevImages.prototype = {
+    image: PropTypes.array.isRequired,
+    onClick: PropTypes.func,
+    table: PropTypes.string
 }

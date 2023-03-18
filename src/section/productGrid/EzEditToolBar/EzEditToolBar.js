@@ -8,6 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import EzIconButton from "../../../components/ezComponents/EzIconButton/EzIconButton";
 import EzText from "../../../components/ezComponents/EzText/EzText";
 import {staticData} from "../../../helper/staticData/StaticData";
+import {createId, openModal} from "../../../helper";
 //dynamic import
 const AddOrEditProduct = lazy(() => import("../addProduct/AddOrEditProduct"))
 
@@ -55,7 +56,7 @@ export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowPar
     };
 
     const handleAddRow = async () => {
-        const id = await import('../../../helper').then(module => {return module.createId(20)});
+        const id = createId(20);
         setRows(prev => [{id, color: '', size: '', price: 0, stock: 0, discount: 0, active: false, isNew: true}, ...prev]);
         setRowModesModel(prev => {
             return {
@@ -74,9 +75,7 @@ export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowPar
                     disabled={!!(rows?.find(item => item.isNew))}
                     onClick={async _ => {
                         if(from === 'product') {
-                            await import('../../../helper').then(module =>
-                                module.openModal(<Suspense fallback={<div>'...loading'</div>}><AddOrEditProduct tempData={staticData}/></Suspense>)
-                            )
+                            openModal(<Suspense fallback={<div>'...loading'</div>}><AddOrEditProduct tempData={staticData}/></Suspense>)
                         } else {
                             handleAddRow().then()
                         }

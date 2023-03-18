@@ -42,12 +42,18 @@ const Check = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductForm({data, checkProduct, onChangeHandler, setCheckProduct}) {
+export default function ProductForm({data, checkProduct, onChangeHandler, setCheckProductName}) {
     const handleCheckProductName = (name) => {
         //check if name already existed on db
         checkProductNameApi(name).then(res => {
-            setCheckProduct(prev => {
-                return {...prev, check: !prev.check, isOnDb: !res}})
+            setCheckProductName(prev => {
+                return {
+                    ...prev,
+                    check: !prev.check,
+                    isOnDb: !res,
+                    value: name
+                }
+            })
         })
     }
 

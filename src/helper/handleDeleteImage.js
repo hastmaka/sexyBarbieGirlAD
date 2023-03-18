@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import {deleteFileFromFirestore} from "./deleteFileFromFirestore";
 
 /**
  * use case
@@ -22,12 +23,12 @@ export const handleDeleteImage = (item, data, setData, hiddenInputRef, setProgre
         if (res) {
             if(deleteAllImg) {
                 let imagesUploaded = [...data.image.filter(i => i.uploaded)];
-                if(imagesUploaded.length > 0) await import('../helper').then(module => module.deleteFileFromFirestore(imagesUploaded, 'delete-all'))
+                if(imagesUploaded.length > 0) deleteFileFromFirestore(imagesUploaded, 'delete-all')
                 setData(prev => { return {...prev, image: []}})
                 hiddenInputRef.current.lastChild.value = null
                 setProgress(0);
             } else {
-                if(item.uploaded) await import('../helper').then(module => module.deleteFileFromFirestore(item, 'delete-one'))
+                if(item.uploaded) deleteFileFromFirestore(item, 'delete-one')
                 setData(prev => { return {...prev, image: prev.image.filter(i => i.id !== item.id)}})
                 hiddenInputRef.current.lastChild.value = null
                 setProgress(0);

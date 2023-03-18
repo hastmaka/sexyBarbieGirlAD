@@ -17,12 +17,13 @@ import VariationGrid from "./variationGrid/VariationGrid";
 import EzIconButton from "../../components/ezComponents/EzIconButton/EzIconButton";
 import EzText from "../../components/ezComponents/EzText/EzText";
 import AddOrEditProduct from "./addProduct/AddOrEditProduct";
-import {getAll} from "../../helper/firebase/FirestoreApi";
+import {getAll, updateProductApi} from "../../helper/firebase/FirestoreApi";
 import EzEditToolBar from "./EzEditToolBar/EzEditToolBar";
 import EzButton from "../../components/ezComponents/EzButton/EzButton";
 import EzSwiper from "../../components/ezComponents/EzSwiper/EzSwiper";
 import {SwiperSlide} from "swiper/react";
 import {staticData} from "../../helper/staticData/StaticData";
+import {openModal} from "../../helper";
 // import EzEditToolBar from "./EzEditToolBar/EzEditToolBar";
 
 //----------------------------------------------------------------
@@ -48,7 +49,7 @@ const tableSx = {
 
 export default function ProductGrid() {
     const {product, productState} = useSelector(slice => slice.product);
-    const [row, setRows] = useState([]);
+    const [rows, setRows] = useState([]);
     const addBtnRef = useRef();
     const [rowModesModel, setRowModesModel] = useState({});
 
@@ -57,6 +58,11 @@ export default function ProductGrid() {
             window.dispatch(getAll({collection: 'products'}))
         }
     }, [productState]);
+
+    useEffect(_ => {
+        if(productState.loaded)
+            setRows(product)
+    }, [product, productState]);
 
     //region
     // const [selectedRowParams, setSelectedRowParams] = useState(null);
@@ -100,7 +106,7 @@ export default function ProductGrid() {
 
     const processRowUpdate = useCallback(
         async (newRow, oldRow) => {
-            await new Promise(async (resolve, reject) => {
+            await new Promise((resolve, reject) => {
                 //check empty field
                 if(!(!!newRow.name) || !(!!newRow.category)) {
                     return reject({type: 'error', content: 'No empty field allowed'});
@@ -113,9 +119,7 @@ export default function ProductGrid() {
             if(JSON.stringify(newRow) === JSON.stringify(oldRow)) {
                 return oldRow
             } else {
-                await import('../../helper/firebase/FirestoreApi').then(module =>
-                    module.updateProductApi(newRow.id, newRow)
-                );
+                updateProductApi(newRow.id, newRow)
                 return newRow
             }
         },[]
@@ -139,61 +143,54 @@ export default function ProductGrid() {
 
     const onImageClickHandler = async (images, e) => {
         // debugger
-        await import('../../helper').then(module =>
-            module.openModal(<Stack
-                sx={{
-                    height: 'calc(90vh)',
-                    // width: '60vw',
-                    maxHeight: '950px',
-                    maxWidth: '768px',
-                    '& .swiper': {
-                        width: '100%',
-                        height: '100%',
-                    }
-                }}>
-                <EzSwiper allowTouchMove show data={images.map(item => {
-                    return ({id: item.id, el:
-                            <SwiperSlide>
-                                <Stack sx={{position: 'relative'}}>
-                                    <Stack
-                                        sx={{
-                                            position: 'absolute',
-                                            top: '7px',
-                                            right: '10px',
-                                            color: 'whitesmoke',
-                                            flexDirection: 'row',
-                                            backgroundColor: 'rgba(153,153,153,0.70)',
-                                            borderRadius: '4px'
-                                        }}
-                                    >
-                                        <EzIconButton
-                                            icon={<PublishedWithChangesIcon/>}
-                                            toolTipTitle='Change Image'
-                                            size='small'
-                                            ariaLabel='change-image'
-                                            onClick={_ => handleChangeImage(item)}
-                                        />
-                                        <EzIconButton
-                                            icon={<DeleteOutlineIcon/>}
-                                            toolTipTitle='Delete Image'
-                                            size='small'
-                                            ariaLabel='delete-icon'
-                                            onClick={_ => handleDeleteImage(item)}
-                                        />
-                                    </Stack>
-                                    <img src={item.url} alt={item.url} style={{width: '100%', height: '100%'}}/>
+        openModal(<Stack
+            sx={{
+                height: 'calc(90vh)',
+                // width: '60vw',
+                maxHeight: '950px',
+                maxWidth: '768px',
+                '& .swiper': {
+                    width: '100%',
+                    height: '100%',
+                }
+            }}>
+            <EzSwiper allowTouchMove show data={images.map(item => {
+                return ({id: item.id, el:
+                        <SwiperSlide>
+                            <Stack sx={{position: 'relative'}}>
+                                <Stack
+                                    sx={{
+                                        position: 'absolute',
+                                        top: '7px',
+                                        right: '10px',
+                                        color: 'whitesmoke',
+                                        flexDirection: 'row',
+                                        backgroundColor: 'rgba(153,153,153,0.70)',
+                                        borderRadius: '4px'
+                                    }}
+                                >
+                                    <EzIconButton
+                                        icon={<PublishedWithChangesIcon/>}
+                                        toolTipTitle='Change Image'
+                                        size='small'
+                                        ariaLabel='change-image'
+                                        onClick={_ => handleChangeImage(item)}
+                                    />
+                                    <EzIconButton
+                                        icon={<DeleteOutlineIcon/>}
+                                        toolTipTitle='Delete Image'
+                                        size='small'
+                                        ariaLabel='delete-icon'
+                                        onClick={_ => handleDeleteImage(item)}
+                                    />
                                 </Stack>
-                            </SwiperSlide>
-                    })
-                })}/>
-            </Stack>, 'swiper')
-        )
+                                <img src={item.url} alt={item.url} style={{width: '100%', height: '100%'}}/>
+                            </Stack>
+                        </SwiperSlide>
+                })
+            })}/>
+        </Stack>, 'swiper')
     }
-
-    useEffect(_ => {
-        if(productState.loaded)
-        setRows(product)
-    }, [product, productState]);
 
     const allProductsGridColumns = useMemo(
         () => [
@@ -363,14 +360,12 @@ export default function ProductGrid() {
                         <GridActionsCellItem
                             icon={<BorderAllIcon/>}
                             label="Variants"
-                            onClick={async _ => {
-                                await import('../../helper').then(module =>
-                                    module.openModal(<VariationGrid
-                                        variation={params.row.variation}
-                                        product={params.row}
-                                        productName={params.row.name}
-                                    />)
-                                )
+                            onClick={_ => {
+                                openModal(<VariationGrid
+                                    variation={params.row.variation}
+                                    product={params.row}
+                                    productName={params.row.name}
+                                />)
                             }}
                             // showInMenu
                         />
@@ -413,10 +408,10 @@ export default function ProductGrid() {
     return (
         <Wrapper sx={{height: 'calc(100vh - 80px)', padding: 0}}>
             <Box sx={{height: '100%', width: '100%'}}>
-                {row.length ?
+                {rows.length ?
                     <DataGrid
                         sx={tableSx}
-                        rows={row}
+                        rows={rows}
                         columns={allProductsGridColumns}
                         getRowId={row => row.id}
                         rowHeight={85}
@@ -450,9 +445,7 @@ export default function ProductGrid() {
                         // loading={productState.loading}
                     /> :
                     <EzButton
-                        onClick={async _ => await import('../../helper').then(module =>
-                            module.openModal(<AddOrEditProduct tempData={staticData}/>))
-                        }
+                        onClick={_ => openModal(<AddOrEditProduct tempData={staticData}/>)}
                     >First Product</EzButton>
                 }
             </Box>

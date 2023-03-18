@@ -8,7 +8,7 @@ import EzText from "../../../components/ezComponents/EzText/EzText";
 import ProductProperties from "./productProperties/ProductProperties";
 import ProductMedia from "./productMedia/ProductMedia";
 import ProductVariation from "./productVariation/ProductVariation";
-import {handleDecimalsOnValue} from "../../../helper";
+import {handleDecimalsOnValue, sortArray} from "../../../helper";
 
 //----------------------------------------------------------------
 
@@ -50,15 +50,24 @@ const TopParentContainer = styled(Stack)(({theme}) => ({
 
 export default function AddOrEditProduct({tempData}) {
     const [data, setData] = useState({...tempData});
-    const [checkProduct, setCheckProduct] = useState({check: false, isOnDb: null})
+    const [checkProductName, setCheckProductName] = useState({check: false, isOnDb: null, value: ''})
     //reset name field
     useEffect(_ => {
+        //checkProductName.value store the checked name if isOnDb was false(means the name is not in the DB)
+        //to check later if the user change the input value
+        if(checkProductName.value !== '') {
+            if(checkProductName.value !== data.name) {
+                setCheckProductName(prev => {
+                    return {...prev, check: false, isOnDb: null, value: ''}
+                })
+            }
+        }
         if(data.name === '')
-            setCheckProduct(prev => {
-                return {...prev, check: false, isOnDb: null}
+            setCheckProductName(prev => {
+                return {...prev, check: false, isOnDb: null, value: ''}
             })
     }, [data.name])
-    const onChangeHandler = async (value, key) => {
+    const onChangeHandler = (value, key) => {
         switch (key) {
             case 'price':
             case 'name':
@@ -67,9 +76,7 @@ export default function AddOrEditProduct({tempData}) {
                 if(key === 'price') value = handleDecimalsOnValue(value.target.value)
                 return setData({
                     ...data,
-                    [key]: key === 'size' ?
-                        await import('../../../helper').then(module => module.sortArray(value, 'id')):
-                        value
+                    [key]: key === 'size' ? sortArray(value, 'id') : value
                 })
             case 'description':
                 if(value.action === 'delete') {
@@ -103,9 +110,9 @@ export default function AddOrEditProduct({tempData}) {
                 <TopParentContainer>
                     <ProductProperties
                         data={data}
-                        checkProduct={checkProduct}
+                        checkProduct={checkProductName}
                         onChangeHandler={onChangeHandler}
-                        setCheckProduct={setCheckProduct}
+                        setCheckProductName={setCheckProductName}
                     />
                     <ProductMedia
                         data={data}
@@ -116,7 +123,7 @@ export default function AddOrEditProduct({tempData}) {
                 {/*variation section*/}
                 <ProductVariation
                     data={data}
-                    checkProduct={checkProduct}
+                    checkProductName={checkProductName}
                 />
             </Layout>
         </RootStyle>

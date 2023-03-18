@@ -7,12 +7,14 @@ import {styled} from '@mui/material/styles';
 import EzText from "../../../../components/ezComponents/EzText/EzText";
 import EzFileInput from "../../../../components/ezComponents/EzFileInput/EzFileInput";
 import PrevImages from "./prevImages/PrevImages";
+import {checkImageNameBeforeUpload, createId, handleDeleteImage, uploadToFirebaseStorage} from "../../../../helper";
 
 //----------------------------------------------------------------
 
 const RootStyle = styled(Stack)(({theme}) => ({
     flex: 1,
-    gap: '20px'
+    gap: '20px',
+    minHeight: '400px'
 }));
 
 //----------------------------------------------------------------
@@ -40,7 +42,7 @@ export default function ProductMedia({data, setData}) {
             // if(newImage.size > 50000) return alert('Img size must be less than 50k');
             tempImg.push({
                 File: e.target.files[i],
-                id: await import('../../../../helper').then(module => {return module.createId(20)}),
+                id: createId(20),
                 uploaded: false
             })
         }
@@ -73,63 +75,49 @@ export default function ProductMedia({data, setData}) {
                     image={data.image}
                     onChange={e => handleChange(e)}
                 />
-                {data.image.length > 0 && (
-                    <Stack width='100%' gap='5px'>
-                        <Stack direction='row' justifyContent='space-between'>
-                            <EzText text='Selected Files:'/>
-                            <EzText
-                                text='Clear All'
-                                sx={{
-                                    color: '#2065D1',
-                                    borderBottom: '1px solid transparent',
-                                    '&:hover': {
-                                        cursor: 'pointer',
-                                        borderBottom: '1px solid #999'
-                                    }
-                                }}
-                                onClick={async _ => {
-                                    await import('../../../../helper').then(module => {
-                                        module.handleDeleteImage('all', data, setData, hiddenInputRef, setProgress)
-                                    })
-                                }}
-                            />
-                        </Stack>
-                        <Stack width='100%' gap='5px'>
-                            {data.image.map(item =>
-                                <Stack key={item.id} direction='row' justifyContent='space-between'>
-                                    <EzText text={item.File.name}/>
-                                    {data.image.length && <EzText
-                                        text='delete'
-                                        sx={{
-                                            borderBottom: '1px solid transparent',
-                                            '&:hover': {
-                                                cursor: 'pointer',
-                                                borderBottom: '1px solid #999'
-                                            }
-                                        }}
-                                        onClick={async _ => {
-                                            await import('../../../../helper').then(module => {
-                                                module.handleDeleteImage(item, data, setData, hiddenInputRef, setProgress)
-                                            })
-                                        }}
-                                    />}
-                                </Stack>
-                            )}
-                        </Stack>
+                <Stack width='100%' gap='5px'>
+                    <Stack direction='row' justifyContent='space-between'>
+                        <EzText text='Selected Files:'/>
+                        <EzText
+                            text='Clear All'
+                            sx={{
+                                color: data.image.length > 0 ? '#2065D1' : '#808080',
+                                borderBottom: '1px solid transparent',
+                                pointerEvents: data.image.length > 0 ? '' : 'none',
+                                '&:hover': {
+                                    cursor: 'pointer',
+                                    borderBottom: '1px solid #999'
+                                }
+                            }}
+                            onClick={_ => handleDeleteImage('all', data, setData, hiddenInputRef, setProgress)}
+                        />
                     </Stack>
-                )}
+                    <Stack width='100%' gap='5px'>
+                        {data.image.length > 0 && data.image.map(item =>
+                            <Stack key={item.id} direction='row' justifyContent='space-between'>
+                                <EzText text={item.File.name}/>
+                                {data.image.length && <EzText
+                                    text='delete'
+                                    sx={{
+                                        borderBottom: '1px solid transparent',
+                                        '&:hover': {
+                                            cursor: 'pointer',
+                                            borderBottom: '1px solid #999'
+                                        }
+                                    }}
+                                    onClick={_ => handleDeleteImage(item, data, setData, hiddenInputRef, setProgress)}
+                                />}
+                            </Stack>
+                        )}
+                    </Stack>
+                </Stack>
                 <Button
                     disabled={progress === 100 || !data.image.length}
                     onClick={async _ => {
                         //check at least one file meet required to use it as Firestore
                         //folder name
-                        const nameChecked = await import('../../../../helper').then(module => {
-                            return module.checkImageNameBeforeUpload(data.image)
-                        })
-                        if(!!nameChecked) {
-                            await import('../../../../helper').then(module =>
-                                module.uploadToFirebaseStorage(data.image, setProgress, setData)
-                            )
+                        if(!!checkImageNameBeforeUpload(data.image)) {
+                            uploadToFirebaseStorage(data.image, setProgress, setData)
                         } else {
                             window.displayNotification({
                                 type: 'warning',
@@ -148,11 +136,7 @@ export default function ProductMedia({data, setData}) {
                 {/*{image.length > 0 || !!edit &&*/}
                 <PrevImages
                     image={data.image}
-                    onClick={async (item) => {
-                        await import('../../../../helper').then(module => {
-                            module.handleDeleteImage(item, data, setData, hiddenInputRef, setProgress)
-                        })
-                    }}
+                    onClick={item => handleDeleteImage(item, data, setData, hiddenInputRef, setProgress)}
                 />
                 {/*}*/}
             </Stack>

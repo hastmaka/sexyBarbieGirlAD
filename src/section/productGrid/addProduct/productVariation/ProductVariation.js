@@ -6,8 +6,10 @@ import {styled} from '@mui/material/styles';
 //
 import VariationGrid from "../../variationGrid/VariationGrid";
 import {create} from "../../../../helper/firebase/FirestoreApi";
-import {productSliceActions} from "../../../../store/productSlice";
+import productSlice, {productSliceActions} from "../../../../store/productSlice";
 import {adminSliceActions} from "../../../../store/adminSlice";
+import {createId, sortArray, updateFilter} from "../../../../helper";
+import {useSelector} from "react-redux";
 
 //----------------------------------------------------------------
 
@@ -15,19 +17,23 @@ const RootStyle = styled(Stack)(({theme}) => ({}));
 
 //----------------------------------------------------------------
 
-export default function ProductVariation({data, checkProduct}) {
-    const [tempProduct, setTempProduct] = useState({});
+export default function ProductVariation({data, checkProductName}) {
+    const {tempProduct} = useSelector(slice => slice.product);
     const [saveBtn, setSaveBtn] = useState(true);
     const allValidated = useMemo(() => !(
-        data.image.every(i => i.uploaded) && //every img was uploaded
-        data.image.length >= 1 && //there are all images
-        !checkProduct.isOnDb && //name was already checked
+        //every img was uploaded
+        data.image.every(i => i.uploaded) &&
+        data.image.length >= 1 &&
+        //name was already checked
+        !checkProductName.isOnDb &&
+        checkProductName.check &&
+        checkProductName.value !== ''
         +data.price > 0 &&
         data.category.length > 0 &&
         data.color.length > 0 &&
         data.size.length > 0 &&
         data.description.length > 0
-    ), [data]);
+    ), [data, checkProductName.isOnDb, checkProductName.check]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -48,7 +54,7 @@ export default function ProductVariation({data, checkProduct}) {
         for (const col of data.color) {
             for (const siz of data.size) {
                 variant.push({
-                    id: await import('../../../../helper').then(module => {return module.createId(20)}),
+                    id: createId(20),
                     price: +data.price,
                     color: col.color,
                     size: siz.size,
@@ -59,7 +65,7 @@ export default function ProductVariation({data, checkProduct}) {
                 })
             }
         }
-        setTempProduct({
+        window.dispatch(productSliceActions.setTempProduct({
             active: data.active,
             category: data.category,
             color: data.color.map(i => i.color),
@@ -70,15 +76,16 @@ export default function ProductVariation({data, checkProduct}) {
             size: data.size.map(i => i.size),
             statistic: statistic,
             stock: true,
-            variation: await import('../../../../helper').then(module => {return module.sortArray([...variant])})
-        })
+            variation: sortArray([...variant])
+        }))
+
         setSaveBtn(false)
     }
-    const onSaveProduct = async (tempProduct) => {
+    const onSaveProduct = (tempProduct) => {
         try{
-            await import('../../../../helper').then(module => {return module.updateFilter(tempProduct)})
+            updateFilter(tempProduct).then()
             window.dispatch(create({collection: 'products', data: tempProduct}));
-            window.dispatch(productSliceActions.setTempProduct([]));
+            window.dispatch(productSliceActions.setTempProduct({}));
             window.dispatch(adminSliceActions.closeModal());
         } catch (err) {
             console.log(err);
@@ -94,23 +101,25 @@ export default function ProductVariation({data, checkProduct}) {
                     color="primary"
                 > Create Variations </Button>
                 <Button
+                    disabled={allValidated}
+                    onClick={_ => {
+                        const {variation, ...rest} = tempProduct;
+                        window.dispatch(productSliceActions.setTempProduct({variation: [], ...rest}))
+                    }}
+                    variant='outlined'
+                    color="primary"
+                > reset var </Button>
+                <Button
                     onClick={_ => onSaveProduct(tempProduct)}
                     variant='outlined'
-                    sx={{width: 100}}
+                    sx={{width: 80}}
                     disabled={saveBtn || allValidated}
                 > Save </Button>
             </Stack>
             <Stack>
                 {Object.keys(tempProduct).length ?
                     <VariationGrid
-                        variation={tempProduct.variation}
-                        product={tempProduct}
                         productName={tempProduct.name}
-                        dataToUpdateProduct={tempVariation => {
-                            const {variation, ...rest} = tempProduct;
-                            const updatedProduct = {variation: tempVariation, ...rest}
-                            setTempProduct(updatedProduct)
-                        }}
                     /> :
                     <Stack sx={{height: '500px'}}>No Variation Yet</Stack>
                 }

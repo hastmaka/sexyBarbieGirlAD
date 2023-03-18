@@ -16,7 +16,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductProperties({data, checkProduct, onChangeHandler, setCheckProduct}) {
+export default function ProductProperties({data, checkProduct, onChangeHandler, setCheckProductName}) {
     return (
         <RootStyle>
             <Stack width='100%' alignItems='center'>
@@ -28,7 +28,7 @@ export default function ProductProperties({data, checkProduct, onChangeHandler, 
                     data={data}
                     checkProduct={checkProduct}
                     onChangeHandler={onChangeHandler}
-                    setCheckProduct={setCheckProduct}
+                    setCheckProductName={setCheckProductName}
                 />
 
                 <ProductDescription

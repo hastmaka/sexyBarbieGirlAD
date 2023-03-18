@@ -5,11 +5,15 @@ const productSlice = createSlice({
     name: 'product',
     initialState: {
         product: [],
+        tempProduct: {},
         unsavedProduct: [],
         productState: {loaded: false, loading: false},
     },
     reducers: {
-        setTempProduct(state, {payload}){state.tempProduct = {...payload}},
+        setTempProduct(state, {payload}){
+            debugger
+            state.tempProduct = payload
+        },
         updateProduct(state, {payload}) {
             const product = [...state.product];
             const indexToUpdate = product.findIndex(item => item.id === payload.id);

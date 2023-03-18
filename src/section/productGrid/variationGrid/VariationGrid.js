@@ -14,11 +14,14 @@ import EzText from "../../../components/ezComponents/EzText/EzText";
 import {productSliceActions} from "../../../store/productSlice";
 import EzFileInput from "../../../components/ezComponents/EzFileInput/EzFileInput";
 import PrevImages from "../addProduct/productMedia/prevImages/PrevImages";
+import {updateProductApi} from "../../../helper/firebase/FirestoreApi";
+import {createId, sortArray} from "../../../helper";
+import {useSelector} from "react-redux";
 
 //----------------------------------------------------------------
 
 const RootStyle = styled(Stack)(({datatoupdateproducts, theme}) => ({
-    height: datatoupdateproducts === 'true' ? '500px' : '689px',
+    height: '700px',
     '& > div': {
         height: '100%',
     }
@@ -37,17 +40,16 @@ const tableSx = {
 
 //----------------------------------------------------------------
 
-export default function VariationGrid({variation, product, productName, dataToUpdateProducts: dataToUpdateProduct}) {
-    const [rowModesModel, setRowModesModel] = useState({});
+export default function VariationGrid({productName}) {
+    const {tempProduct} = useSelector(slice => slice.product);
     const [rows, setRows] = useState([]);
+    const [rowModesModel, setRowModesModel] = useState({});
     //to restore input lastChild value and prevent bugs
     const hiddenInputRef = useRef();
 
     useEffect(_ => {
-        if (variation.length){
-            setRows(variation)
-        }
-    }, [variation])
+        setRows(tempProduct)
+    }, [tempProduct])
 
 
     const handleEditClick = useCallback((id) => {
@@ -63,17 +65,15 @@ export default function VariationGrid({variation, product, productName, dataToUp
 
         const editedRow = rows.find(item => item.id === id);
         if(editedRow.isNew) {
-            setRows(rows.filter(item => item.id !== id))
+            window.dispatch(productSliceActions.setTempProduct({
+                ...tempProduct,
+                variation: rows.filter(item => item.id !== id)
+            }))
         }
     }, [rowModesModel]);
 
-    const handleRowEditStart = (params, event) => {
-        event.defaultMuiPrevented = true;
-    };
-
-    const handleRowEditStop = (params, event) => {
-        event.defaultMuiPrevented = true;
-    };
+    const handleRowEditStart = (params, event) => event.defaultMuiPrevented = true
+    const handleRowEditStop = (params, event) => event.defaultMuiPrevented = true
 
     const handleProcessRowUpdateError = useCallback((error) => {
         debugger
@@ -107,7 +107,7 @@ export default function VariationGrid({variation, product, productName, dataToUp
             if(JSON.stringify(newRow) === JSON.stringify(oldRow)) {
                 return oldRow
             } else {
-                let {id, variation, ...rest} = {...product},
+                let {id, variation, ...rest} = {...tempProduct},
                     tempRows = [];
                 if(newRow.isNew) {
                     tempRows = [...rows]
@@ -118,51 +118,51 @@ export default function VariationGrid({variation, product, productName, dataToUp
                 let indexTempVariation = tempRows.findIndex(item => item.id === newRow.id);
                 if(indexTempVariation >= 0) {
                     tempRows[indexTempVariation] = newRow;
-                    if(dataToUpdateProduct) {
+                    debugger
+                    // if(dataToUpdateProduct) {
                         // debugger
                         //update variation when product is in creating mode
-                        dataToUpdateProduct(await import('../../../helper').then(module => {
-                            return module.sortArray(tempRows)
-                        }))
-                    }
+                    //     dataToUpdateProduct(sortArray(tempRows))
+                    // }
                 } else {
                     //new variation
                     const {isNew, ...rest} = newRow;
                     tempRows = [...tempRows, rest];
                 }
-                setRows(await import('../../../helper').then(module => {return module.sortArray(tempRows)}))
                 window.dispatch(productSliceActions.updateProduct({
                     ...rest,
                     id,
-                    variation: await import('../../../helper').then(module => {return module.sortArray(tempRows)})
+                    variation: sortArray(tempRows)
                 }))
                 //if no id, the product was not uploaded yet
-                if(id) await import('../../../helper/firebase/FirestoreApi').then(module =>
-                    module.updateProductApi(id, {id, variation: tempRows, ...rest})
-                );
+                if(id) updateProductApi(id, {id, variation: tempRows, ...rest})
                 return newRow
             }
         },[]
     );
 
     const handleAddImage = async (e, row) => {
-        debugger
-        const indexToUpdate = variation.findIndex(i => i.id === row.id);
+        let tempVar = [...rows];
+        const indexToUpdate = tempVar.findIndex(i => i.id === row.id);
         for (let i = 0; i < e.target.files.length; i++) {
             //check if image was already added
-            if(row.varImage.length) {
-                if(!!row.varImage.find(item => item.File.name === e.target.files[i].name)) continue;
+            if(!!row.varImage.length) {
+                if(!!tempVar[indexToUpdate].varImage.find(item => item.File.name === e.target.files[i].name)) continue;
             }
             // if(newImage.size > 50000) return alert('Img size must be less than 50k');
-            variation[indexToUpdate].varImage.push({
-                File: e.target.files[i],
-                id: await import('../../../helper').then(module => {return module.createId(20)}),
-                uploaded: false
-            })
+            tempVar[indexToUpdate] = {
+                ...tempVar[indexToUpdate],
+                varImage: [...tempVar[indexToUpdate].varImage, {
+                    File: e.target.files[i],
+                    id: createId(20),
+                    uploaded: false
+                }]
+            }
         }
-        // let temp = [...variation[indexToUpdate].varImage].sort((a,b) => a.File.name > b.File.name ? 1 : -1);
-        // setRows(prev => { return {...prev, varImage: temp}})
-        dataToUpdateProduct(variation)
+        window.dispatch(productSliceActions.setTempProduct({
+            ...tempProduct,
+            variation: [...tempVar]
+        }))
     }
 
     const allProductsVariantsGridColumns = useMemo(
@@ -183,17 +183,17 @@ export default function VariationGrid({variation, product, productName, dataToUp
             headerAlign: 'center',
             renderCell: (params) => {
                 // debugger
-                let addImgBtn = params.row.varImage.length === 4;
+                // let addImgBtn = params.row.varImage.length === 4;
                 return (
-                    <>
-                        <PrevImages image={params.row.varImage}/>
+                    <Stack direction='row' sx={{maxHeight: '109px'}} gap='40px'>
+                        <PrevImages table image={params.row.varImage}/>
                         <EzFileInput
                             icon={<CameraAltIcon/>}
                             image={params.row.varImage}
                             onChange={e => handleAddImage(e, params.row)}
                             hiddenInputRef={hiddenInputRef}
                         />
-                    </>
+                    </Stack>
                     // <Stack
                     //     // onClick={e => onImageClickHandler(params.row.image, e)}
                     //     flexDirection='row'
@@ -334,9 +334,9 @@ export default function VariationGrid({variation, product, productName, dataToUp
     }], [rowModesModel, handleSaveClick, handleCancelClick, handleEditClick]);
 
     return (
-        <RootStyle datatoupdateproducts={(!!dataToUpdateProduct).toString()}>
+        <RootStyle>
             <Box>
-                {variation?.length &&
+                {rows?.length &&
                     <DataGrid
                         sx={tableSx}
                         rows={rows}
@@ -345,6 +345,7 @@ export default function VariationGrid({variation, product, productName, dataToUp
                         editMode='row'
                         pageSize={10}
                         rowsPerPageOptions={[10]}
+                        rowHeight={110}
                         onRowEditStart={handleRowEditStart}//disable edit with dbclick
                         onRowEditStop={handleRowEditStop}//disable edit with dbclick
                         experimentalFeatures={{ newEditingApi: true }}
@@ -360,9 +361,9 @@ export default function VariationGrid({variation, product, productName, dataToUp
                                 // rowMode,
                                 // selectedRowParams
                                 // setOpen,
+                                // setRows,
                                 rowModesModel,
                                 setRowModesModel,
-                                setRows,
                                 rows,
                                 from: 'variation',
                                 productName
@@ -374,7 +375,6 @@ export default function VariationGrid({variation, product, productName, dataToUp
                     />
                 }
             </Box>
-
         </RootStyle>
     );
 }

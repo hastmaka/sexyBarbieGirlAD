@@ -60,7 +60,7 @@ export default function CssBaseline() {
                 img: {
                     display: 'block',
                     maxWidth: '100%',
-                },
+                }
             },
         },
     };

@@ -1,6 +1,7 @@
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {storage} from "./firebase/FirebaseConfig";
 import PropTypes from "prop-types";
+import {getNameFromUrl} from "./getNameFromUrl";
 
 /**
  * Function to handle upload files to firestore
@@ -32,7 +33,7 @@ export const uploadToFirebaseStorage = (data, setProgress, setData) => {
                     .then((url) => {
                         return new Promise(async (resolve, reject) => {
                             //here we get the name to include the url in the correct file
-                            let name = await import('../helper').then(module => module.getNameFromUrl(url)),
+                            let name = getNameFromUrl(url),
                                 indexToUpdate = data.findIndex(i => i.File.name === name);
                             tempData[indexToUpdate] = {...tempData[indexToUpdate], url, uploaded: true};
                             if(tempData.every(i => i.uploaded)) {
