@@ -10,9 +10,36 @@ const productSlice = createSlice({
         productState: {loaded: false, loading: false},
     },
     reducers: {
-        setTempProduct(state, {payload}){
-            debugger
-            state.tempProduct = payload
+        setTempProduct(state, {payload}){state.tempProduct = payload},
+        addImageToColor(state, {payload}) {
+            const {data, item} = payload;
+            const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color)
+            state.tempProduct.color[indexToUpdate].image = [...data]
+        },
+        deleteImageFromColor(state, {payload}) {
+            const {img, item, action} = payload;
+            const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color);
+            switch (action) {
+                case 'delete-one':
+                    const imgUpdated = item.image.filter(i => i.id !== img.id)
+                    state.tempProduct.color[indexToUpdate].image = [...imgUpdated];
+                    break;
+                case 'delete-all':
+                    state.tempProduct.color[indexToUpdate].image = []
+                    break;
+                default:
+                    break;
+            }
+
+        },
+        updateColorAfterUploadImage(state, {payload}) {
+            const {item, res, refs} = payload;
+            const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color);
+            state.tempProduct.color[indexToUpdate] = {
+                ...state.tempProduct.color[indexToUpdate],
+                image: [...res],
+                refs
+            }
         },
         updateProduct(state, {payload}) {
             const product = [...state.product];

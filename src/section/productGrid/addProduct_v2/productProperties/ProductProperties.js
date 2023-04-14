@@ -3,35 +3,33 @@ import React from "react";
 import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import EzText from "../../../../components/ezComponents/EzText/EzText";
-import ProductForm from "./productForm/ProductForm";
-import ProductDescription from "./productDescription/ProductDescription";
+import ProductAttribute from "./productAttribute/ProductAttribute";
 import PropTypes from "prop-types";
+import ProductForm from "./productForm/ProductForm";
 
 //----------------------------------------------------------------
 
 const RootStyle = styled(Stack)(({theme}) => ({
-    flex: 2,
+    flex: 1,
     gap: '10px'
 }));
 
 //----------------------------------------------------------------
 
-export default function ProductProperties({data, checkProduct, onChangeHandler, setCheckProductName}) {
+export default function ProductProperties({data, checkProductName, onChangeHandler, setCheckProductName}) {
     return (
         <RootStyle>
-            <Stack width='100%' alignItems='center'>
-                <EzText text='Product Properties' sx={{fontSize: '20px'}}/>
-            </Stack>
-            <Stack direction='row' gap='20px'>
+            <Stack gap='20px'>
 
                 <ProductFormMemoized
                     data={data}
-                    checkProduct={checkProduct}
+                    checkProductName={checkProductName}
                     onChangeHandler={onChangeHandler}
                     setCheckProductName={setCheckProductName}
                 />
 
-                <ProductDescription
+                <ProductAttribute
+                    data={data}
                     onchange={value => onChangeHandler(value, 'description')}
                 />
             </Stack>

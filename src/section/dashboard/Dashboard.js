@@ -1,7 +1,7 @@
 // material
 import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import Wrapper from "../../components/Wrapper/Wrapper";
+import ChildWrapper from "../../components/ChildWrapper/ChildWrapper";
 
 //----------------------------------------------------------------
 
@@ -34,26 +34,26 @@ export default function Dashboard() {
 
                 {/*first section*/}
                 <SectionContainer>
-                    <Wrapper sx={{width: '65%'}}>
+                    <ChildWrapper sx={{width: '65%'}}>
                         Total Revenue
-                    </Wrapper>
-                    <Wrapper sx={{width: '35%'}}>
+                    </ChildWrapper>
+                    <ChildWrapper sx={{width: '35%'}}>
                         Customers
-                    </Wrapper>
+                    </ChildWrapper>
                 </SectionContainer>
 
                 {/*second section*/}
                 <SectionContainer>
-                    <Wrapper sx={{width: '65%'}}>Top Products</Wrapper>
-                    <Wrapper sx={{width: '35%'}}>Stats Overview</Wrapper>
+                    <ChildWrapper sx={{width: '65%'}}>Top Products</ChildWrapper>
+                    <ChildWrapper sx={{width: '35%'}}>Stats Overview</ChildWrapper>
                 </SectionContainer>
             </Stack>
 
             {/*notificationArea area*/}
             <NotificationAreaContainer>
-                <Wrapper sx={{flex: 1}}>notification</Wrapper>
-                <Wrapper sx={{flex: 1}}>daily activities</Wrapper>
-                <Wrapper sx={{flex: 1}}>notes</Wrapper>
+                <ChildWrapper sx={{flex: 1}}>notification</ChildWrapper>
+                <ChildWrapper sx={{flex: 1}}>daily activities</ChildWrapper>
+                <ChildWrapper sx={{flex: 1}}>notes</ChildWrapper>
             </NotificationAreaContainer>
         </RootStyle>
     );

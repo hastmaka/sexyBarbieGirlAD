@@ -22,3 +22,38 @@ export const withIcon = () => {
 
     }
 }
+
+export const tableSx = (palette) => {
+    return {
+        color: palette.ecommerce['swatch_1'],
+        backgroundColor: palette.ecommerce['tableBg'],
+        border: `1px solid ${palette.ecommerce['tableBorder']}`,
+        '& .MuiDataGrid-footerContainer': {
+            borderTop: `1px solid ${palette.ecommerce['tableBorder']}`,
+        },
+        '& .MuiTablePagination-toolbar': {
+            color: palette.ecommerce['tableColor'],
+            '& * svg': {
+                fill: palette.ecommerce['tableColor']
+            }
+        },
+        '& .MuiDataGrid-cell, & .MuiDataGrid-columnHeaders': {
+            borderBottom: `1px solid ${palette.ecommerce['selectedBgColor']}`
+        },
+        '& .MuiDataGrid-row--editing': {
+            '& .MuiDataGrid-cell': {
+                boxShadow: '' +
+                    '0px 3px 1px -2px rgba(145, 158, 171, 0.2), ' +
+                    '0px 2px 2px 0px rgba(145, 158, 171, 0.14), ' +
+                    '0px 1px 5px 0px rgba(145, 158, 171, 0.12)',
+
+                '& .MuiInputBase-input': {
+                    color: palette.ecommerce['tableColor'],
+                }
+            },
+            '& div[data-field="action"]': {
+                // backgroundColor: palette.ecommerce['tableBCActionCellInEditingMode']
+            }
+        },
+    }
+}

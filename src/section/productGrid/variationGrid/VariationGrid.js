@@ -7,13 +7,10 @@ import {DataGrid, GridActionsCellItem, GridRowModes} from "@mui/x-data-grid";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import EditIcon from "@mui/icons-material/Edit";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
 //
 import EzEditToolBar from "../EzEditToolBar/EzEditToolBar";
 import EzText from "../../../components/ezComponents/EzText/EzText";
 import {productSliceActions} from "../../../store/productSlice";
-import EzFileInput from "../../../components/ezComponents/EzFileInput/EzFileInput";
-import PrevImages from "../addProduct/productMedia/prevImages/PrevImages";
 import {updateProductApi} from "../../../helper/firebase/FirestoreApi";
 import {createId, sortArray} from "../../../helper";
 import {useSelector} from "react-redux";
@@ -45,10 +42,9 @@ export default function VariationGrid({productName}) {
     const [rows, setRows] = useState([]);
     const [rowModesModel, setRowModesModel] = useState({});
     //to restore input lastChild value and prevent bugs
-    const hiddenInputRef = useRef();
 
     useEffect(_ => {
-        setRows(tempProduct)
+        setRows(tempProduct.variation)
     }, [tempProduct])
 
 
@@ -141,30 +137,6 @@ export default function VariationGrid({productName}) {
         },[]
     );
 
-    const handleAddImage = async (e, row) => {
-        let tempVar = [...rows];
-        const indexToUpdate = tempVar.findIndex(i => i.id === row.id);
-        for (let i = 0; i < e.target.files.length; i++) {
-            //check if image was already added
-            if(!!row.varImage.length) {
-                if(!!tempVar[indexToUpdate].varImage.find(item => item.File.name === e.target.files[i].name)) continue;
-            }
-            // if(newImage.size > 50000) return alert('Img size must be less than 50k');
-            tempVar[indexToUpdate] = {
-                ...tempVar[indexToUpdate],
-                varImage: [...tempVar[indexToUpdate].varImage, {
-                    File: e.target.files[i],
-                    id: createId(20),
-                    uploaded: false
-                }]
-            }
-        }
-        window.dispatch(productSliceActions.setTempProduct({
-            ...tempProduct,
-            variation: [...tempVar]
-        }))
-    }
-
     const allProductsVariantsGridColumns = useMemo(
         () => [
             {
@@ -175,82 +147,6 @@ export default function VariationGrid({productName}) {
             headerAlign: 'center',
             filterable: false,
             renderCell: (index) => index.api.getRowIndex(index.row.id) + 1
-        }, {
-            field: 'image',
-            headerName: 'Image',
-            flex: 3,
-            align: 'center',
-            headerAlign: 'center',
-            renderCell: (params) => {
-                // debugger
-                // let addImgBtn = params.row.varImage.length === 4;
-                return (
-                    <Stack direction='row' sx={{maxHeight: '109px'}} gap='40px'>
-                        <PrevImages table image={params.row.varImage}/>
-                        <EzFileInput
-                            icon={<CameraAltIcon/>}
-                            image={params.row.varImage}
-                            onChange={e => handleAddImage(e, params.row)}
-                            hiddenInputRef={hiddenInputRef}
-                        />
-                    </Stack>
-                    // <Stack
-                    //     // onClick={e => onImageClickHandler(params.row.image, e)}
-                    //     flexDirection='row'
-                    //     justifyContent='space-between'
-                    //     alignItems='center'
-                    //     sx={{width: 'fit-content', cursor: 'pointer'}}
-                    //     gap='10px'
-                    // >
-                    //     <Stack flexDirection='row' sx={{height: '100%'}}>
-                    //         {params.row.varImage.map(i =>
-                    //             <img
-                    //                 // onClick={onImageClickHandler} //delete or update
-                    //                 key={i.id}
-                    //                 src={i.url}
-                    //                 alt={i.url}
-                    //                 style={{height: '100%', width: '50px'}}
-                    //             />
-                    //         )}
-                    //     </Stack>
-                    //     <Button
-                    //         ref={addBtnRef}
-                    //         disabled={addImgBtn}
-                    //         variant="outlined"
-                    //         component="label"
-                    //         sx={{
-                    //             // marginRight: '20px',
-                    //             minWidth: '46px',
-                    //             cursor: 'pointer'
-                    //         }}
-                    //     >
-                    //         <input hidden accept="image/*" multiple type="file" />
-                    //         <CameraAltIcon/>
-                    //     </Button>
-                    // </Stack>
-                )
-            }
-        }, {
-            field: 'color',
-            headerName: 'Color',
-            flex: 1.3,
-            align: 'center',
-            headerAlign: 'center',
-            renderCell: (params) => {
-                return (
-                    <Stack direction='row' justifyContent='space-between' width='80%'>
-                        <span>{params.row.color}</span>
-                        <Box
-                            style={{
-                                height: '20px',
-                                width: '20px',
-                                borderRadius: '5px',
-                                backgroundColor: params.row.color
-                            }}
-                        />
-                    </Stack>
-                )
-            }
         }, {
             field: 'size',
             headerName: 'Size',
@@ -336,7 +232,7 @@ export default function VariationGrid({productName}) {
     return (
         <RootStyle>
             <Box>
-                {rows?.length &&
+                {rows?.length > 0 &&
                     <DataGrid
                         sx={tableSx}
                         rows={rows}
@@ -380,8 +276,5 @@ export default function VariationGrid({productName}) {
 }
 
 VariationGrid.prototype = {
-    variation: PropTypes.array.isRequired,
-    product: PropTypes.object.isRequired,
-    productName: PropTypes.string.isRequired,
-    dataToUpdateProduct: PropTypes.func.isRequired
+    productName: PropTypes.string.isRequired
 }

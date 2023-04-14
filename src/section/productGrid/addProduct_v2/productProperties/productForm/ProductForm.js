@@ -42,7 +42,7 @@ const Check = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductForm({data, checkProduct, onChangeHandler, setCheckProductName}) {
+export default function ProductForm({data, checkProductName, onChangeHandler, setCheckProductName}) {
     const handleCheckProductName = (name) => {
         //check if name already existed on db
         checkProductNameApi(name).then(res => {
@@ -56,7 +56,6 @@ export default function ProductForm({data, checkProduct, onChangeHandler, setChe
             })
         })
     }
-
     return (
         <RootStyle>
             <Stack direction='row' justifyContent='space-between' alignItems='center'>
@@ -75,7 +74,8 @@ export default function ProductForm({data, checkProduct, onChangeHandler, setChe
             <FormControl variant="outlined" size='small'>
                 <InputLabel htmlFor="outlined-adornment-name">Name</InputLabel>
                 <OutlinedInput
-                    error={checkProduct.isOnDb && data.name !== ''}
+                    error={checkProductName.isOnDb && data.name !== ''}
+                    value={data.name}
                     id="name"
                     label="name"
                     name='name'
@@ -91,11 +91,11 @@ export default function ProductForm({data, checkProduct, onChangeHandler, setChe
                         </InputAdornment>
                     }
                 />
-                {checkProduct.isOnDb !== null && data.name !== '' &&
+                {checkProductName.isOnDb !== null && data.name !== '' &&
                     <EzHelpText
                         alignment='center'
-                        text={checkProduct.isOnDb ? 'This name already exist' : 'Ok'}
-                        sx={{color: checkProduct.isOnDb ? 'red' : 'green'}}
+                        text={checkProductName.isOnDb ? 'This name already exist' : 'Ok'}
+                        sx={{color: checkProductName.isOnDb ? 'red' : 'green'}}
                         top={2}
                     />
                 }
@@ -113,7 +113,7 @@ export default function ProductForm({data, checkProduct, onChangeHandler, setChe
                 freeSolo
                 label='Product Category'
                 value={data.category}
-                setValue={value => onChangeHandler(value, 'category')}
+                setValue={option => onChangeHandler(option, 'category')}
             />
 
 
@@ -122,7 +122,7 @@ export default function ProductForm({data, checkProduct, onChangeHandler, setChe
                 freeSolo
                 label='Product Color'
                 value={data.color}
-                setValue={value => onChangeHandler(value, 'color')}
+                setValue={option => onChangeHandler(option, 'color')}
                 valueForIteration='color'
             />
 
@@ -131,7 +131,7 @@ export default function ProductForm({data, checkProduct, onChangeHandler, setChe
                 // freeSolo
                 label='Product Size'
                 value={data.size}
-                setValue={value => onChangeHandler(value, 'size')}
+                setValue={option => onChangeHandler(option, 'size')}
                 valueForIteration='size'
             />
         </RootStyle>

@@ -5,6 +5,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {useState} from "react";
 import EzText from "../../../../../components/ezComponents/EzText/EzText";
 import PropTypes from "prop-types";
+import {getNameFromUrl} from "../../../../../helper";
 
 //----------------------------------------------------------------
 
@@ -36,7 +37,7 @@ export default function PrevImages({image, onClick, table = false}) {
                             sx={{
                                 position: 'relative',
                                 cursor: 'pointer',
-                                border: `1px solid ${'#cccccc'}`,
+                                border: `1px solid ${'#efefef'}`,
                                 borderRadius: '4px',
                                 transition: 'all 200ms',
                                 '&:hover': {
@@ -64,13 +65,16 @@ export default function PrevImages({image, onClick, table = false}) {
                                         boxShadow: 'rgb(0 0 0 / 25%) 0px 4px 4px',
                                     }}
                                 >
-                                    <EzText text={item.File.name}/>
+                                    <EzText text={item.url ? getNameFromUrl(item.url) : item.File.name}/>
                                 </Box>
                             }
                             <img
                                 src={image.every(i => i.uploaded) ? item.url : URL.createObjectURL(item.File)}
-                                alt={item.File.name}
-                                style={{borderRadius: '4px', maxHeight: table ? '105px' : ''}}
+                                alt={item.url ? getNameFromUrl(item.url) : item.File.name}
+                                style={{
+                                    borderRadius: '4px',
+                                    // maxHeight: table ? '105px' : ''
+                                }}
                             />
                         </Box>
                     )}

@@ -5,8 +5,8 @@ import {Provider} from 'react-redux';
 import {BrowserRouter} from "react-router-dom";
 import ThemeProvider from "./theme";
 import store from './store';
-import EzNotification from "./components/ezComponents/EzNotification/EzNotification";
 import EzConfirmDialog from "./components/ezComponents/EzConfirmDialog/EzConfirmDialog";
+import EzNotification from "./components/ezComponents/EzNotification/EzNotification";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

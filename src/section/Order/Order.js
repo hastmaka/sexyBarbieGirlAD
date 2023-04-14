@@ -4,8 +4,7 @@ import {styled} from '@mui/material/styles';
 import {useEffect, useMemo, useState} from "react";
 import {getAll} from "../../helper/firebase/FirestoreApi";
 import {useSelector} from "react-redux";
-import Wrapper from "../../components/Wrapper/Wrapper";
-import EzMuiGrid from "../../components/EzMuiGrid/EzMuiGrid";
+import ChildWrapper from "../../components/ChildWrapper/ChildWrapper";
 import EzText from "../../components/ezComponents/EzText/EzText";
 import OrderProduct from "./OrderProduct";
 
@@ -103,12 +102,12 @@ export default function Order() {
     ], []);
 
     return (
-        <Wrapper sx={{height: 'calc(100vh - 80px)', padding: 0}}>
+        <ChildWrapper sx={{height: 'calc(100vh - 80px)', padding: 0}}>
             {/*<EzMuiGrid*/}
             {/*    rows={rows}*/}
             {/*    columns={orderColumns}*/}
             {/*    GridContainerSx={{height: '100%', width: '100%'}}*/}
             {/*/>*/}
-        </Wrapper>
+        </ChildWrapper>
     );
 }

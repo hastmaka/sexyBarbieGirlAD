@@ -76,7 +76,11 @@ const ecommerce = {
     tableHeader: '#3c6e71',
     toolBarAndSideBarBg: '#2f3e46',
     inactive_color: '#767193',
-    bg_parent: '#EDEDED'
+    bg_parent: '#EDEDED',
+    tableBg: '#fff',
+    tableBorder: '#e7e7e7',
+    tableBCCellInEditingMode: '#d9d9d9',
+    tableBCActionCellInEditingMode: '#e7e7e7',
 }
 
 const PRIMARY = {

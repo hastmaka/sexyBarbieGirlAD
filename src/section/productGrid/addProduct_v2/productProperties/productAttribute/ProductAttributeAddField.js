@@ -8,7 +8,7 @@ import EzText from "../../../../../components/ezComponents/EzText/EzText";
 
 //----------------------------------------------------------------
 
-export default function ProductDescriptionAddField({item, onChange, onDelete}) {
+export default function ProductAttributeAddField({item, onChange, onDelete}) {
     const [isHovering, setIsHovering] = useState(false);
     return (
         <Stack
@@ -19,7 +19,7 @@ export default function ProductDescriptionAddField({item, onChange, onDelete}) {
             justifyContent='space-between'
             my='5px'
         >
-            <EzText text={item.text}/>
+            <EzText text={item.text || item.name}/>
             <Stack direction='row' gap='5px' alignItems='center'>
                 {isHovering &&
                     <Tooltip title='Delete Property'>
@@ -33,8 +33,9 @@ export default function ProductDescriptionAddField({item, onChange, onDelete}) {
                     </Tooltip>
                 }
                 <TextField
+                    value={item.value}
                     onChange={e => onChange({name: item.text, value: e.target.value})}
-                    name={item.text}
+                    name={item.text || item.name}
                     size='small'
                     sx={{width: '300px'}}
                 />
@@ -43,7 +44,7 @@ export default function ProductDescriptionAddField({item, onChange, onDelete}) {
     )
 }
 
-ProductDescriptionAddField.prototype = {
+ProductAttributeAddField.prototype = {
     item: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired

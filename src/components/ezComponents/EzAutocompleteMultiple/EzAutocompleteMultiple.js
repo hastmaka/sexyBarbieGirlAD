@@ -1,8 +1,9 @@
 import React from 'react';
-import {Autocomplete, Stack, TextField} from '@mui/material';
+import {Autocomplete, TextField} from '@mui/material';
 import {useMemo} from 'react';
 import Chip from '@mui/material/Chip';
 import PropTypes from 'prop-types';
+import EzColor from "../EzColor/EzColor";
 
 /**
  *
@@ -27,12 +28,18 @@ export default function EzAutocompleteMultiple({
         }
         switch (reason) {
             case 'selectOption':
+                //color
                 if (typeof option.option === 'object') {
                     const existedValue = value.findIndex(i => i[valueForIteration] === option.option[valueForIteration])
-                    setValue(existedValue !== -1 ? [...value] : [...value, option.option])
+                    setValue(existedValue !== -1 ? [...value] :
+                        valueForIteration === 'size' ?
+                            [...value, {...option.option}] :
+                            [...value, {...option.option, image: []}]
+                    )
                 }
                 break;
             case 'createOption':
+                //size and freeSolo
                 if (typeof option.option === 'string') {
                     const textSanitized = option.option.replace(/\s+/g, ' ').trim();
                     const existedValue = value.findIndex(i => i === textSanitized)
@@ -52,7 +59,7 @@ export default function EzAutocompleteMultiple({
                 label={isObj ? props?.item[valueForIteration] : props?.item}
                 variant='outlined'
                 sx={{
-                    backgroundColor: isObj ? props?.item?.hex || 'inherit' : 'inherit',
+                    backgroundColor: isObj ? props?.item?.color || 'inherit' : 'inherit',
                     color: isObj ? (!!props?.item?.size ? '#2d2d2d' : '#fff') : '#2d2d2d',
                     height: '',
                     '& .MuiChip-deleteIcon': {
@@ -81,14 +88,7 @@ export default function EzAutocompleteMultiple({
             renderOption={(props, option, state) =>
                 <li {...props} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <span>{valueForIteration === 'color' ? option.color : option.size}</span>
-                    {valueForIteration === 'color' && <div
-                        style={{
-                            height: '20px',
-                            width: '20px',
-                            borderRadius: '5px',
-                            backgroundColor: option.hex
-                        }}
-                    />}
+                    {valueForIteration === 'color' && <EzColor color={option.color}/>}
                 </li>
             }
             renderInput={(params) =>

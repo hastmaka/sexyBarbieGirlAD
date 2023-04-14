@@ -13,7 +13,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function Wrapper({children, sx}) {
+export default function ChildWrapper({children, sx}) {
     return (
         <RootStyle sx={{...sx}}>
             {children}

@@ -8,6 +8,8 @@ import {deleteFileFromFirestore} from "./deleteFileFromFirestore";
 import {openModal} from "./openModal";
 import {updateFilter} from "./updateFilter";
 import {checkImageNameBeforeUpload} from "./checkImageNameBeforeUpload";
+import {handleAddImageToVariation} from "./handleAddImageToVariation";
+import {sanitizeTempProduct} from "./sanitizeTempProduct";
 
 export {
     createId,
@@ -19,5 +21,7 @@ export {
     deleteFileFromFirestore,
     openModal,
     updateFilter,
-    checkImageNameBeforeUpload
+    checkImageNameBeforeUpload,
+    handleAddImageToVariation,
+    sanitizeTempProduct
 }

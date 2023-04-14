@@ -10,7 +10,7 @@ import {withIcon, withoutIconSx} from "../../../helper/sx/Sx";
 const RootStyle = styled(Stack)(({theme}) => ({
     gap: '10px',
     flexDirection: 'row',
-    flex: 1,
+    // flex: 1,
     '& 	.MuiFormControlLabel-label': {
         display: 'flex',
         color: 'red'

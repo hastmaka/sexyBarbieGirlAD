@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import {deleteFileFromFirestore} from "./deleteFileFromFirestore";
+import {productSliceActions} from "../store/productSlice";
 
 /**
  * use case
@@ -7,29 +8,28 @@ import {deleteFileFromFirestore} from "./deleteFileFromFirestore";
  * delete all local
  * delete one firestore
  * delete all firestore
- * @param item - can be an object (in case just want to delete one) or string
+ * @param img - can be an object (in case just want to delete one) or string
  * in case want to delete all
- * @param data - temp product
- * @param setData - func to set product
+ * @param item - color object to update
  * @param hiddenInputRef - ref to reset input value and prevent bugs
  * @param setProgress
  */
-export const handleDeleteImage = (item, data, setData, hiddenInputRef, setProgress) => {
-    let deleteAllImg = typeof item === 'string';
+export const handleDeleteImage = (img, item, hiddenInputRef, setProgress) => {
+    let deleteAllImg = typeof img === 'string';
     window.confirm({
         type: 'warning',
         content: deleteAllImg ? 'Want to delete all Image' : 'Want to delete this Image'
     }).then(async res => {
         if (res) {
             if(deleteAllImg) {
-                let imagesUploaded = [...data.image.filter(i => i.uploaded)];
+                let imagesUploaded = [...item.image.filter(i => i.uploaded)];
                 if(imagesUploaded.length > 0) deleteFileFromFirestore(imagesUploaded, 'delete-all')
-                setData(prev => { return {...prev, image: []}})
+                window.dispatch(productSliceActions.deleteImageFromColor({item, action: 'delete-all'}))
                 hiddenInputRef.current.lastChild.value = null
                 setProgress(0);
             } else {
-                if(item.uploaded) deleteFileFromFirestore(item, 'delete-one')
-                setData(prev => { return {...prev, image: prev.image.filter(i => i.id !== item.id)}})
+                if(img.uploaded) deleteFileFromFirestore(img, 'delete-one')
+                window.dispatch(productSliceActions.deleteImageFromColor({img, item, action: 'delete-one'}))
                 hiddenInputRef.current.lastChild.value = null
                 setProgress(0);
             }
@@ -38,12 +38,11 @@ export const handleDeleteImage = (item, data, setData, hiddenInputRef, setProgre
 }
 
 handleDeleteImage.prototype = {
-    item: PropTypes.oneOfType([
+    img: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
     ]).isRequired,
-    data: PropTypes.object.isRequired,
-    setData: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
     hiddenInputRef: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.shape({current: PropTypes.any})

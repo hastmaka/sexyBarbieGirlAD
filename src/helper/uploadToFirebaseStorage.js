@@ -2,22 +2,23 @@ import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {storage} from "./firebase/FirebaseConfig";
 import PropTypes from "prop-types";
 import {getNameFromUrl} from "./getNameFromUrl";
+import {productSliceActions} from "../store/productSlice";
 
 /**
  * Function to handle upload files to firestore
- * @param data - array of objects with files to upload
+ * @param item - array of objects with files to upload
  * @param setProgress - to set progress if the operation is success
- * @param setData - to update the data once the operation is complete
  */
-export const uploadToFirebaseStorage = (data, setProgress, setData) => {
+export const uploadToFirebaseStorage = (item, setProgress) => {
     //shallow copy
-    let tempData = [...data];
+    let tempData = [...item.image];
     //check if the image was already uploaded
-    const noUploadedImages = data.filter(item => !item.uploaded);
-    const folder_name = data[0].File.name.split('.')[0];
+    const noUploadedImages = item.image.filter(item => !item.uploaded);
+    const timeStamp = new Date().getTime();
+    // const folder_name = item.image[0].File.name.split('.')[0];
     const promises = [];
     noUploadedImages.map((image) => {
-        const storageRef = ref(storage, `products/${folder_name}/${image.File.name}`);
+        const storageRef = ref(storage, `products/${timeStamp}/${image.File.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image.File);
         promises.push(uploadTask);
         uploadTask.on('state_changed', (snapshot) => {
@@ -34,13 +35,13 @@ export const uploadToFirebaseStorage = (data, setProgress, setData) => {
                         return new Promise(async (resolve, reject) => {
                             //here we get the name to include the url in the correct file
                             let name = getNameFromUrl(url),
-                                indexToUpdate = data.findIndex(i => i.File.name === name);
-                            tempData[indexToUpdate] = {...tempData[indexToUpdate], url, uploaded: true};
+                                indexToUpdate = item.image.findIndex(i => i.File.name === name);
+                            tempData[indexToUpdate] = {id: tempData[indexToUpdate].id, url, uploaded: true};
                             if(tempData.every(i => i.uploaded)) {
                                 resolve(tempData)
                             }
                         }).then(res => {
-                            setData(prev => { return {...prev, image: res}})
+                            window.dispatch(productSliceActions.updateColorAfterUploadImage({res, item, refs: timeStamp}))
                         })
                     })
             }
@@ -54,6 +55,5 @@ export const uploadToFirebaseStorage = (data, setProgress, setData) => {
 
 uploadToFirebaseStorage.prototype = {
     data: PropTypes.array.isRequired,
-    setProgress: PropTypes.func.isRequired,
-    setData: PropTypes.func.isRequired
+    setProgress: PropTypes.func.isRequired
 }

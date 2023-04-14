@@ -9,8 +9,10 @@ import EzIconButton from "../../../components/ezComponents/EzIconButton/EzIconBu
 import EzText from "../../../components/ezComponents/EzText/EzText";
 import {staticData} from "../../../helper/staticData/StaticData";
 import {createId, openModal} from "../../../helper";
+import PropTypes from "prop-types";
 //dynamic import
-const AddOrEditProduct = lazy(() => import("../addProduct/AddOrEditProduct"))
+// const AddOrEditProduct = lazy(() => import("../addProduct_v1/AddOrEditProduct"))
+const AddOrEditProduct = lazy(() => import("../addProduct_v2/AddOrEditProduct"))
 
 //----------------------------------------------------------------
 
@@ -28,43 +30,13 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowParams, setRows, rows, from, productName}) {
-    // debugger
-    const handleSaveOrEdit = () => {
-        if (!selectedRowParams) {
-            return;
-        }
-        const { id } = selectedRowParams;
-        if (rowMode === 'edit') {
-            setRowModesModel(prev => { return {...prev, [id]: {mode: GridRowModes.View}}});
-        } else {
-            setRowModesModel(prev => { return {...prev, [id]: {mode: GridRowModes.Edit}}});
-        }
-    };
-
-    const handleCancel = () => {
-        if (!selectedRowParams) {
-            return;
-        }
-        const { id } = selectedRowParams;
-        setRowModesModel(prev => { return {...prev, [id]: {mode: GridRowModes.View, ignoreModifications: true}}});
-    };
-
-    const handleMouseDown = (event) => {
-        // Keep the focus in the cell
-        event.preventDefault();
-    };
-
-    const handleAddRow = async () => {
-        const id = createId(20);
-        setRows(prev => [{id, color: '', size: '', price: 0, stock: 0, discount: 0, active: false, isNew: true}, ...prev]);
-        setRowModesModel(prev => {
-            return {
-                ...prev,
-                [id]: {mode: GridRowModes.Edit, fieldToFocus: 'color'}
-            }
-        })
-    }
+export default function EzEditToolBar({
+                                          setRowModesModel,
+                                          // setRows,
+                                          from,
+                                          tempProduct,
+                                          ...rest
+}) {
 
     return (
         <RootStyle>
@@ -72,39 +44,32 @@ export default function EzEditToolBar({rowMode, setRowModesModel, selectedRowPar
                 <EzIconButton
                     toolTipTitle={from === 'product' ? 'Add Product' : 'Add Variation'}
                     icon={<AddIcon/>}
-                    disabled={!!(rows?.find(item => item.isNew))}
-                    onClick={async _ => {
-                        if(from === 'product') {
-                            openModal(<Suspense fallback={<div>'...loading'</div>}><AddOrEditProduct tempData={staticData}/></Suspense>)
+                    onClick={_ => {
+                        if (from === 'product') {
+                            openModal(
+                                <Suspense fallback={<div>'...loading'</div>}>
+                                    <AddOrEditProduct
+                                        tempData={Object.keys(tempProduct).length > 0 ?
+                                            tempProduct : staticData}
+                                    />
+                                </Suspense>)
                         } else {
-                            handleAddRow().then()
+                            // handleAddRow().then()
                         }
                     }}
                 />
                 <EzText
-                    text={from === 'product' ? 'Product' : from === 'variation' ? `Variations of ${productName}` : ''}
+                    text={from === 'product' ? 'Product' : from === 'variation' ? `Variations of ${rest?.productName}` : ''}
                     sx={{color: '#fff', fontSize: '14px'}}
                 />
             </Stack>
-            <Stack flexDirection='row'>
-                {/*<Button*/}
-                {/*    onClick={handleSaveOrEdit}*/}
-                {/*    onMouseDown={handleMouseDown}*/}
-                {/*    disabled={!selectedRowParams}*/}
-                {/*    variant="outlined"*/}
-                {/*>*/}
-                {/*    {rowMode === 'edit' ? 'Save' : 'Edit'}*/}
-                {/*</Button>*/}
-                {/*<Button*/}
-                {/*    onClick={handleCancel}*/}
-                {/*    onMouseDown={handleMouseDown}*/}
-                {/*    disabled={rowMode === 'view'}*/}
-                {/*    variant="outlined"*/}
-                {/*    sx={{ ml: 1 }}*/}
-                {/*>*/}
-                {/*    Cancel*/}
-                {/*</Button>*/}
-            </Stack>
         </RootStyle>
     );
+}
+
+EzEditToolBar.prototype = {
+    setRowModesModel: PropTypes.func.isRequired,
+    from: PropTypes.string.isRequired,
+    tempProduct: PropTypes.object.isRequired,
+    rest: PropTypes.object
 }
