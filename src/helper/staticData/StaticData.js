@@ -1,15 +1,3 @@
-export const staticData = {
-    active: true,
-    category: [],
-    color: [],
-    description: [],
-    image: [],
-    name: '',
-    price: 0,
-    size: [],
-    variation: []
-}
-
 export const colorArray = [
     {
         color: 'INDIANRED',

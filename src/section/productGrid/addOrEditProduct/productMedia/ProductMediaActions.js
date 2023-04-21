@@ -71,18 +71,20 @@ export default function ProductMediaActions({data, checkProductName}) {
                 })
             }
         }
-        window.dispatch(productSliceActions.setTempProduct({
-            active: data.active,
-            category: data.category,
-            color: data.color,
-            description: data.description,
-            name: data.name,
-            price: +data.price,
-            size: data.size,
-            statistic: statistic,
-            stock: true,
-            variation: sortArray([...variant])
-        }))
+        window.dispatch(
+                productSliceActions.setTempProduct({
+                active: data.active,
+                category: data.category,
+                color: data.color,
+                description: data.description,
+                name: data.name,
+                price: +data.price,
+                size: data.size,
+                statistic: statistic,
+                stock: true,
+                variation: sortArray([...variant])
+            })
+        )
     }
     const onSaveProduct = (tempProduct) => {
         // const sanitizedProduct = sanitizeTempProduct(tempProduct)

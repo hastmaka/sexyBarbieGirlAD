@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {lazy, Suspense, useCallback, useEffect, useRef, useState} from "react";
 // material
 import {Box, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
@@ -14,14 +14,14 @@ import ProductGridToolBar from "./ProductGridToolBar";
 import EzButton from "../../components/ezComponents/EzButton/EzButton";
 import EzSwiper from "../../components/ezComponents/EzSwiper/EzSwiper";
 import {SwiperSlide} from "swiper/react";
-import {staticData} from "../../helper/staticData/StaticData";
 import {openModal} from "../../helper";
 import {tableSx} from "../../helper/sx/Sx";
 import EzMuiGrid from "../../components/EzMuiGrid/EzMuiGrid";
 import AddOrEditProduct from "./addOrEditProduct/AddOrEditProduct";
 import {productSliceActions} from "../../store/productSlice";
 import ProductGridFooter from "./ProductGridFooter";
-// import EzEditToolBar from "./EzEditToolBar/EzEditToolBar";
+// dynamic import
+const AOEP = lazy(() => import("./addOrEditProduct_v2/AOEP"))
 
 //----------------------------------------------------------------
 
@@ -44,10 +44,6 @@ export default function ProductGrid() {
     const [rows, setRows] = useState([]);
     const [rowModesModel, setRowModesModel] = useState({});
     const [isAddActive, setIsAddActive] = useState(false);
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(5);
-    const [totalRows, setTotalRows] = useState(rows.length);
-    const apiRef = useRef();
     const addBtnRef = useRef();
 
     useEffect(() => {
@@ -276,11 +272,6 @@ export default function ProductGrid() {
         }
     ];
 
-    const handlePageSizeChange = (params) => {
-        const newPageSize = params.pageSize;
-        setPageSize(newPageSize);
-    };
-
     return (
         <ChildWrapper sx={{height: 'calc(100vh - 80px)', padding: 0}}>
             <Box sx={{height: '100%', width: '100%'}}>
@@ -312,7 +303,13 @@ export default function ProductGrid() {
                         sx={({palette}) => tableSx(palette)}
                     /> :
                     <EzButton
-                        onClick={_ => openModal(<AddOrEditProduct tempData={staticData}/>)}
+                        onClick={_ =>
+                            openModal(
+                                <Suspense fallback={<div>'...loading'</div>}>
+                                    <AOEP tempData={tempProduct}/>
+                                </Suspense>
+                            )
+                    }
                     >First Product</EzButton>
                 }
             </Box>

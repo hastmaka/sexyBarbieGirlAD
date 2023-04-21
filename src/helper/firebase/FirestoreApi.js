@@ -112,7 +112,7 @@ export const updateProductApi = (id, product) => {
 };
 
 export const checkProductNameApi = async (name) => {
-    const productRef = firestoreCollection(db, 'products')
+    const productRef = firestoreCollection(db, 'tests')//products
     const q = query(productRef, where('name', '==', name))
     try {
         const querySnapshot = await getDocs(q)

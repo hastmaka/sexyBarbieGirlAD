@@ -1,6 +1,4 @@
-// material
-import {Stack} from "@mui/material";
-import {styled} from '@mui/material/styles';
+import PropTypes from "prop-types";
 //
 import AOEPChild_1 from "../localComponent/AOEPChild_1";
 import AOEPHelp from "../localComponent/AOEPHelp";
@@ -9,14 +7,9 @@ import AOEPChild_2 from "../localComponent/AOEPChild_2";
 import EzAutocompleteMultiple from "../../../../components/ezComponents/EzAutocompleteMultiple/EzAutocompleteMultiple";
 import {colorArray} from "../../../../helper/staticData/StaticData";
 import AOEPParent from "../localComponent/AOEPParent";
+import {productSliceActions} from "../../../../store/productSlice";
 
-//----------------------------------------------------------------
-
-const RootStyle = styled(Stack)(({theme}) => ({}));
-
-//----------------------------------------------------------------
-
-export default function VariationColor() {
+export default function VariationColor({tempProduct}) {
     return (
         <AOEPParent>
             <AOEPChild_1>
@@ -30,11 +23,22 @@ export default function VariationColor() {
                     initialData={colorArray}
                     freeSolo
                     label='Product Color'
-                    value={[]}
-                    // setValue={option => onChangeHandler(option, 'color')}
+                    value={tempProduct.color}
+                    setValue={option => {
+                        window.dispatch(
+                            productSliceActions.setTempProduct({
+                                ...tempProduct,
+                                color: option
+                            })
+                        )
+                    }}
                     valueForIteration='color'
                 />
             </AOEPChild_2>
         </AOEPParent>
     );
+}
+
+VariationColor.prototype = {
+    tempProduct: PropTypes.object.isRequired
 }

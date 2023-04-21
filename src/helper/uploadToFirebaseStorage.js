@@ -41,7 +41,13 @@ export const uploadToFirebaseStorage = (item, setProgress) => {
                                 resolve(tempData)
                             }
                         }).then(res => {
-                            window.dispatch(productSliceActions.updateColorAfterUploadImage({res, item, refs: timeStamp}))
+                            window.dispatch(
+                                productSliceActions.updateColorAfterUploadImage({
+                                    res,
+                                    item,
+                                    refs: timeStamp
+                                })
+                            )
                         })
                     })
             }

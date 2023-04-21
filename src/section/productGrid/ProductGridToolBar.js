@@ -6,12 +6,11 @@ import AddIcon from "@mui/icons-material/Add";
 //
 import EzIconButton from "../../components/ezComponents/EzIconButton/EzIconButton";
 import EzText from "../../components/ezComponents/EzText/EzText";
-import {staticData} from "../../helper/staticData/StaticData";
 import {openModal} from "../../helper";
 import PropTypes from "prop-types";
 //dynamic import
 // const AddOrEditProduct = lazy(() => import("../addProduct_v1/AddOrEditProduct"))
-const AddOrEditProduct = lazy(() => import("./addOrEditProduct_v2/AOEP"))
+const AOEP = lazy(() => import("./addOrEditProduct_v2/AOEP"))
 
 //----------------------------------------------------------------
 
@@ -40,10 +39,7 @@ export default function ProductGridToolBar({setRowModesModel, tempProduct, ...re
                     onClick={_ =>
                         openModal(
                             <Suspense fallback={<div>'...loading'</div>}>
-                                <AddOrEditProduct
-                                    tempData={Object.keys(tempProduct).length > 0 ?
-                                        tempProduct : staticData}
-                                />
+                                <AOEP tempData={tempProduct}/>
                             </Suspense>
                         )
                     }

@@ -228,7 +228,12 @@ export default function ProductAttribute({data, onchange}) {
                     }
 
                     //update data in the store
-                    window.dispatch(productSliceActions.setProductInEditMode({description: tempDescription, ...rest}))
+                    window.dispatch(
+                        productSliceActions.setProductInEditMode({
+                            description: tempDescription,
+                            ...rest
+                        })
+                    )
                 }
             }
         },
@@ -322,10 +327,12 @@ export default function ProductAttribute({data, onchange}) {
                                 let {description, ...rest} = data,
                                     tempDescription = [...description];
                                 // debugger
-                                window.dispatch(productSliceActions.setProductInEditMode({
-                                    description: tempDescription.length === 1 ? [] : tempDescription.filter(i => i.name !== item.name),
-                                    ...rest
-                                }))
+                                window.dispatch(
+                                    productSliceActions.setProductInEditMode({
+                                        description: tempDescription.length === 1 ? [] : tempDescription.filter(i => i.name !== item.name),
+                                        ...rest
+                                    })
+                                )
                             }}
                         />
                     )

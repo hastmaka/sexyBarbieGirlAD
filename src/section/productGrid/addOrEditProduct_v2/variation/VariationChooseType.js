@@ -13,7 +13,7 @@ const RootStyle = styled(Stack)(({theme}) => ({}));
 
 //----------------------------------------------------------------
 
-export default function VariationChooseType({handleCheckbox}) {
+export default function VariationChooseType({handleCheckbox, tempProductState}) {
     return (
         <AOEPParent>
             <AOEPChild_1>
@@ -24,8 +24,24 @@ export default function VariationChooseType({handleCheckbox}) {
             </AOEPChild_1>
             <AOEPChild_2>
                 <FormGroup sx={{flexDirection: 'row'}} gap='24px'>
-                    <FormControlLabel control={<Checkbox onChange={_ => handleCheckbox('size')}/>} label="Size"/>
-                    <FormControlLabel control={<Checkbox onChange={_ => handleCheckbox('color')}/>} label="Color"/>
+                    <FormControlLabel
+                        label="Size"
+                        control={
+                            <Checkbox
+                                checked={tempProductState.size}
+                                onChange={_ => handleCheckbox('size')}
+                            />
+                        }
+                    />
+                    <FormControlLabel
+                        label="Color"
+                        control={
+                            <Checkbox
+                                checked={tempProductState.color}
+                                onChange={_ => handleCheckbox('color')}
+                            />
+                        }
+                    />
                     <FormControlLabel control={<Checkbox disabled/>} label="Style Name"/>
                     <FormControlLabel control={<Checkbox disabled/>} label="Package Quantity"/>
                 </FormGroup>

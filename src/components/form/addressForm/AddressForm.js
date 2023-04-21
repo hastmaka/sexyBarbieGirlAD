@@ -78,11 +78,13 @@ export default function AddressForm({type, data, afterSubmit}) {
         if(type === 'edit') {
             window.dispatch(userSliceActions.editAddress({...data}));
         } else {
-            window.dispatch(userSliceActions.addAddress({
-                ...data,
-                main: !user.address.length,
-                id: createId()
-            }));
+            window.dispatch(
+                userSliceActions.addAddress({
+                    ...data,
+                    main: !user.address.length,
+                    id: createId()
+                })
+            );
         }
         afterSubmit(false)
         setLoading(false)

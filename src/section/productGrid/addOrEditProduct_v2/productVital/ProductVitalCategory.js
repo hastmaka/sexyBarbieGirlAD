@@ -7,6 +7,8 @@ import {VariationCategoryHelpText} from "../AOEPTextHelpData";
 import AOEPChild_2 from "../localComponent/AOEPChild_2";
 import AOEPParent from "../localComponent/AOEPParent";
 import EzAutocompleteMultiple from "../../../../components/ezComponents/EzAutocompleteMultiple/EzAutocompleteMultiple";
+import {productSliceActions} from "../../../../store/productSlice";
+import {useSelector} from "react-redux";
 
 //----------------------------------------------------------------
 
@@ -14,7 +16,8 @@ const RootStyle = styled(Stack)(({theme}) => ({}));
 
 //----------------------------------------------------------------
 
-export default function ProductVitalCategory({data}) {
+export default function ProductVitalCategory() {
+    const {tempProduct} = useSelector(slice => slice.product);
     return (
         <AOEPParent>
             <AOEPChild_1>
@@ -27,8 +30,15 @@ export default function ProductVitalCategory({data}) {
                 <EzAutocompleteMultiple
                     freeSolo
                     label='Product Category *'
-                    value={data.category}
-                    // setValue={option => onChangeHandler(option, 'category')}
+                    value={tempProduct.category}
+                    setValue={option => {
+                        window.dispatch(
+                            productSliceActions.setTempProduct({
+                                ...tempProduct,
+                                category: option
+                            })
+                        )
+                    }}
                 />
             </AOEPChild_2>
         </AOEPParent>

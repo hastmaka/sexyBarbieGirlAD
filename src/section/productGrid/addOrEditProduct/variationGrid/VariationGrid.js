@@ -71,11 +71,13 @@ export default function VariationGrid({variation}) {
                     const {isNew, ...rest} = newRow;
                     tempRows = [...tempRows, rest];
                 }
-                window.dispatch(productSliceActions.updateProduct({
-                    ...rest,
-                    id,
-                    variation: sortArray(tempRows)
-                }))
+                window.dispatch(
+                    productSliceActions.updateProduct({
+                        ...rest,
+                        id,
+                        variation: sortArray(tempRows)
+                    })
+                )
                 //if no id, the product was not uploaded yet
                 if(id) updateProductApi(id, {id, variation: tempRows, ...rest})
                 return newRow

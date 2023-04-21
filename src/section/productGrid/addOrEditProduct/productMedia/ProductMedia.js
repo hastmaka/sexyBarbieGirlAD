@@ -50,10 +50,12 @@ export default function ProductMedia({item}) {
                 uploaded: false
             })
         }
-        window.dispatch(productSliceActions.addImageToColor({
-            data: [...item.image, ...tempImg],
-            item
-        }))
+        window.dispatch(
+            productSliceActions.addImageToColor({
+                data: [...item.image, ...tempImg],
+                item
+            })
+        )
     };
 
     return (

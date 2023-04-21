@@ -7,13 +7,25 @@ const productSlice = createSlice({
         product: [],
         productState: {loaded: false, loading: false},
         //AOEP
-        tempProduct: {},
+        tempProduct: {
+            active: true,
+            category: [],
+            color: [],
+            description: [],
+            image: [],
+            name: '',
+            price: 0,
+            size: [],
+            variation: [],
+            tags: []
+        },
         tempProductState: {
-            vital: {
-
-            },
-            variation: {
-
+            size: false,
+            color: false,
+            checkProductName: {
+                check: false,
+                isOnDb: null,
+                value: '',
             }
         },
         productInEditMode: {},
@@ -57,6 +69,11 @@ const productSlice = createSlice({
             const indexToUpdate = product.findIndex(item => item.id === payload.id);
             product[indexToUpdate] = payload;
             state.product = product;
+        },
+
+        //AOEP
+        updateTempProductState(state, {payload}) {
+            state.tempProductState = {...payload}
         }
     },
     extraReducers: (builder) => {

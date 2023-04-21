@@ -7,8 +7,10 @@ import {VariationBrandNameHelpText} from "../AOEPTextHelpData";
 import AOEPChild_2 from "../localComponent/AOEPChild_2";
 import AOEPParent from "../localComponent/AOEPParent";
 import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 
-export default function ProductVitalBrandName({data}) {
+export default function ProductVitalBrandName() {
+    const {tempProduct} = useSelector(slice => slice.product);
     return (
         <AOEPParent>
             <AOEPChild_1>
@@ -19,7 +21,7 @@ export default function ProductVitalBrandName({data}) {
             </AOEPChild_1>
             <AOEPChild_2>
                 <TextField
-                    defaultValue={data.name}
+                    defaultValue={tempProduct.name}
                     size='small'
                     label="brand"
                     name='brand'
