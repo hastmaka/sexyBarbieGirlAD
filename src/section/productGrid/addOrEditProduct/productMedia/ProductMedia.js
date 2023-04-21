@@ -23,7 +23,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductMedia({item, category}) {
+export default function ProductMedia({item}) {
     const [progress, setProgress] = useState(0);
     const hiddenInputRef = useRef(null);
 
@@ -66,7 +66,6 @@ export default function ProductMedia({item, category}) {
 
             <ProductMediaInputFilesMemoized
                 item={item}
-                category={category}
                 progress={progress}
                 setProgress={setProgress}
                 hiddenInputRef={hiddenInputRef}
@@ -74,7 +73,7 @@ export default function ProductMedia({item, category}) {
             />
 
             <Stack gap='20px'>
-                <EzText text='Image Preview'/>
+                <EzText text='VariationImage Preview'/>
                 {item.image.length > 0 &&
                     <PrevImages
                         image={item.image}

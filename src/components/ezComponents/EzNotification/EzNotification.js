@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 // material
 import {Alert, AlertTitle, Slide, Snackbar, Typography} from "@mui/material";
 //
-import {useNotification} from "../../../helper/hooks/Hooks";
+import {useNotification} from "../../../helper/hooks";
 
 //----------------------------------------------------------------
 

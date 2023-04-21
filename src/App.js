@@ -4,10 +4,10 @@ import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
 //
 import {adminSliceActions} from "./store/adminSlice";
-import {useCheckScreen, useConfirmDialog, useNotification} from "./helper/hooks/Hooks";
 import {useDispatch, useSelector} from "react-redux";
 import Routes from './routes/index';
 import ScrollToTop from "./components/scrollToTop/ScrollToTop";
+import {useCheckScreen, useConfirmDialog, useNotification} from "./helper/hooks";
 //async import
 const EzModal = lazy(() => import('./components/ezComponents/EzModal/EzModal'))
 
@@ -23,6 +23,13 @@ export default function App() {
     const {displayNotification} = useNotification();
     const {user, userStatus} = useSelector(slice => slice.admin);
     const [children, setChildren] = useState(null);
+
+    //delete firebase emulator warning
+    useEffect(_ => {
+        const firebaseWarning = document.getElementsByClassName('firebase-emulator-warning');
+        firebaseWarning[0].style.display = 'none'
+    }, [])
+
 
     //check if user is authenticated
 

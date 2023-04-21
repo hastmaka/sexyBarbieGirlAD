@@ -1,21 +1,22 @@
-import {useEffect, useRef, useState} from "react";
-import PropTypes from "prop-types";
 // material
-import {Divider, Stack, TextField, Tooltip} from "@mui/material";
+import {Box, Divider, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import DeleteIcon from '@mui/icons-material/Delete';
-//
-import EzText from "../../../../../components/ezComponents/EzText/EzText";
-import EzSetOfIcons from "../../../../../components/ezComponents/EzSetOfIcons/EzSetOfIcons";
-import EzMenu from "../../../../../components/ezComponents/EzMenu/EzMenu";
-import ProductAttributeAddField from "./ProductAttributeAddField";
-import {sortArray} from "../../../../../helper";
+import {useEffect, useRef, useState} from "react";
+import SaveIcon from "@mui/icons-material/Save";
+import {areArrayOfObjectsEqual, sortArray} from "../../../../helper";
+import {productSliceActions} from "../../../../store/productSlice";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EzText from "../../../../components/ezComponents/EzText/EzText";
+import EzSetOfIcons from "../../../../components/ezComponents/EzSetOfIcons/EzSetOfIcons";
+import EzMenu from "../../../../components/ezComponents/EzMenu/EzMenu";
+import ProductAttributeAddField
+    from "../../addOrEditProduct/productProperties/productAttribute/ProductAttributeAddField";
 
 //----------------------------------------------------------------
 
 const RootStyle = styled(Stack)(({theme}) => ({
-    flex: 1
+    gap: '24px'
 }));
 
 const RightContainer = styled(Stack)(({theme}) => ({
@@ -24,8 +25,9 @@ const RightContainer = styled(Stack)(({theme}) => ({
     flexDirection: 'row'
 }));
 
-//---------------------------------------------------------------------------------------
-export default function ProductAttribute({data, onchange}) {
+//----------------------------------------------------------------
+
+export default function Description({data, onchange}) {
     const [state, setState] = useState({
         //to render TextField
         description: data.description,
@@ -114,6 +116,7 @@ export default function ProductAttribute({data, onchange}) {
         descriptionExtraMenuCopy: [...state.descriptionExtraMenu]
     })
     const profileAnchorRef = useRef(null);
+    const formRef = useRef(null);
     const [openMenu, setOpenMenu] = useState(null);
 
     useEffect(_ => {
@@ -123,11 +126,12 @@ export default function ProductAttribute({data, onchange}) {
                 const newMenu = prev.descriptionMenu.filter((item) => !existingDescriptions.has(item.text));
                 return {
                     ...prev,
+                    description: data.description,
                     descriptionMenu: [...newMenu]
                 }
             })
         }
-    }, [])
+    }, [data.description])
 
     const handleClick = (e) => setOpenMenu(e.currentTarget);
     const handleClose = () => {setOpenMenu(null)};
@@ -165,22 +169,86 @@ export default function ProductAttribute({data, onchange}) {
 
     const RIGHTCONTAINERITEMS = [
         {
-        id: 1,
-        tooltip: 'Add Description',
-        badgeValue: false,
-        visibleOnMobile: 1,
-        icon: <AddBoxIcon sx={{fill: 'green'}}/>,
-        ref: profileAnchorRef,
+            id: 1,
+            tooltip: 'Save Description',
+            badgeValue: false,
+            visibleOnMobile: 1,
+            icon: <SaveIcon sx={{fill: '#457b9d'}}/>,
+            functionality: {
+                onClick: _ => {
+                    let formData  = new FormData(formRef.current),
+                        {description, ...rest} = data,
+                        tempDescription = [...description],
+                        formDataToCompare = [];
+                    if(!description.length) {
+                        return window.displayNotification({
+                            type: 'warning',
+                            content: `No description to save`
+                        })
+                    } else {
+                        //check for empty values
+                        for (const value of formData.values()) {
+                            if(value === '') {
+                                return window.displayNotification({
+                                    type: 'error',
+                                    content: `Product Description has empty values`
+                                })
+                            }
+                        }
+                        //check if data haven't been changed
+                        for (const [key, value] of formData.entries()) {
+                            formDataToCompare.push({name: key, value: value})
+                        }
+                        if(areArrayOfObjectsEqual(tempDescription, formDataToCompare)) {
+                            return window.displayNotification({
+                                type: 'warning',
+                                content: `No description has been modified`
+                            })
+                        }
+                        //if the key exist modify it, otherwise create it
+                        for (const [key, value] of formData.entries()) {
+                            let indexToUpdate = description.findIndex(item => item.name === key);
+                            if(indexToUpdate !== -1) {
+                                tempDescription[indexToUpdate] = {
+                                    name: key,
+                                    value: value
+                                }
+                                window.displayNotification({
+                                    type: 'success',
+                                    content: `Descriptions modified successfully`
+                                })
+                            } else {
+                                tempDescription.push({name: key, value: value})
+                                window.displayNotification({
+                                    type: 'success',
+                                    content: `New description ${key} was added`
+                                })
+                            }
+                        }
+                    }
+
+                    //update data in the store
+                    window.dispatch(productSliceActions.setProductInEditMode({description: tempDescription, ...rest}))
+                }
+            }
+        },
+        {
+            id: 2,
+            tooltip: 'Add Description',
+            badgeValue: false,
+            visibleOnMobile: 1,
+            icon: <AddBoxIcon sx={{fill: '#2a9d8f'}}/>,
+            ref: profileAnchorRef,
             functionality: {
                 onClick: (e) => handleClick(e)
             }
         }, {
-            id: 2,
+            id: 3,
             tooltip: 'Delete All',
             badgeValue: false,
             visibleOnMobile: 1,
             icon: <DeleteIcon
-                sx={{fill: 'red'}}
+                sx={{fill: '#e63946'}}
             />,
             functionality: {
                 onClick: _ => {
@@ -224,42 +292,45 @@ export default function ProductAttribute({data, onchange}) {
                 onClick={handleClose}
                 data={sortArray([...state.descriptionMenu, ...state.descriptionExtraMenu], 'id')}
             />
-            {state.description.length > 0 &&
-                sortArray(state.description, 'id').map(item =>
-                    <ProductAttributeAddField
-                        key={item.id || item.name}
-                        item={item}
-                        onChange={onchange}
-                        onDelete={_ => {
-                            setState(prev => {
-                                let validItem = !item.id ?
-                                    menuCopy.descriptionMenuCopy.filter(i => i.text === item.name)[0] :
-                                    item
-                                return {
-                                    ...prev,
-                                    description: prev.description.filter(i =>
-                                        //check if the item comes from state or from data.description
-                                        !item.id ? i.name !== item.name : i.text !== item.text
-                                    ),
-                                    //add the item to the menu again
-                                    descriptionMenu: [...prev.descriptionMenu, validItem],
-                                    //restore descriptionMenuExtra conditionally
-                                    descriptionExtraMenu: !prev.descriptionMenu.length ?
-                                        [...menuCopy.descriptionExtraMenuCopy] :
-                                        [...prev.descriptionExtraMenu]
-                                }
-                            })
-                            //send the item to update the product variable
-                            onchange({action: 'delete', item})
-                        }}
-                    />
-                )
-            }
+            <Box component='form' ref={formRef}>
+                {state.description.length > 0 &&
+                    sortArray(state.description, 'id').map(item =>
+                        <ProductAttributeAddField
+                            key={item.id || item.name}
+                            item={item}
+                            onDelete={_ => {
+                                setState(prev => {
+                                    let validItem = !item.id ?
+                                        menuCopy.descriptionMenuCopy.filter(i => i.text === item.name)[0] :
+                                        item
+                                    return {
+                                        ...prev,
+                                        description: prev.description.filter(i =>
+                                            //check if the item comes from state or from data.description
+                                            !item.id ? i.name !== item.name : i.text !== item.text
+                                        ),
+                                        //add the item to the menu again
+                                        descriptionMenu: [...prev.descriptionMenu, validItem],
+                                        //restore descriptionMenuExtra conditionally
+                                        descriptionExtraMenu: !prev.descriptionMenu.length ?
+                                            [...menuCopy.descriptionExtraMenuCopy] :
+                                            [...prev.descriptionExtraMenu]
+                                    }
+                                })
+                                //send the item to update the product variable
+                                // onchange({action: 'delete', item})
+                                let {description, ...rest} = data,
+                                    tempDescription = [...description];
+                                // debugger
+                                window.dispatch(productSliceActions.setProductInEditMode({
+                                    description: tempDescription.length === 1 ? [] : tempDescription.filter(i => i.name !== item.name),
+                                    ...rest
+                                }))
+                            }}
+                        />
+                    )
+                }
+            </Box>
         </RootStyle>
     );
-}
-
-ProductAttribute.prototype = {
-    data: PropTypes.object,
-    onChange: PropTypes.func.isRequired
 }

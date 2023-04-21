@@ -1,22 +1,23 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 // material
 import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
 //
 import EzText from "../../../components/ezComponents/EzText/EzText";
-import ProductProperties from "../addProduct_v2/productProperties/ProductProperties";
-import ProductMedia from "./productMedia/ProductMedia";
+import ProductProperties from "../addOrEditProduct/productProperties/ProductProperties";
 import ChildWrapper from "../../../components/ChildWrapper/ChildWrapper";
 import {handleDecimalsOnValue, sortArray} from "../../../helper";
 import ProductMediaActions from "./productMedia/ProductMediaActions";
 import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
+import AddOrEditProductMediaLogic from "./AddOrEditProductMediaLogic";
+import {productSliceActions} from "../../../store/productSlice";
 
 //----------------------------------------------------------------
 
 const RootStyle = styled(Stack)(({theme}) => ({
     minWidth: '1122px',
-    minHeight: '900px',
+    // height: '900px',
     backgroundColor: theme.palette.ecommerce.bg_parent
 }));
 
@@ -43,11 +44,15 @@ const Layout = styled(Stack)(({theme}) => ({
     margin: '10px'
 }));
 //----------------------------------------------------------------
-export default function AddOrEditProduct({tempData}) {
+export default function AddOrEditProduct({tempData, editMode}) {
     //tempProduct depend of if there are temp data on store otherwise it's going ot be static dummy data
-    const {tempProduct} = useSelector(slice => slice.product);
-    const [data, setData] = useState({...tempData});
+    const {tempProduct, productInEditMode} = useSelector(slice => slice.product);
+    const [data, setData] = useState({});
     const [checkProductName, setCheckProductName] = useState({check: false, isOnDb: null, value: ''});
+
+    useEffect(_ => {
+        setData(editMode ? {...productInEditMode} : {...tempData})
+    }, [productInEditMode])
 
     useEffect(_ => {
         //checkProductName.value store the checked name if isOnDb was false(means the name is not in the DB)
@@ -76,21 +81,6 @@ export default function AddOrEditProduct({tempData}) {
                     ...data,
                     [key]: key === 'size' ? sortArray(value, 'id') : value
                 })
-            case 'description':
-                if(value.action === 'delete') {
-                    data[key] = data[key].filter(item => item.name !== value.item.name)
-                    return setData({...data})
-                }
-                if(value.action === 'delete-all') {
-                    return setData({...data, [key]: []})
-                }
-                let indexToUpdate = key === 'description' && data[key].findIndex(i => i.name === value.name)
-                if(indexToUpdate === -1) {
-                    return setData({ ...data, [key]: [...data[key], value]})
-                } else {
-                    data[key][indexToUpdate] = value;
-                    return setData({...data})
-                }
             case 'color':
                 return setData({...data, [key]: [...value]})
             default:
@@ -98,11 +88,14 @@ export default function AddOrEditProduct({tempData}) {
         }
     };
 
+
+
+
     return (
         <RootStyle>
             <Header>
                 <EzText text={'Add Product'} sx={{color: '#FFF', fontSize: '12px'}}/>
-                <ProductMediaActions data={data} checkProductName={checkProductName}/>
+                {Object.keys(data).length && <ProductMediaActions data={data} checkProductName={checkProductName}/>}
             </Header>
             <Layout>
                 <ChildWrapper
@@ -113,12 +106,12 @@ export default function AddOrEditProduct({tempData}) {
                         // top: '60px'
                     }}
                 >
-                    <ProductProperties
+                    {Object.keys(data).length && <ProductProperties
                         data={data}
                         checkProductName={checkProductName}
                         onChangeHandler={onChangeHandler}
                         setCheckProductName={setCheckProductName}
-                    />
+                    />}
                 </ChildWrapper>
                 <Stack
                     sx={{
@@ -127,18 +120,7 @@ export default function AddOrEditProduct({tempData}) {
                         gap: '10px'
                     }}
                 >
-                    {tempProduct?.variation?.length ?
-                        tempProduct.color.map(item =>
-                            <ChildWrapper key={item.color}>
-                                <ProductMedia
-                                    item={item}
-                                    category={tempProduct.category}
-                                />
-                            </ChildWrapper>
-                        )
-                        :
-                        <Stack> No Variation yet</Stack>
-                    }
+                    <AddOrEditProductMediaLogic tempProduct={data.id ? data : tempProduct}/>
                 </Stack>
             </Layout>
         </RootStyle>
@@ -146,5 +128,5 @@ export default function AddOrEditProduct({tempData}) {
 }
 
 AddOrEditProduct.prototype = {
-    tempProduct: PropTypes.object.isRequired
+    tempData: PropTypes.object.isRequired
 }

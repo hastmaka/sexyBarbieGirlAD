@@ -28,10 +28,7 @@ export default function ProductProperties({data, checkProductName, onChangeHandl
                     setCheckProductName={setCheckProductName}
                 />
 
-                <ProductAttribute
-                    data={data}
-                    onchange={value => onChangeHandler(value, 'description')}
-                />
+                <ProductAttribute data={data}/>
             </Stack>
         </RootStyle>
     );

@@ -10,6 +10,7 @@ import {updateFilter} from "./updateFilter";
 import {checkImageNameBeforeUpload} from "./checkImageNameBeforeUpload";
 import {handleAddImageToVariation} from "./handleAddImageToVariation";
 import {sanitizeTempProduct} from "./sanitizeTempProduct";
+import areArrayOfObjectsEqual from "./areArrayOfObjectsEqual";
 
 export {
     createId,
@@ -23,5 +24,6 @@ export {
     updateFilter,
     checkImageNameBeforeUpload,
     handleAddImageToVariation,
-    sanitizeTempProduct
+    sanitizeTempProduct,
+    areArrayOfObjectsEqual
 }

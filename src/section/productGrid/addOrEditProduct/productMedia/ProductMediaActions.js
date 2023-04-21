@@ -67,6 +67,7 @@ export default function ProductMediaActions({data, checkProductName}) {
                     stock: 10,
                     discount: 0,
                     checked: true,
+                    active: true
                 })
             }
         }

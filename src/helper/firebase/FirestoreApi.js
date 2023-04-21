@@ -8,7 +8,9 @@ import {
     getDocs,
     query,
     updateDoc,
-    where
+    where,
+    writeBatch,
+    limit
 } from "firebase/firestore";
 import {db} from "./FirebaseConfig";
 
@@ -75,7 +77,11 @@ export const getAll = createAsyncThunk(
                 queries.push(where(filter.field, filter.operator, filter.value));
             }
         }
-        let q = query(firestoreCollection(db, collection), ...queries);
+        const collectionRef = firestoreCollection(db, collection)
+        let q = query(collectionRef, ...queries);
+        if (lim !== null) {
+            q = query(collectionRef, ...queries, limit(lim));
+        }
         try {
             let data = collection === 'stripe_customers' ? {} : [];
             let res = await getDocs(q);
@@ -118,25 +124,52 @@ export const checkProductNameApi = async (name) => {
     }
 };
 
-// export const updateWishListApi = (uid, wish_list) => {
-//     try {
-//         setDoc(doc(db, 'users', uid), {wish_list: [...wish_list]}, {merge: true})
-//             .then()
-//     } catch (err) {
-//         debugger
-//         console.log(err);
-//     }
-// };
-//
-// export const updateAddressApi = (uid, address) => {
-//     try {
-//         setDoc(doc(db, 'users', uid), {address: [...address]}, {merge: true})
-//             .then()
-//     } catch (err) {
-//         debugger
-//         console.log(err);
-//     }
-// };
+//Test with Dummy data
+export const uploadDummyData = async (data) => {
+    debugger
+    try {
+        const collectionRef = firestoreCollection(db, 'tests');
+        const batch = writeBatch(db);
+
+        data.forEach((item) => {
+            const docRef = doc(collectionRef);
+            batch.set(docRef, item);
+        });
+
+        await batch.commit();
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export const getDummyData = async (searchParams, setData) => {
+    try {
+        const data = [];
+        if(Object.keys(searchParams).length) {
+            const querySnapshot = await getDocs(
+                query(
+                    firestoreCollection(db, 'tests'),
+                    where('tags', 'array-contains', searchParams)
+                )
+            );
+            querySnapshot.docs.map(doc => {
+                data.push({...doc.data(), id: doc.id})
+            })
+        } else {
+            const querySnapshot = await getDocs(firestoreCollection(db, 'tests'));
+            querySnapshot.docs.map(doc => {
+                data.push({...doc.data(), id: doc.id})
+            })
+        }
+        return setData(data);
+    } catch (err) {
+        debugger
+    }
+}
+
+export const searchByTags = async () => {
+
+}
 
 
 

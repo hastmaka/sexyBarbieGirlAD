@@ -1,24 +1,16 @@
 import {useSelector} from "react-redux";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 // material
-import {Box, Button, Stack, Tooltip} from "@mui/material";
+import {Box, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import {DataGrid, GridActionsCellItem, GridRowModes} from "@mui/x-data-grid";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Cancel';
-import BorderAllIcon from '@mui/icons-material/BorderAll';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
-import EditIcon from '@mui/icons-material/Edit';
 //
 import ChildWrapper from "../../components/ChildWrapper/ChildWrapper";
-import VariationGrid from "./variationGrid/VariationGrid";
 import EzIconButton from "../../components/ezComponents/EzIconButton/EzIconButton";
 import EzText from "../../components/ezComponents/EzText/EzText";
-import AddOrEditProduct from "./addProduct_v2/AddOrEditProduct";
 import {getAll, updateProductApi} from "../../helper/firebase/FirestoreApi";
-import EzEditToolBar from "./EzEditToolBar/EzEditToolBar";
+import ProductGridToolBar from "./ProductGridToolBar";
 import EzButton from "../../components/ezComponents/EzButton/EzButton";
 import EzSwiper from "../../components/ezComponents/EzSwiper/EzSwiper";
 import {SwiperSlide} from "swiper/react";
@@ -26,6 +18,9 @@ import {staticData} from "../../helper/staticData/StaticData";
 import {openModal} from "../../helper";
 import {tableSx} from "../../helper/sx/Sx";
 import EzMuiGrid from "../../components/EzMuiGrid/EzMuiGrid";
+import AddOrEditProduct from "./addOrEditProduct/AddOrEditProduct";
+import {productSliceActions} from "../../store/productSlice";
+import ProductGridFooter from "./ProductGridFooter";
 // import EzEditToolBar from "./EzEditToolBar/EzEditToolBar";
 
 //----------------------------------------------------------------
@@ -45,15 +40,19 @@ const TableHeader = styled(Stack)(({theme}) => ({
 //----------------------------------------------------------------
 
 export default function ProductGrid() {
-    const {product, tempProduct, productState} = useSelector(slice => slice.product);
+    const {product, tempProduct, productState, productInEditMode} = useSelector(slice => slice.product);
     const [rows, setRows] = useState([]);
-    const addBtnRef = useRef();
     const [rowModesModel, setRowModesModel] = useState({});
     const [isAddActive, setIsAddActive] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+    const [totalRows, setTotalRows] = useState(rows.length);
+    const apiRef = useRef();
+    const addBtnRef = useRef();
 
     useEffect(() => {
         if (!productState.loading && !productState.loaded) {
-            window.dispatch(getAll({collection: 'products'}))
+            window.dispatch(getAll({collection: 'tests', filter: null, lim: null}))
         }
     }, [productState]);
 
@@ -82,8 +81,9 @@ export default function ProductGrid() {
     //endregion
 
 
-    const handleDoubleClick = (params, e) => {
-        // openModal(<AddOrEditProduct tempData={params.row}/>)
+    const handleOnRowDoubleClick = (params, e) => {
+        window.dispatch(productSliceActions.setProductInEditMode(params.row))
+        openModal(<AddOrEditProduct editMode/>)
     }
 
     const processRowUpdate = useCallback(
@@ -173,7 +173,10 @@ export default function ProductGrid() {
             align: 'center',
             headerAlign: 'center',
             filterable: false,
-            renderCell: (index) => index.api.getRowIndex(index.row.id) + 1
+            renderCell: (params) => {
+                let value = params.api.getRowIndexRelativeToVisibleRows(params.row.id) + 1;
+                return isNaN(value) ? '' : value.toString()
+            }
         }, {
                 field: 'image',
                 headerName: 'Image',
@@ -245,21 +248,23 @@ export default function ProductGrid() {
                     </Stack>
                 )
             }
-        }, {
-            field: 'price',
-            headerName: 'Price',
-            type: 'number',
-            flex: 1,
-            align: 'center',
-            headerAlign: 'center',
-            editable: true,
-            renderCell: ({value}) => {
-                return <EzText text={`$ ${value}`} sx={{fontSize: '13px'}}/>
-            }
-        }, {
+        },
+        // {
+        //     field: 'price',
+        //     headerName: 'Price',
+        //     type: 'number',
+        //     flex: 1,
+        //     align: 'center',
+        //     headerAlign: 'center',
+        //     editable: true,
+        //     renderCell: ({value}) => {
+        //         return <EzText text={`$ ${value}`} sx={{fontSize: '13px'}}/>
+        //     }
+        // },
+        {
             field: 'active',
             headerName: 'Active',
-            flex: 1,
+            width: 100,
             align: 'center',
             headerAlign: 'center',
             type: 'boolean',
@@ -269,7 +274,12 @@ export default function ProductGrid() {
                 return <EzText text={params.row.active? 'true' : 'false'} sx={{fontSize: '13px', color: tempColor}}/>
             }
         }
-    ]
+    ];
+
+    const handlePageSizeChange = (params) => {
+        const newPageSize = params.pageSize;
+        setPageSize(newPageSize);
+    };
 
     return (
         <ChildWrapper sx={{height: 'calc(100vh - 80px)', padding: 0}}>
@@ -283,17 +293,19 @@ export default function ProductGrid() {
                         setRowModesModel={setRowModesModel}
                         rowModesModel={rowModesModel}
                         processRowUpdate={processRowUpdate}
+                        isloading={productState.loading}
                         isAddActive={isAddActive}
                         setIsAddActive={setIsAddActive}
+                        // onRowDoubleClick={handleOnRowDoubleClick}
                         components={{
-                            Toolbar: EzEditToolBar
+                            Toolbar: ProductGridToolBar,
+                            Footer: ProductGridFooter,
                         }}
                         componentsProps={{
                             toolbar: {
                                 rowModesModel,
                                 setRowModesModel,
-                                tempProduct,
-                                from: 'product'
+                                tempProduct
                             },
                         }}
                         disableSelectionOnClick

@@ -106,8 +106,13 @@ export default function EzMuiGrid({
             rows={rows}
             columns={allProductsVariantsGridColumns}
             getRowId={row => row.id}
-            pageSize={10}
-            rowsPerPageOptions={[10, 20]}
+
+            //height of table is calculated depending on how many rows has
+            //and nothing about pagination work because is handling auto
+            autoPageSize
+            // pageSize={10}
+            // pageSizeOptions={[10, 25, 50, 100]}
+
             //to edit function in v5 editMode and experimentalFeatures are required
             editMode='row'
             onRowEditStart={handleRowEditStart}//disable edit with dbclick

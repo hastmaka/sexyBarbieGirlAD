@@ -23,7 +23,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductMediaInputFiles({item, progress, setProgress, hiddenInputRef, handleChange, category}) {
+export default function ProductMediaInputFiles({item, progress, setProgress, hiddenInputRef, handleChange}) {
     return (
         <RootStyle>
             <EzFileInput

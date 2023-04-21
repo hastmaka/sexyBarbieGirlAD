@@ -5,12 +5,23 @@ const productSlice = createSlice({
     name: 'product',
     initialState: {
         product: [],
-        tempProduct: {},
-        unsavedProduct: [],
         productState: {loaded: false, loading: false},
+        //AOEP
+        tempProduct: {},
+        tempProductState: {
+            vital: {
+
+            },
+            variation: {
+
+            }
+        },
+        productInEditMode: {},
+        unsavedProduct: [],
     },
     reducers: {
         setTempProduct(state, {payload}){state.tempProduct = payload},
+        setProductInEditMode(state, {payload}){state.productInEditMode = payload},
         addImageToColor(state, {payload}) {
             const {data, item} = payload;
             const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color)
@@ -61,7 +72,7 @@ const productSlice = createSlice({
         });
         builder.addCase(getAll.fulfilled, (state, {meta, payload}) => {
             switch (meta.arg.collection) {
-                case 'products':
+                case 'tests'://change to products later
                     state.product = payload;
                     state.productState.loading = false;
                     state.productState.loaded = true;

@@ -33,11 +33,10 @@ export default function ProductAttributeAddField({item, onChange, onDelete}) {
                     </Tooltip>
                 }
                 <TextField
-                    value={item.value}
-                    onChange={e => onChange({name: item.text, value: e.target.value})}
+                    defaultValue={item.value}
                     name={item.text || item.name}
                     size='small'
-                    sx={{width: '300px'}}
+                    sx={{width: '70vw'}}
                 />
             </Stack>
         </Stack>

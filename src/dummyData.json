@@ -1,0 +1,3378 @@
+[
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Mayo, Halter, bikini, Bandeau, High Neck"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Plunge", "Tankini", "Bandeau", "Tank", "Swim Dress"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Bandeau", "High Neck", "t-shirt", "Swim Dress", "Bandeau"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Mayo", "t-shirt", "bikini", "Tank", "High Neck"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Halter", "Swim Dress", "High Neck", "t-shirt", "beach"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["beach", "Tank", "Halter", "Bandeau", "Mayo"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Bandeau", "Tank", "Swim Dress", "Plunge", "bikini"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Tankini", "High Neck", "bikini", "t-shirt", "Long sleeved"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Swim Dress", "Mayo", "Long sleeved", "bikini", "Bandeau"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Bandeau", "Tankini", "beach", "Long sleeved", "Bandeau"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Swim Dress", "Halter", "Bandeau", "Tankini", "Plunge"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["beach", "Halter", "Bandeau", "High Neck", "Plunge"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Swim Dress", "Bandeau", "Plunge", "High Neck", "t-shirt"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["beach", "Bandeau", "Bandeau", "High Neck", "Tank"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["Bandeau", "Tankini", "Mayo", "Bandeau", "Swim Dress"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  },
+  {
+    "active": true,
+    "category": ["Bikini"],
+    "color": [
+      {
+        "color": "INDIANRED",
+        "hex": "#CD5C5C",
+        "refs": 1681537689174,
+        "image": [
+          {
+            "id": "7KpjJYaeBg3wnkF4Yvmy",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "ubfVo88fZJQEJxmxZldj",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "yAZrl4fwtETS8ch6bNS1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "HhJYlnu0skpTRhhLmyjP",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "MAGENTA",
+        "hex": "#FF00FF",
+        "refs": 1681537701037,
+        "image": [
+          {
+            "id": "YwSLLp1xMPFLwULkT7GD",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "nyaVFrO6SfbzbEUjT1X6",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "5CbE1w1vapmkuKKqjDIY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "x2ZqMD35KpSxkYnKCeDY",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      },
+      {
+        "color": "LIMEGREEN",
+        "hex": "#32CD32",
+        "refs": 1681537711406,
+        "image": [
+          {
+            "id": "G27St6BbuBSsFdOkgaBK",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob.jpg?alt=media&token=07dded4f-46a9-49c5-a31a-22db1af4fbb5"
+          },
+          {
+            "id": "J8TDpowssLBP9EkTm0sv",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_1.jpg?alt=media&token=4bc7fe37-2eba-4d3c-b938-909aa160f3b5"
+          },
+          {
+            "id": "jwbozP6537zJL6wAFAiA",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_2.jpg?alt=media&token=6e09bdf4-0114-4d60-bb87-048d7c46641e"
+          },
+          {
+            "id": "QXjA7jkPIdeGweWWRmhC",
+            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1681537689174%2Fnob_3.jpg?alt=media&token=37840686-c02a-4eab-aa5d-6956a5fadac2"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "name": "Style",
+        "value": "Bikini"
+      },
+      {
+        "name": "Details",
+        "value": "Details"
+      }
+    ],
+    "name": "Bikini Dream on it",
+    "size": [
+      {
+        "bust": 76,
+        "hips": 81,
+        "size": "XXS",
+        "waist": 56
+      },
+      {
+        "bust": 81,
+        "hips": 86,
+        "size": "XS",
+        "waist": 61
+      },
+      {
+        "bust": 86,
+        "hips": 91,
+        "size": "S",
+        "waist": 66
+      }
+    ],
+    "statistic": [
+      {
+        "average_rating": 0,
+        "date_on_sale_from": "",
+        "date_on_sale_to": "",
+        "sales": {
+          "MJi7xWL3ZdM77GdZwrd7": 3,
+          "GJr9pDM7NdL23RfFhj5s": 12
+        },
+        "total_view": 0
+      }
+    ],
+    "tags": ["beach", "Swim Dress", "Tankini", "Long sleeved", "Plunge"],
+    "variation": [
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "MJi7xWL3ZdM77GdZwrd7",
+        "price": 25.99,
+        "size": "XXS",
+        "stock": 10
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 0,
+        "id": "FHs6tTz8WmR91YvNkqj3",
+        "price": 39.99,
+        "size": "XXS",
+        "stock": 5
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "INDIANRED",
+        "discount": 10,
+        "id": "GJr9pDM7NdL23RfFhj5s",
+        "price": 12.99,
+        "size": "XXS",
+        "stock": 15
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 20,
+        "id": "LJt4zBW2DrK68QsXmz9f",
+        "price": 19.99,
+        "size": "XS",
+        "stock": 8
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 0,
+        "id": "KPd8cZS4ExA34FnVgj6w",
+        "price": 59.99,
+        "size": "XS",
+        "stock": 12
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "MAGENTA",
+        "discount": 5,
+        "id": "HRq2nYG9UtT84MpKwv7d",
+        "price": 34.99,
+        "size": "XS",
+        "stock": 20
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "NMu5wQJ6GsB97VhLr4e2",
+        "price": 45.99,
+        "size": "S",
+        "stock": 6
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 15,
+        "id": "EZf3kPX5YbS27GcTv6q1",
+        "price": 29.99,
+        "size": "S",
+        "stock": 3
+      },
+      {
+        "active": true,
+        "checked": true,
+        "color": "LIMEGREEN",
+        "discount": 0,
+        "id": "SJy6uHF7PaD25KeBv9x8",
+        "price": 24.99,
+        "size": "S",
+        "stock": 10
+      }
+    ]
+  }
+]

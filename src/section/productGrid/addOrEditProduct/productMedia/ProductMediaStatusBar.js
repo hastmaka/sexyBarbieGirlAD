@@ -15,7 +15,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 export default function ProductMediaStatusBar({item, progress}) {
     return (
         <RootStyle>
-            <Stack direction='row' justifyContent='space-around' width='100%'>
+            <Stack direction='row' justifyContent='space-between' width='100%'>
                 <EzText text='Number of Images Allow (4)'/>
                 <EzText text={`${4 - item.image.length} left - ${item.image.filter(i => i.uploaded).length} uploaded`}/>
                 <EzText

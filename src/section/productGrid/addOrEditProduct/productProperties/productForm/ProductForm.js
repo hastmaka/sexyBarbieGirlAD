@@ -42,7 +42,7 @@ const Check = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductForm({data, checkProductName, onChangeHandler, setCheckProductName}) {
+export default function ProductForm({data, checkProductName, setCheckProductName}) {
     const handleCheckProductName = (name) => {
         //check if name already existed on db
         checkProductNameApi(name).then(res => {
@@ -56,6 +56,11 @@ export default function ProductForm({data, checkProductName, onChangeHandler, se
             })
         })
     }
+
+    const onChangeHandler = () => {
+        debugger
+    }
+
     return (
         <RootStyle>
             <Stack direction='row' justifyContent='space-between' alignItems='center'>
