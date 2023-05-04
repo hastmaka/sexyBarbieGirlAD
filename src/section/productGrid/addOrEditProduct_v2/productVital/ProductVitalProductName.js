@@ -8,11 +8,10 @@ import {ProductNameHelpText} from "../AOEPTextHelpData";
 import AOEPChild_2 from "../localComponent/AOEPChild_2";
 import EzHelpText from "../../../../components/ezComponents/EzHelpText/EzHelpText";
 import AOEPParent from "../localComponent/AOEPParent";
-import PropTypes from "prop-types";
 import {productSliceActions} from "../../../../store/productSlice";
-import {useSelector} from "react-redux";
 import {checkProductNameApi} from "../../../../helper/firebase/FirestoreApi";
-import {useCallback, useLayoutEffect} from "react";
+import {useCallback, useLayoutEffect, useMemo, useState} from "react";
+import {capitalizeFirstLetter} from "../../../../helper";
 
 //----------------------------------------------------------------
 
@@ -30,34 +29,57 @@ const Check = styled(Stack)(({theme}) => ({
 }));
 
 //----------------------------------------------------------------
+export default function ProductVitalProductName({formRef, tempProduct, tempProductState}) {
+    const [value, setValue] = useState(tempProduct.name);
 
-export default function ProductVitalProductName({formRef}) {
-    const {tempProduct, tempProductState} = useSelector(slice => slice.product);
-    // const [checkProductName] = useCheckProductName(tempProduct);
+    useLayoutEffect(() => {
+        setValue(tempProduct.name)
+    }, [tempProduct.name])
+
+    const handleChange = (e) => {
+        setValue(e.target.value);
+        if(e.target.value !== tempProduct.name) {
+            debouncedDispatch({
+                ...tempProduct,
+                name: capitalizeFirstLetter(e.target.value)
+            });
+        }
+    };
 
     const handleCheckProductName = async (value) => {
-        const name = new FormData(formRef.current).get(value)
-        //check if name already existed on db
-        if(!name) {
-            return window.displayNotification({
-                type: 'warning',
-                content: `Name can't be empty`
+        //check first if the product name was already check in the db
+        if(!tempProductState.checkProductName.check) {
+            const name = new FormData(formRef.current).get(value);
+            const capName = name.slice(0, 1).toUpperCase() + name.slice(1)
+            //check if name already existed on db
+            if (!capName) {
+                return window.displayNotification({
+                    type: 'warning',
+                    content: `Name can't be empty`
+                })
+            }
+            const res = await checkProductNameApi(capName);
+            window.dispatch(
+                productSliceActions.updateTempProductState({
+                    ...tempProductState,
+                    checkProductName: {
+                        check: !tempProductState.checkProductName.check,
+                        isOnDb: !res,
+                        value: capName
+                    }
+                })
+            )
+        } else {
+            window.displayNotification({
+                type: 'success',
+                content: 'The product name was already verified'
             })
         }
-        const res = await checkProductNameApi(name);
-        window.dispatch(
-            productSliceActions.updateTempProductState({
-                ...tempProductState,
-                checkProductName: {
-                    check: !tempProductState.checkProductName.check,
-                    isOnDb: !res,
-                    value: name
-                }
-            })
-        )
     }
 
     const handleTempProductNameChange = useCallback(() => {
+        //make function don't trigger first time open the component
+        if(!tempProductState.productNameModified) return
         if (!tempProduct.name?.trim()) {
             window.dispatch(
                 productSliceActions.updateTempProductState({
@@ -89,9 +111,18 @@ export default function ProductVitalProductName({formRef}) {
         handleTempProductNameChange();
     }, [handleTempProductNameChange]);
 
-    const debouncedDispatch = debounce((newTempProduct) => {
-        window.dispatch(productSliceActions.setTempProduct(newTempProduct));
-    }, 400);
+    const debouncedDispatch = useMemo(
+        () =>
+            debounce((newTempProduct) => {
+                window.dispatch(productSliceActions.setTempProduct(newTempProduct));
+                window.dispatch(
+                    productSliceActions.updateTempProductState({
+                    ...tempProductState,
+                    productNameModified: true
+                }));
+            }, 200),
+        []
+    );
 
     return (
         <AOEPParent>
@@ -104,17 +135,12 @@ export default function ProductVitalProductName({formRef}) {
             <AOEPChild_2>
                 <TextField
                     error={tempProductState.checkProductName.isOnDb && tempProduct.name !== ''}
-                    defaultValue={tempProduct.name}
+                    value={value}
                     size='small'
-                    label="name"
+                    label="Name"
                     name='name'
                     required
-                    onChange={e => {
-                        debouncedDispatch({
-                            ...tempProduct,
-                            name: e.target.value
-                        });
-                    }}
+                    onChange={handleChange}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -136,10 +162,4 @@ export default function ProductVitalProductName({formRef}) {
             </AOEPChild_2>
         </AOEPParent>
     );
-}
-
-ProductVitalProductName.prototype = {
-    checkProductName: PropTypes.object.isRequired,
-    handleCheckProductName: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
 }

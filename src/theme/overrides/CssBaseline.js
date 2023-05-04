@@ -1,9 +1,5 @@
 // ----------------------------------------------------------------------
-
-import {useSelector} from "react-redux";
-
 export default function CssBaseline() {
-    const {screen} = useSelector(slice => slice.admin);
     return {
         MuiCssBaseline: {
             styleOverrides: {
@@ -41,7 +37,7 @@ export default function CssBaseline() {
                 '#root': {
                     width: '100%',
                     height: '100%',
-                    fontSize: screen <= 786 ? '12px' : '13px',
+                    fontSize: '12px',
                     position: 'relative'
                 },
                 input: {

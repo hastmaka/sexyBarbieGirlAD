@@ -4,6 +4,7 @@ import {useMemo} from 'react';
 import Chip from '@mui/material/Chip';
 import PropTypes from 'prop-types';
 import EzColor from "../EzColor/EzColor";
+import {capitalizeFirstLetter} from "../../../helper";
 
 /**
  *
@@ -56,7 +57,10 @@ export default function EzAutocompleteMultiple({
         return (
             <Chip
                 onDelete={() => setValue(value.filter((i, index) => index !== props['data-tag-index']))}
-                label={isObj ? props?.item[valueForIteration] : props?.item}
+                label={isObj ?
+                    capitalizeFirstLetter(props?.item[valueForIteration]) :
+                    capitalizeFirstLetter(props?.item)
+                }
                 variant='outlined'
                 sx={{
                     backgroundColor: isObj ? props?.item?.color || 'inherit' : 'inherit',
@@ -87,7 +91,7 @@ export default function EzAutocompleteMultiple({
             onChange={handleChange}
             renderOption={(props, option, state) =>
                 <li {...props} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <span>{valueForIteration === 'color' ? option.color : option.size}</span>
+                    <span>{valueForIteration === 'color' ? option.color.toUpperCase() : option.size.toUpperCase()}</span>
                     {valueForIteration === 'color' && <EzColor color={option.color}/>}
                 </li>
             }

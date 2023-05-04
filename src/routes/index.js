@@ -9,12 +9,15 @@ import Shipping from "../section/shipping/Shipping";
 import Test from "../section/test/Test";
 
 //----------------------------------------------------------------
-
+const FallBack = () => {
+    return <div>Loading...</div>
+}
 export default function Router() {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const children = [];
+
+
     return useRoutes([{
-        path: '/login',
-        element: <Login/>
-    }, {
         path: '/',
         element: <Layout/>,
         children: [{
@@ -36,16 +39,5 @@ export default function Router() {
             path: '/test',
             element: <Test/>
         }]
-    }, {
-            path: '/error',
-        // element: <Error/>,
-    }, {
-        path: '/test',
-        // element: <FileInput/>,
-    },
-        //     {
-        //     path: '*',
-        //     element: <Navigate to='/error' replace/>
-        // }
-    ])
+    }])
 }

@@ -5,6 +5,7 @@ import {forwardRef} from "react";
 import {useSelector} from "react-redux";
 import EzCustomIconButton from "../EzCustomIconButton/EzCustomIconButton";
 import {adminSliceActions} from "../../../store/adminSlice";
+import {productSliceActions} from "../../../store/productSlice";
 
 //----------------------------------------------------------------
 
@@ -40,7 +41,10 @@ export default function EzModal({children}) {
             <EzCustomIconButton
                 icon={<CloseIcon sx={{fontSize: '2rem'}}/>}
                 toolTipTitle='Close'
-                onClick={_ => window.dispatch(adminSliceActions.closeModal())}
+                onClick={_ => {
+                    window.dispatch(productSliceActions.resetTempProductAndTempProductState())
+                    window.dispatch(adminSliceActions.closeModal())
+                }}
                 sx={{
                     position: 'fixed',
                     right: {xs: '19px', md: 0},

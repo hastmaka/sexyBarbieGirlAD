@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
 //
-import EzText from "../../../../components/ezComponents/EzText/EzText";
+import EzText from "../../../../../components/ezComponents/EzText/EzText";
 import PrevImages from "./prevImages/PrevImages";
-import {createId, handleDeleteImage} from "../../../../helper";
+import {createId, getNameFromUrl, handleDeleteImage} from "../../../../../helper";
 import ProductMediaStatusBar from "./ProductMediaStatusBar";
 import ProductMediaInputFiles from "./ProductMediaInputFiles";
-import EzColor from "../../../../components/ezComponents/EzColor/EzColor";
-import {productSliceActions} from "../../../../store/productSlice";
+import EzColor from "../../../../../components/ezComponents/EzColor/EzColor";
+import {productSliceActions} from "../../../../../store/productSlice";
 
 //----------------------------------------------------------------
 
@@ -23,7 +23,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductMedia({item}) {
+export default function ProductMedia({item, editMode, tempProduct}) {
     const [progress, setProgress] = useState(0);
     const hiddenInputRef = useRef(null);
 
@@ -41,7 +41,10 @@ export default function ProductMedia({item}) {
         for (let i = 0; i < e.target.files.length; i++) {
             //check if image was already added
             if(item.image.length) {
-                if(!!item.image.find(item => item.File.name === e.target.files[i].name)) continue;
+                let existedImageIndex = item.image.findIndex(item =>
+                    (editMode ? getNameFromUrl(item.url) : item.File.name) === e.target.files[i].name
+                )
+                if(!existedImageIndex) continue;
             }
             // if(newImage.size > 50000) return alert('Img size must be less than 50k');
             tempImg.push({
@@ -68,10 +71,12 @@ export default function ProductMedia({item}) {
 
             <ProductMediaInputFilesMemoized
                 item={item}
+                editMode={editMode}
                 progress={progress}
                 setProgress={setProgress}
                 hiddenInputRef={hiddenInputRef}
                 handleChange={handleChange}
+                tempProduct={tempProduct}
             />
 
             <Stack gap='20px'>
@@ -79,7 +84,7 @@ export default function ProductMedia({item}) {
                 {item.image.length > 0 &&
                     <PrevImages
                         image={item.image}
-                        onClick={img => handleDeleteImage(img, item, hiddenInputRef, setProgress)}
+                        onClick={img => handleDeleteImage(img, item, hiddenInputRef, setProgress, tempProduct)}
                     />
                 }
             </Stack>

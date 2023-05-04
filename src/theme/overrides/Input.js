@@ -51,7 +51,7 @@ export default function Input(theme) {
             styleOverrides: {
                 root: {
                     '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: theme.palette.grey[500_32],
+                        borderColor: '#c9c9c9',
                     },
                     '&.Mui-disabled': {
                         '& .MuiOutlinedInput-notchedOutline': {
@@ -61,5 +61,12 @@ export default function Input(theme) {
                 },
             },
         },
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    color: '#c9c9c9'
+                }
+            }
+        }
     };
 }

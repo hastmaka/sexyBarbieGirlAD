@@ -1,28 +1,29 @@
 import {lazy, Suspense, useEffect, useState} from "react";
-// material
-import {Stack} from "@mui/material";
-import {styled} from '@mui/material/styles';
 //
-import {adminSliceActions} from "./store/adminSlice";
 import {useDispatch, useSelector} from "react-redux";
-import Routes from './routes/index';
+import Router from './routes';
 import ScrollToTop from "./components/scrollToTop/ScrollToTop";
-import {useCheckScreen, useConfirmDialog, useNotification} from "./helper/hooks";
-//async import
+import {useConfirmDialog, useNotification} from "./helper/hooks";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {addNeededSlices, verifySession} from "./AppController";
+import AppStoreControl from "./AppStoreControl";
+import Login from './section/login/Login'
+//dynamic import
 const EzModal = lazy(() => import('./components/ezComponents/EzModal/EzModal'))
-
-//----------------------------------------------------------------
-
-const RootStyle = styled(Stack)(({theme}) => ({}));
+const CreateAccount = lazy(() => import('./section/login/CreateAccount'))
+const ForgotPassword = lazy(() => import('./section/login/ForgotPassword'))
 
 //----------------------------------------------------------------
 
 export default function App() {
+    const location = useLocation();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const {confirm} = useConfirmDialog();
     const {displayNotification} = useNotification();
     const {user, userStatus} = useSelector(slice => slice.admin);
     const [children, setChildren] = useState(null);
+    const [runApp, setRunApp] = useState(false);
 
     //delete firebase emulator warning
     useEffect(_ => {
@@ -30,14 +31,15 @@ export default function App() {
         firebaseWarning[0].style.display = 'none'
     }, [])
 
+    // check if the user is logged in and has credentials
+    useEffect(_ => {
+        if (!verifySession() && !['/login', '/create-account', '/forgot-password'].includes(location.pathname)) {
+            navigate('/login')
+        }
+    }, [location]);
+
 
     //check if user is authenticated
-
-    //get screen size
-    const screenSize = useCheckScreen();
-    useEffect(_ => {
-        dispatch(adminSliceActions.setScreen(screenSize))
-    }, [screenSize]);
 
     useEffect(_ => {
         window.dispatch = dispatch;
@@ -47,12 +49,29 @@ export default function App() {
     }, [])
 
     return (
-        <RootStyle>
-            <ScrollToTop/>
-            {window.dispatch && <Routes/>}
+        <>
             <Suspense fallback={<div>Loading Login...</div>}>
                 <EzModal children={children}/>
             </Suspense>
-        </RootStyle>
+            {!runApp && !verifySession() ?
+                <Routes>
+                    <Route path='/login' element={<Login/>}/>
+                    <Route path='/create-account' element={<Suspense fallback={<p>Loading...</p>}>{<CreateAccount/>}</Suspense>}/>
+                    <Route path='/forgot-password' element={<Suspense fallback={<p>Loading...</p>}>{<ForgotPassword/>}</Suspense>}/>
+                    <Route path='*' to='/login' element={<Login/>}/>
+                </Routes> :
+                runApp ?
+                    <AppStoreControl>
+                        <Router/>
+                    </AppStoreControl> :
+                    addNeededSlices(
+                        setRunApp,
+                        dispatch,
+                        confirm,
+                        setChildren,
+                        displayNotification
+                    )
+            }
+        </>
     );
 }

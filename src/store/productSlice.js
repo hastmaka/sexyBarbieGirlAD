@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {create, getAll} from "../helper/firebase/FirestoreApi";
+import {create, getAll, update, updateProductApi} from "../helper/firebase/FirestoreApi";
+import {tempProductState, tempProduct} from "../helper/staticData/StaticData";
 
 const productSlice = createSlice({
     name: 'product',
@@ -12,9 +13,8 @@ const productSlice = createSlice({
             category: [],
             color: [],
             description: [],
-            image: [],
             name: '',
-            price: 0,
+            brandName: '',
             size: [],
             variation: [],
             tags: []
@@ -22,6 +22,8 @@ const productSlice = createSlice({
         tempProductState: {
             size: false,
             color: false,
+            variation: true,
+            productNameModified: false,
             checkProductName: {
                 check: false,
                 isOnDb: null,
@@ -39,22 +41,6 @@ const productSlice = createSlice({
             const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color)
             state.tempProduct.color[indexToUpdate].image = [...data]
         },
-        deleteImageFromColor(state, {payload}) {
-            const {img, item, action} = payload;
-            const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color);
-            switch (action) {
-                case 'delete-one':
-                    const imgUpdated = item.image.filter(i => i.id !== img.id)
-                    state.tempProduct.color[indexToUpdate].image = [...imgUpdated];
-                    break;
-                case 'delete-all':
-                    state.tempProduct.color[indexToUpdate].image = []
-                    break;
-                default:
-                    break;
-            }
-
-        },
         updateColorAfterUploadImage(state, {payload}) {
             const {item, res, refs} = payload;
             const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color);
@@ -63,6 +49,8 @@ const productSlice = createSlice({
                 image: [...res],
                 refs
             }
+            //if it has id the product is in db
+            if(!!state.tempProduct.id) updateProductApi(state.tempProduct.id, state.tempProduct)
         },
         updateProduct(state, {payload}) {
             const product = [...state.product];
@@ -74,6 +62,10 @@ const productSlice = createSlice({
         //AOEP
         updateTempProductState(state, {payload}) {
             state.tempProductState = {...payload}
+        },
+        resetTempProductAndTempProductState(state, {payload}) {
+            state.tempProduct = tempProduct;
+            state.tempProductState = tempProductState
         }
     },
     extraReducers: (builder) => {
@@ -124,6 +116,32 @@ const productSlice = createSlice({
             }
         });
         builder.addCase(create.rejected, (state, {meta}) => {
+            debugger
+            state.message = meta.type;
+        });
+        //update
+        builder.addCase(update.pending, (state, {meta}) => {
+            switch (meta.arg.collection) {
+                case 'tests'://products
+                    state.productState.loading = true;
+                    break;
+                default:
+                    return
+            }
+        });
+        builder.addCase(update.fulfilled, (state, {meta, payload}) => {
+            switch (meta.arg.collection) {
+                case 'tests'://products
+                    const indexToUpdate = state.product.findIndex(i => i.id === meta.arg.id)
+                    state.product[indexToUpdate] = {...meta.arg.data}
+                    state.productState.loading = false;
+                    state.productState.loaded = true;
+                    break;
+                default:
+                    return
+            }
+        });
+        builder.addCase(update.rejected, (state, {meta}) => {
             debugger
             state.message = meta.type;
         });

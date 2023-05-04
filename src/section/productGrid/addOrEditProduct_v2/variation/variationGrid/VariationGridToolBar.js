@@ -5,9 +5,9 @@ import AddIcon from "@mui/icons-material/Add";
 //
 import PropTypes from "prop-types";
 import {GridRowModes} from "@mui/x-data-grid";
-import EzIconButton from "../../../../components/ezComponents/EzIconButton/EzIconButton";
-import EzText from "../../../../components/ezComponents/EzText/EzText";
-import {createId} from "../../../../helper";
+import EzIconButton from "../../../../../components/ezComponents/EzIconButton/EzIconButton";
+import EzText from "../../../../../components/ezComponents/EzText/EzText";
+import {createId, getColumnDataToRenderNewRow} from "../../../../../helper";
 
 //----------------------------------------------------------------
 
@@ -25,24 +25,16 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function VariationGridToolBar({setRows, tempProduct, ...rest}) {
+export default function VariationGridToolBar({setRows, tempProduct, columns, ...rest}) {
     const handleAddRow = async () => {
         rest.setIsAddActive(true)
         const id = createId(20);
         setRows(prev => {
-            return [...prev, {
-                id,
-                size: '',
-                price: 0,
-                stock: 0,
-                discount: 0,
-                active: true,
-                isNew: true
-            }]
+            return [...prev, {id, ...getColumnDataToRenderNewRow(columns), isNew: true}]
         });
         rest.setRowModesModel(prev => {
             return {
-                ...prev, [id]: {mode: GridRowModes.Edit, fieldToFocus: 'size'}
+                ...prev, [id]: {mode: GridRowModes.Edit, fieldToFocus: 'color'}
             }
         })
     }

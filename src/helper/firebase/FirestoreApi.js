@@ -20,6 +20,8 @@ export const create = createAsyncThunk(
         try {
             const res = await addDoc(firestoreCollection(db, collection), data);
             window.displayNotification({type: 'info', content: 'Product Created Successfully'})
+            //get the update data from the server
+            window.dispatch(getAll({collection: 'tests', filter: null, lim: null}))
             return res.id;
         } catch (err) {
             debugger
@@ -31,19 +33,13 @@ export const create = createAsyncThunk(
 
 export const update = createAsyncThunk(
     'firestore/update',
-    async ({id, collection, data}, {rejectWithValue})  => {
-        // let {variation, images, ...rest} = data;
-        // images = JSON.stringify(images);
-        // variation = JSON.stringify(variation);
-        // let tempData = {...rest, images, variation}
-        debugger
+    async ({id, data, collection}, {rejectWithValue})  => {
         try {
             await setDoc(doc(firestoreCollection(db, collection), id), data, {merge: true})
-                .then(res => {
-                    debugger
-                }).catch(err => {
-                    console.log(err);
-                })
+            return window.displayNotification({
+                type: 'success',
+                content: `Images deleted Successfully`
+            })
         } catch (error) {
             debugger
             return rejectWithValue(error.response.data);
@@ -99,8 +95,8 @@ export const getAll = createAsyncThunk(
 
 
 export const updateProductApi = (id, product) => {
-    try {
-        setDoc(doc(firestoreCollection(db, 'products'), id), product, {merge: true})
+    try {                                     //products
+        setDoc(doc(firestoreCollection(db, 'tests'), id), product, {merge: true})
             .then(_ => {
                 window.displayNotification({type: 'info', content: 'Product Updated Successfully'})
             })
@@ -171,5 +167,20 @@ export const searchByTags = async () => {
 
 }
 
+
+export const getUser = (uid) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            const user = await getDoc(doc(db, 'admin_dashboard_users', uid))
+            if(user.exists()) {
+                resolve({...user.data(), uid: user.id})
+            } else {
+                resolve(false)
+            }
+        } catch (err) {
+            reject(err)
+        }
+    })
+}
 
 

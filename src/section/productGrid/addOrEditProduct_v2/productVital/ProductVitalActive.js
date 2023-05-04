@@ -6,10 +6,19 @@ import AOEPHelp from "../localComponent/AOEPHelp";
 import {ProductActiveHelpText} from "../AOEPTextHelpData";
 import AOEPChild_2 from "../localComponent/AOEPChild_2";
 import AOEPParent from "../localComponent/AOEPParent";
+import {productSliceActions} from "../../../../store/productSlice";
 
 //----------------------------------------------------------------
 
-export default function ProductVitalActive() {
+export default function ProductVitalActive({tempProduct}) {
+
+    const handleChange = (e) => {
+        window.dispatch(productSliceActions.setTempProduct({
+            ...tempProduct,
+            ['active']: e.target.value === 'true'
+        }))
+    }
+
     return (
         <AOEPParent>
             <AOEPChild_1>
@@ -24,6 +33,7 @@ export default function ProductVitalActive() {
                     name='active'
                     defaultValue='true'
                     sx={{width: '100px'}}
+                    onChange={handleChange}
                 >
                     <MenuItem value='true'>True</MenuItem>
                     <MenuItem value='false'>False</MenuItem>

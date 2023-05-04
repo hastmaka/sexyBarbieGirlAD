@@ -1,12 +1,12 @@
 // material
 import {Button, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import {productSliceActions} from "../../../../store/productSlice";
+import {productSliceActions} from "../../../../../store/productSlice";
 import {useSelector} from "react-redux";
 import {useEffect, useMemo, useState} from "react";
-import {createId, sanitizeTempProduct, sortArray, updateFilter} from "../../../../helper";
-import {create} from "../../../../helper/firebase/FirestoreApi";
-import {adminSliceActions} from "../../../../store/adminSlice";
+import {createId, sanitizeTempProduct, sortArray, updateFilter} from "../../../../../helper";
+import {create} from "../../../../../helper/firebase/FirestoreApi";
+import {adminSliceActions} from "../../../../../store/adminSlice";
 
 //----------------------------------------------------------------
 

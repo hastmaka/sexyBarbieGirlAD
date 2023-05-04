@@ -1,4 +1,6 @@
-export default function areArrayOfObjectsEqual(arr1, arr2) {
+import PropTypes from "prop-types";
+
+export const areArrayOfObjectsEqual = (arr1, arr2) => {
     if (arr1.length !== arr2.length) {
         return false;
     }
@@ -17,4 +19,9 @@ export default function areArrayOfObjectsEqual(arr1, arr2) {
         }
     }
     return true;
+}
+
+areArrayOfObjectsEqual.prototype = {
+    arr1: PropTypes.array.isRequired,
+    arr2: PropTypes.array.isRequired
 }

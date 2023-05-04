@@ -109,7 +109,7 @@ export default function EzMuiGrid({
 
             //height of table is calculated depending on how many rows has
             //and nothing about pagination work because is handling auto
-            autoPageSize
+            autoPageSize={rest.autoPageSize}
             // pageSize={10}
             // pageSizeOptions={[10, 25, 50, 100]}
 

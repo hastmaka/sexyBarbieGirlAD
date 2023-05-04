@@ -27,10 +27,10 @@ const RightContainer = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function Description({data, onchange}) {
+export default function Description({tempProduct, onchange}) {
     const [state, setState] = useState({
         //to render TextField
-        description: data.description,
+        description: tempProduct.description,
         //to render Menu
         descriptionMenu: [
             {
@@ -120,18 +120,18 @@ export default function Description({data, onchange}) {
     const [openMenu, setOpenMenu] = useState(null);
 
     useEffect(_ => {
-        if(data.description.length  > 0){
+        if(tempProduct.description.length  > 0){
             setState(prev => {
-                const existingDescriptions = new Set(data.description.map((item) => item.name));
+                const existingDescriptions = new Set(tempProduct.description.map((item) => item.name));
                 const newMenu = prev.descriptionMenu.filter((item) => !existingDescriptions.has(item.text));
                 return {
                     ...prev,
-                    description: data.description,
+                    description: tempProduct.description,
                     descriptionMenu: [...newMenu]
                 }
             })
         }
-    }, [data.description])
+    }, [tempProduct.description])
 
     const handleClick = (e) => setOpenMenu(e.currentTarget);
     const handleClose = () => {setOpenMenu(null)};
@@ -176,60 +176,54 @@ export default function Description({data, onchange}) {
             icon: <SaveIcon sx={{fill: '#457b9d'}}/>,
             functionality: {
                 onClick: _ => {
+
                     let formData  = new FormData(formRef.current),
-                        {description, ...rest} = data,
+                        {description, ...rest} = tempProduct,
                         tempDescription = [...description],
                         formDataToCompare = [];
-                    if(!description.length) {
-                        return window.displayNotification({
-                            type: 'warning',
-                            content: `No description to save`
-                        })
-                    } else {
-                        //check for empty values
-                        for (const value of formData.values()) {
-                            if(value === '') {
-                                return window.displayNotification({
-                                    type: 'error',
-                                    content: `Product Description has empty values`
-                                })
-                            }
-                        }
-                        //check if data haven't been changed
-                        for (const [key, value] of formData.entries()) {
-                            formDataToCompare.push({name: key, value: value})
-                        }
-                        if(areArrayOfObjectsEqual(tempDescription, formDataToCompare)) {
+
+                    //check for empty values
+                    //check if tempProduct haven't been changed
+                    for (const [key, value] of formData.entries()) {
+                        if(value === '') {
                             return window.displayNotification({
-                                type: 'warning',
-                                content: `No description has been modified`
+                                type: 'error',
+                                content: `Product Description has empty values`
                             })
                         }
-                        //if the key exist modify it, otherwise create it
-                        for (const [key, value] of formData.entries()) {
-                            let indexToUpdate = description.findIndex(item => item.name === key);
-                            if(indexToUpdate !== -1) {
-                                tempDescription[indexToUpdate] = {
-                                    name: key,
-                                    value: value
-                                }
-                                window.displayNotification({
-                                    type: 'success',
-                                    content: `Descriptions modified successfully`
-                                })
-                            } else {
-                                tempDescription.push({name: key, value: value})
-                                window.displayNotification({
-                                    type: 'success',
-                                    content: `New description ${key} was added`
-                                })
+                        formDataToCompare.push({name: key, value: value})
+                    }
+                    if(areArrayOfObjectsEqual(tempDescription, formDataToCompare)) {
+                        return window.displayNotification({
+                            type: 'warning',
+                            content: `No description has been modified`
+                        })
+                    }
+
+                    //if the key exist modify it, otherwise create it
+                    for (const [key, value] of formData.entries()) {
+                        let indexToUpdate = description.findIndex(item => item.name === key);
+                        if(indexToUpdate !== -1) {
+                            tempDescription[indexToUpdate] = {
+                                name: key,
+                                value: value
                             }
+                            window.displayNotification({
+                                type: 'success',
+                                content: `Descriptions modified successfully`
+                            })
+                        } else {
+                            tempDescription.push({name: key, value: value})
+                            window.displayNotification({
+                                type: 'success',
+                                content: `New description ${key} was added`
+                            })
                         }
                     }
 
-                    //update data in the store
+                    //update tempProduct in the store
                     window.dispatch(
-                        productSliceActions.setProductInEditMode({
+                        productSliceActions.setTempProduct({
                             description: tempDescription,
                             ...rest
                         })
@@ -311,7 +305,7 @@ export default function Description({data, onchange}) {
                                     return {
                                         ...prev,
                                         description: prev.description.filter(i =>
-                                            //check if the item comes from state or from data.description
+                                            //check if the item comes from state or from tempProduct.description
                                             !item.id ? i.name !== item.name : i.text !== item.text
                                         ),
                                         //add the item to the menu again
@@ -324,7 +318,7 @@ export default function Description({data, onchange}) {
                                 })
                                 //send the item to update the product variable
                                 // onchange({action: 'delete', item})
-                                let {description, ...rest} = data,
+                                let {description, ...rest} = tempProduct,
                                     tempDescription = [...description];
                                 // debugger
                                 window.dispatch(

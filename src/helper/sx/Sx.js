@@ -57,3 +57,13 @@ export const tableSx = (palette) => {
         },
     }
 }
+
+export const btnOutlined = {
+    color: theme => theme.palette.grey[100],
+    border: `1px solid ${'#353535ff'}`,
+    '&:hover': {
+        color: theme => theme.palette['white'],
+        border: `1px solid ${'#fff'}`,
+        backgroundColor: theme => theme.palette['jet'],
+    }
+}

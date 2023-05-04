@@ -7,22 +7,25 @@ import ProductVitalVariation from "./ProductVitalVariation";
 import ProductVitalProductName from "./ProductVitalProductName";
 import ProductVitalBrandName from "./ProductVitalBrandName";
 import ProductVitalCategory from "./ProductVitalCategory";
+import ProductVitalTags from "./ProductVitalTags";
 
-export default function ProductVital() {
+export default function ProductVital({tempProduct, tempProductState}) {
     const formRef = useRef(null);
 
     return (
         <Stack component='form' ref={formRef} gap={3}>
 
-            <ProductVitalActive/>
+            <ProductVitalActive tempProduct={tempProduct}/>
 
-            <ProductVitalVariation/>
+            <ProductVitalVariation tempProductState={tempProductState}/>
 
-            <ProductVitalProductName formRef={formRef}/>
+            <ProductVitalProductName tempProduct={tempProduct} tempProductState={tempProductState} formRef={formRef}/>
 
-            <ProductVitalBrandName/>
+            <ProductVitalBrandName tempProduct={tempProduct} formRef={formRef}/>
 
-            <ProductVitalCategory/>
+            <ProductVitalCategory tempProduct={tempProduct}/>
+
+            <ProductVitalTags tempProduct={tempProduct}/>
 
         </Stack>
     );

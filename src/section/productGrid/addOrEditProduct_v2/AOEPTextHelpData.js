@@ -4,6 +4,7 @@ export const ProductBrandNameHelpText = ""
 export const VariationTypeHelpText = "List all of your variants for the variation type"
 export const VariationSizeHelpText = "Choose the sizes for create the variations"
 export const VariationColorHelpText = "Choose the color for create the variations"
-export const VariationCategoryHelpText = "Insert of the categories that match this product"
 export const VariationBrandNameHelpText = "Create a memorable and recognizable identity for the brand"
+export const VariationCategoryHelpText = "Insert of the categories that match this product"
+export const VariationTagsHelpText = "Insert tags related with you product, some tags are going to be extracted from the description too to optimize the search engine"
 

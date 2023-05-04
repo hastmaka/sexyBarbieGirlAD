@@ -7,7 +7,7 @@ import EzText from "../../../components/ezComponents/EzText/EzText";
 import ProductProperties from "../addOrEditProduct/productProperties/ProductProperties";
 import ChildWrapper from "../../../components/ChildWrapper/ChildWrapper";
 import {handleDecimalsOnValue, sortArray} from "../../../helper";
-import ProductMediaActions from "./productMedia/ProductMediaActions";
+import ProductMediaActions from "../addOrEditProduct_v2/variationImage/productMedia/ProductMediaActions";
 import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
 import AddOrEditProductMediaLogic from "./AddOrEditProductMediaLogic";

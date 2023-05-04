@@ -2,18 +2,18 @@ import {useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from "react";
 // material
 import {Box} from "@mui/material";
-import ChildWrapper from "../../../../components/ChildWrapper/ChildWrapper";
-import EzMuiGrid from "../../../../components/EzMuiGrid/EzMuiGrid";
-import EzText from "../../../../components/ezComponents/EzText/EzText";
-import {productSliceActions} from "../../../../store/productSlice";
-import {sortArray} from "../../../../helper";
-import {updateProductApi} from "../../../../helper/firebase/FirestoreApi";
-import {tableSx} from "../../../../helper/sx/Sx";
+import ChildWrapper from "../../../../../components/ChildWrapper/ChildWrapper";
+import EzMuiGrid from "../../../../../components/EzMuiGrid/EzMuiGrid";
+import EzText from "../../../../../components/ezComponents/EzText/EzText";
+import {productSliceActions} from "../../../../../store/productSlice";
+import {sortArray, updateColorAfterAddAVariation} from "../../../../../helper";
+import {updateProductApi} from "../../../../../helper/firebase/FirestoreApi";
+import {tableSx} from "../../../../../helper/sx/Sx";
 import VariationGridToolBar from "./VariationGridToolBar";
 
 //----------------------------------------------------------------
 
-export default function VariationGrid({variation}) {
+export default function VariationGrid({variation, editMode}) {
     const {tempProduct} = useSelector(slice => slice.product);
     const [rows, setRows] = useState([]);
     const [rowModesModel, setRowModesModel] = useState({});
@@ -25,7 +25,6 @@ export default function VariationGrid({variation}) {
 
     const processRowUpdate = useCallback(
         async (newRow, oldRow, rows) => {
-            debugger
             await new Promise((resolve, reject) => {
                 //check empty field
                 if(!(!!newRow.color) || !(!!newRow.size)) {
@@ -34,11 +33,11 @@ export default function VariationGrid({variation}) {
                 //check if variation exist
                 if(newRow.isNew) {
                     let tempRows = [...rows];
-                    tempRows.splice(0,1);
+                    // tempRows.splice(0,1);
                     const existVariation = tempRows.find(item => (
-                            item.color.toLowerCase() === newRow.color.toLowerCase()) &&
+                        item.color.toLowerCase() === newRow.color.toLowerCase() &&
                         item.size.toLowerCase() === newRow.size.toLowerCase()
-                    );
+                    ));
                     if(!!existVariation) {
                         return reject({type: 'error', content: 'Variant already exit'});
                     }
@@ -49,18 +48,15 @@ export default function VariationGrid({variation}) {
             if(JSON.stringify(newRow) === JSON.stringify(oldRow)) {
                 return oldRow
             } else {
-                let {id, variation, ...rest} = {...tempProduct},
-                    tempRows = [];
-                if(newRow.isNew) {
-                    tempRows = [...rows]
-                    tempRows.splice(0,1);
-                } else {
-                    tempRows = [...rows]
-                }
-                let indexTempVariation = tempRows.findIndex(item => item.id === newRow.id);
+                const {id, variation, color, size, ...rest} = {...tempProduct};
+                let tempVariation = [...variation],
+                    tempColor = [],
+                    tempSize = [];
+                // debugger
+                let indexTempVariation = variation.findIndex(item => item.id === newRow.id);
                 if(indexTempVariation >= 0) {
-                    tempRows[indexTempVariation] = newRow;
-                    debugger
+                    // variation[indexTempVariation] = newRow;
+                    // debugger
                     // if(dataToUpdateProduct) {
                     // debugger
                     //update variation when product is in creating mode
@@ -68,18 +64,23 @@ export default function VariationGrid({variation}) {
                     // }
                 } else {
                     //new variation
+                    //need to update variation, color and size
                     const {isNew, ...rest} = newRow;
-                    tempRows = [...tempRows, rest];
+                    tempVariation = [...tempVariation, rest]
+                    tempColor = updateColorAfterAddAVariation(color, rest.color);
+                    // const updatedSize = updateColorAfterAddAVariation(size, rest.size);
+                    debugger
                 }
                 window.dispatch(
-                    productSliceActions.updateProduct({
+                    productSliceActions.setTempProduct({
                         ...rest,
                         id,
-                        variation: sortArray(tempRows)
+                        color: tempColor,
+                        variation: sortArray(tempVariation)
                     })
                 )
                 //if no id, the product was not uploaded yet
-                if(id) updateProductApi(id, {id, variation: tempRows, ...rest})
+                // if(id) updateProductApi(id, {id, variation: tempRows, ...rest})
                 return newRow
             }
         },[]
@@ -93,7 +94,17 @@ export default function VariationGrid({variation}) {
             align: 'center',
             headerAlign: 'center',
             filterable: false,
-            renderCell: (index) => index.api.getRowIndex(index.row.id) + 1
+            renderCell: (params) => {
+                let value = params.api.getRowIndexRelativeToVisibleRows(params.row.id) + 1;
+                return isNaN(value) ? '' : value.toString()
+            }
+        },{
+            field: 'color',
+            headerName: 'Color',
+            flex: 1,
+            align: 'center',
+            headerAlign: 'center',
+            editable: true,
         }, {
             field: 'size',
             headerName: 'Size',
@@ -154,20 +165,21 @@ export default function VariationGrid({variation}) {
     ]
 
     return (
-        <ChildWrapper sx={{height: `${variation.length * 52 + 161}px`, padding: 0}}>
+        <ChildWrapper sx={{height: 'calc(100vh - 450px)', padding: 0}}>
             <Box sx={{height: '100%', width: '100%'}}>
                 <EzMuiGrid
                     rows={rows}
                     setRows={setRows}
                     columns={columns}
                     // rowHeight={85}
+                    // hideFooter={true}
                     setRowModesModel={setRowModesModel}
                     rowModesModel={rowModesModel}
-                    processRowUpdate={processRowUpdate}
+                    processRowUpdate={(newRow, oldRow) => processRowUpdate(newRow, oldRow, rows)}
                     isAddActive={isAddActive}
                     setIsAddActive={setIsAddActive}
                     components={{
-                        Toolbar: VariationGridToolBar
+                        Toolbar: editMode ? VariationGridToolBar : ''
                     }}
                     componentsProps={{
                         toolbar: {

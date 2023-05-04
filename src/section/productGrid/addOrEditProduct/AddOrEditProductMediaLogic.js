@@ -1,6 +1,6 @@
 import ChildWrapper from "../../../components/ChildWrapper/ChildWrapper";
-import ProductMedia from "./productMedia/ProductMedia";
-import VariationGrid from "./variationGrid/VariationGrid";
+import ProductMedia from "../addOrEditProduct_v2/variationImage/productMedia/ProductMedia";
+import VariationGrid from "../addOrEditProduct_v2/variation/variationGrid/VariationGrid";
 import {Stack} from "@mui/material";
 import {memo} from "react";
 
@@ -13,9 +13,9 @@ const AddOrEditProductMediaLogic = memo(({tempProduct}) => {
                     return (
                         <ChildWrapper key={item.color} sx={{gap: '10px'}}>
                             <ProductMedia item={item}/>
-                            <VariationGrid
-                                variation={tempProduct?.variation?.filter(i => i.color === item.color)}
-                            />
+                            {/*<VariationGrid*/}
+                            {/*    variation={tempProduct?.variation?.filter(i => i.color === item.color)}*/}
+                            {/*/>*/}
                         </ChildWrapper>
                     )
                 })

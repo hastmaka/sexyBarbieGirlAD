@@ -6,8 +6,17 @@ import AOEPHelp from "../localComponent/AOEPHelp";
 import {ProductActiveHelpText} from "../AOEPTextHelpData";
 import AOEPChild_2 from "../localComponent/AOEPChild_2";
 import AOEPParent from "../localComponent/AOEPParent";
+import {productSliceActions} from "../../../../store/productSlice";
 
-export default function ProductVitalVariation() {
+export default function ProductVitalVariation({tempProductState}) {
+
+    const handleChange = (e) => {
+        window.dispatch(productSliceActions.updateTempProductState({
+            ...tempProductState,
+            ['variation']: e.target.value === 'yes'
+        }))
+    }
+
     return (
         <AOEPParent>
             <AOEPChild_1>
@@ -21,8 +30,8 @@ export default function ProductVitalVariation() {
                 <RadioGroup
                     sx={{flexDirection: 'row'}}
                     name='hasVariation'
-                    defaultValue='yes'
-                    // onChange={handleChange}
+                    value={tempProductState.variation === true ? 'yes' : 'no'}
+                    onChange={handleChange}
                 >
                     <FormControlLabel value="yes" control={<Radio/>} label="Yes"/>
                     <FormControlLabel value="no" control={<Radio/>} label="No"/>

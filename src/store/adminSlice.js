@@ -4,7 +4,6 @@ import {create, getAll} from "../helper/firebase/FirestoreApi";
 const adminSlice = createSlice({
     name: 'admin',
     initialState: {
-        screen: '',
         order: [],
         user: {},
 
@@ -13,7 +12,6 @@ const adminSlice = createSlice({
             who: null
         },
         notification: {
-            open: false,
             type: 'info',
             title: '',
             content: '',
@@ -29,10 +27,10 @@ const adminSlice = createSlice({
         userStatus: {loaded: false, loading: false},
     },
     reducers: {
-        setScreen(state, {payload}) {
-            state.screen = payload
+        setUser(state, {payload}) {
+            state.user = {...payload}
+            state.userStatus.loaded = true;
         },
-
         openModal(state, {payload}) {
             state.modal.open = true;
             state.modal.who = payload
@@ -45,12 +43,6 @@ const adminSlice = createSlice({
                 open: true,
                 timeout: payload.important ? 10000 : 3000,
                 ...payload
-            }
-        },
-        closeNotification(state) {
-            state.notification = {
-                ...state.notification,
-                open: false
             }
         },
         showConfirmDialog(state, {payload}) {

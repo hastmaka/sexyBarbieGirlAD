@@ -6,34 +6,49 @@ import {
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
-    signOut
+    signOut,
+    getIdToken
 } from 'firebase/auth';
-import {getById} from "./FirestoreApi";
+import {getById, getUser} from "./FirestoreApi";
+import {adminSliceActions} from "../../store/adminSlice";
 
-const registerUser = async (email, password) => {
+export const registerUser = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
             return userCredential.user
         }).catch(e => {
             switch (e.code) {
                 case 'auth/email-already-in-use':
-                    return window.displayNotification({type: 'error', content: 'Email already in use, please choose another one'});
+                    return window.displayNotification({
+                        type: 'error',
+                        content: 'Email already in use, please choose another one'
+                    });
                 default:
-                    return window.displayNotification({type: 'error', content: 'Internal Error'})
+                    return window.displayNotification({
+                        type: 'error',
+                        content: 'Internal Error'
+                    });
             }
         })
 };
 
-const loginUser = async (email, password) => {
+export const loginUser = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
             return userCredential.user
         }).catch(e => {
             switch (e.code) {
                 case 'auth/wrong-password':
-                    return window.displayNotification({type: 'error', content: 'Wrong Password, Double check Caps'});
+                    return window.displayNotification({
+                        type: 'error',
+                        content: 'Wrong Password, Double check Caps'
+                    });
                 case 'auth/user-not-found':
-                    return window.displayNotification({type: 'error', content: 'User not Found', important: true});
+                    return window.displayNotification({
+                        type: 'error',
+                        content: 'User not Found',
+                        important: true
+                    });
                 case 'auth/too-many-requests':
                     return window.displayNotification({
                         type: 'error',
@@ -41,41 +56,35 @@ const loginUser = async (email, password) => {
                         important: true
                     });
                 default:
-                    return window.displayNotification({type: 'error', content: 'Firebase Unknown Error'})
+                    return window.displayNotification({
+                        type: 'error',
+                        content: 'Firebase Unknown Error'
+                    })
             }
         })
 }
 
-const logoutUser = () => {
+export const logoutUser = () => {
     return signOut(auth);
 }
 
-const passwordResetEmail = (email) => {
+export const passwordResetEmail = (email) => {
     return sendPasswordResetEmail(auth, email);
 }
 
-const loginWithGoogle = () => {
+export const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider()
     return signInWithPopup(auth, provider);
 }
 
-const subscribeToAuthChanges = ( user) => {
-    onAuthStateChanged(auth, async _ => {
+export const subscribeToAuthChanges = () => {
+    onAuthStateChanged(auth, async firebaseUser => {
+        let token = await getIdToken(firebaseUser);
         try {
-            window.dispatch(getById({id: user.uid, collection: 'users'}))
+            const user = await getUser(firebaseUser.uid);
+            window.dispatch(adminSliceActions.setUser({...user, token}))
         } catch (err) {
             console.log(err);
         }
     })
 }
-
-const FirebaseAuthService = {
-    registerUser,
-    loginUser,
-    logoutUser,
-    passwordResetEmail,
-    loginWithGoogle,
-    subscribeToAuthChanges
-}
-
-export default FirebaseAuthService;

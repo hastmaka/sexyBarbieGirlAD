@@ -28,7 +28,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductGridToolBar({setRowModesModel, tempProduct, ...rest}) {
+export default function ProductGridToolBar({setRowModesModel, ...rest}) {
 
     return (
         <RootStyle>
@@ -39,7 +39,7 @@ export default function ProductGridToolBar({setRowModesModel, tempProduct, ...re
                     onClick={_ =>
                         openModal(
                             <Suspense fallback={<div>'...loading'</div>}>
-                                <AOEP tempData={tempProduct}/>
+                                <AOEP/>
                             </Suspense>
                         )
                     }
@@ -55,6 +55,6 @@ export default function ProductGridToolBar({setRowModesModel, tempProduct, ...re
 
 ProductGridToolBar.prototype = {
     setRowModesModel: PropTypes.func.isRequired,
-    tempProduct: PropTypes.object.isRequired,
+    // tempProduct: PropTypes.object.isRequired,
     rest: PropTypes.object
 }

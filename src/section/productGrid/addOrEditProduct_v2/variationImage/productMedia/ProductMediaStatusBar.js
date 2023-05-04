@@ -1,7 +1,7 @@
 // material
 import {Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import EzText from "../../../../components/ezComponents/EzText/EzText";
+import EzText from "../../../../../components/ezComponents/EzText/EzText";
 import PropTypes from "prop-types";
 
 //----------------------------------------------------------------

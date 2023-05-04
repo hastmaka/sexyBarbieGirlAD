@@ -3,9 +3,9 @@ import {Box, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {useState} from "react";
-import EzText from "../../../../../components/ezComponents/EzText/EzText";
+import EzText from "../../../../../../components/ezComponents/EzText/EzText";
 import PropTypes from "prop-types";
-import {getNameFromUrl} from "../../../../../helper";
+import {getNameFromUrl} from "../../../../../../helper";
 
 //----------------------------------------------------------------
 
@@ -17,7 +17,7 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function PrevImages({image, onClick, table = false}) {
+export default function PrevImages({image, onClick}) {
     const [isHovering, setIsHovering] = useState(false);
     return (
         <RootStyle>
@@ -65,12 +65,12 @@ export default function PrevImages({image, onClick, table = false}) {
                                         boxShadow: 'rgb(0 0 0 / 25%) 0px 4px 4px',
                                     }}
                                 >
-                                    <EzText text={item.url ? getNameFromUrl(item.url) : item.File.name}/>
+                                    <EzText text={getNameFromUrl(item.url) || item.File.name}/>
                                 </Box>
                             }
                             <img
-                                src={image.every(i => i.uploaded) ? item.url : URL.createObjectURL(item.File)}
-                                alt={item.url ? getNameFromUrl(item.url) : item.File.name}
+                                src={item.url || URL.createObjectURL(item.File)}
+                                alt={getNameFromUrl(item.url) || item.File.name}
                                 style={{
                                     borderRadius: '4px',
                                     // maxHeight: table ? '105px' : ''

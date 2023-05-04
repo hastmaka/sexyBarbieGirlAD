@@ -1,58 +1,77 @@
 // material
-import {Box, Button, Stack, TextField} from "@mui/material";
+import {Button, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import {useEffect, useState} from "react";
-import {getDummyData, uploadDummyData} from "../../helper/firebase/FirestoreApi";
-import data from '../../dummyData.json'
-//----------------------------------------------------------------
-
-const RootStyle = styled(Stack)(({theme}) => ({
-    padding: '20px'
-}));
+import RegularList from "./RegularList";
+import SmallPersonListItem from "./people/SmallPersonListItem";
+import LargePersonListItem from "./people/LargePersonListItem";
+import LargeProductListItem from "./product/LargeProductListItem";
+import NumberedList from "./NumberedList";
 
 //----------------------------------------------------------------
-const RenderTags = ({tags}) => {
-    return (
-        <Stack direction='row' gap='5px'>
-            {tags.map((item, index) =>
-                <span key={index}>{(index ? ', ' : '') + item}</span>
-            )}
-        </Stack>
-    )
-}
+
+const RootStyle = styled(Stack)(({theme}) => ({}));
+
+//----------------------------------------------------------------
+const people = [
+    {
+        name: 'John Doe',
+        age: 55,
+        hairColor: 'brown',
+        hobbies: ['swimming', 'bicycling', 'video games']
+    },
+    {
+        name: 'Jose Garcia',
+        age: 23,
+        hairColor: 'black',
+        hobbies: ['golf', 'mathematics']
+    },
+    {
+        name: 'Maka',
+        age: 33,
+        hairColor: 'brown',
+        hobbies: ['biology', 'medicine', 'gymnastic']
+    }
+]
+
+const product = [
+    {
+        name: 'Flat-Screen TV',
+        price: 300,
+        description: 'Huge LCD screen, a great deal',
+        rating: 4.5
+    },
+    {
+        name: 'Baseball',
+        price: 20,
+        description: 'Just like the pros use',
+        rating: 3.5
+    },
+    {
+        name: 'Running Shoes',
+        price: 120,
+        description: 'State-of-the-art technologies for optimum running',
+        rating: 4.2
+    }
+]
 
 export default function Test() {
-    const [data, setData] = useState([]);
-    const [inputData, setInputData] = useState('');
-
-    useEffect(_ => {
-        getDummyData(inputData, setData).then()
-    }, [])
-
     return (
         <RootStyle>
-            <Button
-                // onClick={_ => uploadDummyData(data)}
-            >Upload</Button>
-            <Stack direction='row' gap='10px'>
-                <TextField
-                    onChange={e => setInputData(e.target.value)}
-                />
-                <Button
-                    onClick={_ => getDummyData(inputData !== '' ? inputData : {}, setData).then()}
-                >Search</Button>
-            </Stack>
-            <Stack>
-                {data.length > 0 &&
-                    <ul>
-                        {data.map(item =>
-                            <li key={item.id}>
-                                <RenderTags tags={item.tags}/>
-                            </li>
-                        )}
-                    </ul>
-                }
-            </Stack>
+            <RegularList
+                items={people}
+                resourceName='person'
+                itemComponent={SmallPersonListItem}
+            />
+            <NumberedList
+                items={people}
+                resourceName='person'
+                itemComponent={LargePersonListItem}
+            />
+            <RegularList
+                items={product}
+                resourceName='product'
+                itemComponent={LargeProductListItem}
+            />
         </RootStyle>
     );
 }

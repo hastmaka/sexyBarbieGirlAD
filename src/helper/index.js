@@ -10,7 +10,14 @@ import {updateFilter} from "./updateFilter";
 import {checkImageNameBeforeUpload} from "./checkImageNameBeforeUpload";
 import {handleAddImageToVariation} from "./handleAddImageToVariation";
 import {sanitizeTempProduct} from "./sanitizeTempProduct";
-import areArrayOfObjectsEqual from "./areArrayOfObjectsEqual";
+import {areArrayOfObjectsEqual} from "./areArrayOfObjectsEqual";
+import {capitalizeFirstLetter} from "./capitalizeFirstLetter";
+import {createAccountProcess, loginProcess, logOut} from './helper';
+import {getColumnDataToRenderNewRow} from "./getColumnDataToRenderNewRow";
+import {updateColorAfterAddAVariation} from "./updateColorAfterAddAVariation";
+import {updateSizeAfterAddAVariation} from "./updateSizeAfterAddAVariation";
+import {deepCopy} from "./deepCopy";
+import {findFirst} from "./findFirst";
 
 export {
     createId,
@@ -25,5 +32,14 @@ export {
     checkImageNameBeforeUpload,
     handleAddImageToVariation,
     sanitizeTempProduct,
-    areArrayOfObjectsEqual
+    areArrayOfObjectsEqual,
+    capitalizeFirstLetter,
+    createAccountProcess,
+    loginProcess,
+    logOut,
+    getColumnDataToRenderNewRow,
+    updateColorAfterAddAVariation,
+    updateSizeAfterAddAVariation,
+    deepCopy,
+    findFirst
 }

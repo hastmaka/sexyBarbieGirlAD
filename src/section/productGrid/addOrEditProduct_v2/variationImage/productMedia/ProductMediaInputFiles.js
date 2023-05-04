@@ -1,14 +1,13 @@
 // material
 import {Box, Button, Stack} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import EzFileInput from "../../../../components/ezComponents/EzFileInput/EzFileInput";
-import EzText from "../../../../components/ezComponents/EzText/EzText";
+import EzFileInput from "../../../../../components/ezComponents/EzFileInput/EzFileInput";
+import EzText from "../../../../../components/ezComponents/EzText/EzText";
 import {
-    checkImageNameBeforeUpload,
     getNameFromUrl,
     handleDeleteImage,
     uploadToFirebaseStorage
-} from "../../../../helper";
+} from "../../../../../helper";
 import Chip from "@mui/material/Chip";
 import PropTypes from "prop-types";
 
@@ -23,7 +22,15 @@ const RootStyle = styled(Stack)(({theme}) => ({
 
 //----------------------------------------------------------------
 
-export default function ProductMediaInputFiles({item, progress, setProgress, hiddenInputRef, handleChange}) {
+export default function ProductMediaInputFiles({
+    item,
+    progress,
+    setProgress,
+    hiddenInputRef,
+    handleChange,
+    editMode,
+    tempProduct
+}) {
     return (
         <RootStyle>
             <EzFileInput
@@ -46,7 +53,7 @@ export default function ProductMediaInputFiles({item, progress, setProgress, hid
                                 borderBottom: '1px solid #999'
                             }
                         }}
-                        onClick={_ => handleDeleteImage('all', item, hiddenInputRef, setProgress)}
+                        onClick={_ => handleDeleteImage('all', item, hiddenInputRef, setProgress, tempProduct)}
                     />
                 </Stack>
                 <Box>
@@ -56,7 +63,7 @@ export default function ProductMediaInputFiles({item, progress, setProgress, hid
                             variant="outlined"
                             sx={{margin: '5px'}}
                             label={img.url ? getNameFromUrl(img.url) : img.File.name}
-                            onDelete={_ => handleDeleteImage(img, item, hiddenInputRef, setProgress)}
+                            onDelete={_ => handleDeleteImage(img, item, hiddenInputRef, setProgress, tempProduct)}
                         />
                     )}
                 </Box>
@@ -64,7 +71,7 @@ export default function ProductMediaInputFiles({item, progress, setProgress, hid
             <Button
                 disabled={progress === 100 || !item.image.length}
                 onClick={async _ => {
-                    uploadToFirebaseStorage(item, setProgress)
+                    uploadToFirebaseStorage(item, setProgress, editMode, tempProduct)
                 }}
                 variant='outlined'
                 sx={{width: 100}}

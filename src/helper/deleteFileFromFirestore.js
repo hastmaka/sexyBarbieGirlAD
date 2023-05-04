@@ -14,12 +14,8 @@ export const deleteFileFromFirestore = (data, action) => {
             let promises = [];
             data.map(item => promises.push(deleteObject(ref(storage, item.url))))
             Promise.all(promises)
-                .then(_ => {
-                    return window.displayNotification({
-                        type: 'success',
-                        content: `Images deleted Successfully`
-                    })
-                }).catch(err => {
+                .then()
+                .catch(err => {
                 return window.displayNotification({
                     type: 'error',
                     content: `There was a Error deleting Images ${err}`
@@ -28,12 +24,8 @@ export const deleteFileFromFirestore = (data, action) => {
             break;
         case 'delete-one':
             deleteObject(ref(storage, data.url))
-                .then(_ => {
-                    window.displayNotification({
-                        type: 'info',
-                        content: 'Image Deleted Successfully'
-                    })
-                }).catch(err => {
+                .then()
+                .catch(err => {
                 return window.displayNotification({
                     type: 'error',
                     content: `There was a Error deleting the Image ${err}`

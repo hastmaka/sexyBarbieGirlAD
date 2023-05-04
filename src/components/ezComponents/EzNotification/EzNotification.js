@@ -2,34 +2,53 @@ import {useSelector} from "react-redux";
 // material
 import {Alert, AlertTitle, Slide, Snackbar, Typography} from "@mui/material";
 //
-import {useNotification} from "../../../helper/hooks";
+import {useLayoutEffect, useState} from "react";
 
 //----------------------------------------------------------------
-
 function GrowTransition(props) {
     return <Slide {...props} direction="down" />;
 }
 
 export default function EzNotification() {
-    const {clearNotification} = useNotification();
     const {notification} = useSelector(slice => slice.admin);
+    const [open, setOpen] = useState(false);
+    //state to track existing notification
+    const [notificationStack, setNotificationStack] = useState(null);
+
+    useLayoutEffect(() => {
+        if (!notificationStack && notification.content) {
+            setNotificationStack({...notification, key: new Date().getTime()});
+            setOpen(true)
+        } else if (!!notificationStack) {
+            setNotificationStack(null);
+        }
+    }, [notification]);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway' && notification?.important) {
+            return
+        } else if (reason === 'escapeKeyDown' && notification?.important) {
+            return
+        }
+        setOpen(false)
+    };
+
+    //restart snackbar state on exit
+    const handleExited = () => setNotificationStack(null);
 
     return (
         <Snackbar
-            open={notification.open}
+            key={notificationStack?.key || undefined}
+            open={open}
             autoHideDuration={notification.timeout}
             anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-            onClose={(e, reason) => {
-                if(!(reason === 'clickaway')) {
-                    clearNotification()
-                } else if (reason === 'escapeKeyDown') {
-                    clearNotification()
-                }
-            }}
+            onClose={handleClose}
+
+            TransitionProps={{ onExited: handleExited }}
             TransitionComponent={GrowTransition}
         >
             <Alert
-                onClose={_ => clearNotification()}
+                onClose={_ => setOpen(false)}
                 variant='filled'
                 severity={notification.type}
                 // sx={{
@@ -46,7 +65,6 @@ export default function EzNotification() {
                     variant='span'
                 >{notification.content}
                 </Typography>
-
             </Alert>
         </Snackbar>
     );

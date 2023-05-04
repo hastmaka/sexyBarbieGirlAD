@@ -14,7 +14,7 @@ import ProductGridToolBar from "./ProductGridToolBar";
 import EzButton from "../../components/ezComponents/EzButton/EzButton";
 import EzSwiper from "../../components/ezComponents/EzSwiper/EzSwiper";
 import {SwiperSlide} from "swiper/react";
-import {openModal} from "../../helper";
+import {findFirst, openModal} from "../../helper";
 import {tableSx} from "../../helper/sx/Sx";
 import EzMuiGrid from "../../components/EzMuiGrid/EzMuiGrid";
 import AddOrEditProduct from "./addOrEditProduct/AddOrEditProduct";
@@ -40,7 +40,7 @@ const TableHeader = styled(Stack)(({theme}) => ({
 //----------------------------------------------------------------
 
 export default function ProductGrid() {
-    const {product, tempProduct, productState, productInEditMode} = useSelector(slice => slice.product);
+    const {product, productState, productInEditMode} = useSelector(slice => slice.product);
     const [rows, setRows] = useState([]);
     const [rowModesModel, setRowModesModel] = useState({});
     const [isAddActive, setIsAddActive] = useState(false);
@@ -78,8 +78,12 @@ export default function ProductGrid() {
 
 
     const handleOnRowDoubleClick = (params, e) => {
-        window.dispatch(productSliceActions.setProductInEditMode(params.row))
-        openModal(<AddOrEditProduct editMode/>)
+        window.dispatch(productSliceActions.setTempProduct(params.row))
+        openModal(
+            <Suspense fallback={<div>'...loading'</div>}>
+                <AOEP editMode/>
+            </Suspense>
+        )
     }
 
     const processRowUpdate = useCallback(
@@ -180,13 +184,19 @@ export default function ProductGrid() {
                 align: 'center',
                 headerAlign: 'center',
                 renderCell: (params) => {
-                    return (
-                        <Stack>
-                            <img
-                                style={{width: '60px'}}
-                                src={params.row.color[0].image[0].url} alt=""/>
-                        </Stack>
-                    )
+                    //found the first color with image to show
+                    const found = findFirst(item => item.uploaded, params.row.color);
+                    if(!!found) {
+                        return (
+                            <Stack>
+                                <img
+                                    style={{width: '60px'}}
+                                    src={found.url} alt=""/>
+                            </Stack>
+                        )
+                    } else {
+                        return <p>No image to show</p>
+                    }
                 }
         }, {
             field: 'name',
@@ -204,12 +214,10 @@ export default function ProductGrid() {
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                let color = [];
-                color = params.row.color.map(c => color += `${c.color} `);
                 return (
                     <Stack flexDirection='row' gap='5px'>
-                        {color.map((c, i) =>
-                            <EzText key={c} text={(i ? ', ' : '') + c} sx={{fontSize: '13px'}}/>
+                        {params.row.color.map((c, i) =>
+                            <EzText key={c.color} text={(i ? ', ' : '') + c.color} sx={{fontSize: '13px'}}/>
                         )}
                     </Stack>
                 )
@@ -280,6 +288,7 @@ export default function ProductGrid() {
                         rows={rows}
                         setRows={setRows}
                         columns={columns}
+                        autoPageSize
                         rowHeight={85}
                         setRowModesModel={setRowModesModel}
                         rowModesModel={rowModesModel}
@@ -287,7 +296,7 @@ export default function ProductGrid() {
                         isloading={productState.loading}
                         isAddActive={isAddActive}
                         setIsAddActive={setIsAddActive}
-                        // onRowDoubleClick={handleOnRowDoubleClick}
+                        onRowDoubleClick={handleOnRowDoubleClick}
                         components={{
                             Toolbar: ProductGridToolBar,
                             Footer: ProductGridFooter,
@@ -296,7 +305,7 @@ export default function ProductGrid() {
                             toolbar: {
                                 rowModesModel,
                                 setRowModesModel,
-                                tempProduct
+                                // tempProduct
                             },
                         }}
                         disableSelectionOnClick
@@ -306,7 +315,7 @@ export default function ProductGrid() {
                         onClick={_ =>
                             openModal(
                                 <Suspense fallback={<div>'...loading'</div>}>
-                                    <AOEP tempData={tempProduct}/>
+                                    <AOEP/>
                                 </Suspense>
                             )
                     }

@@ -1,5 +1,5 @@
 // material
-import {TextField} from "@mui/material";
+import {debounce, TextField} from "@mui/material";
 //
 import AOEPChild_1 from "../localComponent/AOEPChild_1";
 import AOEPHelp from "../localComponent/AOEPHelp";
@@ -7,10 +7,14 @@ import {VariationBrandNameHelpText} from "../AOEPTextHelpData";
 import AOEPChild_2 from "../localComponent/AOEPChild_2";
 import AOEPParent from "../localComponent/AOEPParent";
 import PropTypes from "prop-types";
-import {useSelector} from "react-redux";
+import {productSliceActions} from "../../../../store/productSlice";
 
-export default function ProductVitalBrandName() {
-    const {tempProduct} = useSelector(slice => slice.product);
+export default function ProductVitalBrandName({tempProduct}) {
+
+    const debouncedDispatch = debounce((newTempProduct) => {
+        window.dispatch(productSliceActions.setTempProduct(newTempProduct));
+    }, 400);
+
     return (
         <AOEPParent>
             <AOEPChild_1>
@@ -21,11 +25,17 @@ export default function ProductVitalBrandName() {
             </AOEPChild_1>
             <AOEPChild_2>
                 <TextField
-                    defaultValue={tempProduct.name}
+                    defaultValue={tempProduct.brandName}
                     size='small'
-                    label="brand"
+                    label="Brand"
                     name='brand'
                     required
+                    onChange={e => {
+                        debouncedDispatch({
+                            ...tempProduct,
+                            brandName: e.target.value
+                        });
+                    }}
                 />
             </AOEPChild_2>
         </AOEPParent>
