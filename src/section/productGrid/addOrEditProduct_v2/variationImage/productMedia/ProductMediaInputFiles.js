@@ -69,9 +69,9 @@ export default function ProductMediaInputFiles({
                 </Box>
             </Stack>
             <Button
-                disabled={progress === 100 || !item.image.length}
+                disabled={progress === 100 || !item.image.length || item.image.every(i => i.uploaded)}
                 onClick={async _ => {
-                    uploadToFirebaseStorage(item, setProgress, editMode, tempProduct)
+                    uploadToFirebaseStorage(item, setProgress, editMode, tempProduct).then()
                 }}
                 variant='outlined'
                 sx={{width: 100}}

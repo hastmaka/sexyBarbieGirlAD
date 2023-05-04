@@ -41,17 +41,6 @@ const productSlice = createSlice({
             const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color)
             state.tempProduct.color[indexToUpdate].image = [...data]
         },
-        updateColorAfterUploadImage(state, {payload}) {
-            const {item, res, refs} = payload;
-            const indexToUpdate = state.tempProduct.color.findIndex(i => i.color === item.color);
-            state.tempProduct.color[indexToUpdate] = {
-                ...state.tempProduct.color[indexToUpdate],
-                image: [...res],
-                refs
-            }
-            //if it has id the product is in db
-            if(!!state.tempProduct.id) updateProductApi(state.tempProduct.id, state.tempProduct)
-        },
         updateProduct(state, {payload}) {
             const product = [...state.product];
             const indexToUpdate = product.findIndex(item => item.id === payload.id);

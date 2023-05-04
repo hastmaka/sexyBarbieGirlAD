@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {getNameFromUrl} from "./getNameFromUrl";
 import {productSliceActions} from "../store/productSlice";
 import {deepCopy} from "./deepCopy";
+import {update} from "./firebase/FirestoreApi";
 
 /**
  * Function to handle upload files to firestore
@@ -12,67 +13,68 @@ import {deepCopy} from "./deepCopy";
  * @param editMode - tell me if the upload process comes from editMode to handle the refs
  * @param tempProduct - product in question to update before update state in redux
  */
-export const uploadToFirebaseStorage = (item, setProgress, editMode, tempProduct) => {
+export const uploadToFirebaseStorage = async (item, setProgress, editMode, tempProduct) => {
     let tempProductDeepCopy = deepCopy(tempProduct),
         //shallow copy
-        tempData = [...item.image];
+        tempData = [...item.image],
+        itemsWithOutUrl = tempData.filter(item => !item.url),
+        itemsWithUrl = tempData.filter(item => item.url);
     //check if the image was already uploaded
     const noUploadedImages = item.image.filter(item => !item.uploaded);
-    const timeStamp = new Date().getTime();
+    const timeStamp = (editMode && !!item.refs) ? item.refs : new Date().getTime();
     // const folder_name = item.image[0].File.name.split('.')[0];
     const promises = [];
     noUploadedImages.map((image) => {
-        const storageRef = ref(storage, `products/${editMode ? item.refs : timeStamp}/${image.File.name}`);
+        const storageRef = ref(storage, `products/${timeStamp}/${image.File.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image.File);
-        promises.push(uploadTask);
-        uploadTask.on('state_changed', (snapshot) => {
-                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log('Upload is ' + progress + '% done');
-                setProgress(progress)
-            },
-            (error) => {
-                console.log(error);
-            },
-            async () => {
-                await getDownloadURL(uploadTask.snapshot.ref)
-                    .then((url) => {
-                        return new Promise(async (resolve, reject) => {
-                            //here we get the name to include the url in the correct file
-                            if(editMode) {
-                                let itemsWithOutUrl = tempData.filter(item => !item.url),
-                                    itemsWithUrl = tempData.filter(item => item.url),
-                                    name = getNameFromUrl(url),
-                                    indexToUpdate = itemsWithOutUrl.findIndex(i => i.File.name === name);
-                                itemsWithOutUrl[indexToUpdate] = {id: itemsWithOutUrl[indexToUpdate].id, url, uploaded: true};
-                                if(itemsWithOutUrl.every(i => i.uploaded)) {
-                                    resolve([...itemsWithOutUrl, ...itemsWithUrl])
-                                }
-                            } else {
-                                let name = getNameFromUrl(url),
-                                    indexToUpdate = item.image.findIndex(i => i.File.name === name);
-                                tempData[indexToUpdate] = {id: tempData[indexToUpdate].id, url, uploaded: true};
-                                if(tempData.every(i => i.uploaded)) {
-                                    resolve(tempData)
-                                }
-                            }
-                        }).then(res => {
-                            debugger
-                            window.dispatch(
-                                productSliceActions.updateColorAfterUploadImage({
-                                    res,
-                                    item,
-                                    refs: timeStamp
-                                })
-                            )
-                        })
-                    })
-            }
+        promises.push(
+            new Promise((resolve, reject) => {
+                uploadTask.on(
+                    "state_changed",
+                    (snapshot) => {
+                        // Here you can handle the progress of the upload
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log(`Upload is ${progress}% done`);
+                    },
+                    (error) => {
+                        // Handle unsuccessful uploads
+                        reject(error);
+                    },
+                    () => {
+                        // Handle successful uploads
+                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                            resolve({name: getNameFromUrl(downloadURL), url: downloadURL})
+                        });
+                    }
+                );
+            })
         );
     });
 
-    Promise.race(promises)
-        .then()
-        .catch((err) => console.log(err));
+    const result = await Promise.all(promises);
+    let updateImages = []
+    for (let i = 0; i < itemsWithOutUrl.length; i++) {
+        for (let j = 0; j < result.length; j++) {
+            if(itemsWithOutUrl[i].File.name === result[j].name) {
+                updateImages.push({id: itemsWithOutUrl[i].id, url: result[j].url, uploaded: true})
+            }
+        }
+    }
+    const indexToUpdate = tempProductDeepCopy.color.findIndex(i => i.color === item.color);
+    tempProductDeepCopy.color[indexToUpdate] = {
+        ...tempProductDeepCopy.color[indexToUpdate],
+        image: !!itemsWithUrl.length ? [...updateImages, ...itemsWithUrl] : [...updateImages],
+        refs: timeStamp
+    }
+    // debugger
+    window.dispatch(productSliceActions.setTempProduct(tempProductDeepCopy))
+    if(!!tempProductDeepCopy.id) {
+        window.dispatch(update({
+            id: tempProductDeepCopy.id,
+            data: tempProductDeepCopy,
+            collection: 'tests'//products
+        }))
+    }
 };
 
 uploadToFirebaseStorage.prototype = {
