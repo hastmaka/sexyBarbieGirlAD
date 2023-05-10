@@ -12,6 +12,9 @@
 # production
 /build
 
+# others
+/src/resources
+
 # misc
 .DS_Store
 .env.local
