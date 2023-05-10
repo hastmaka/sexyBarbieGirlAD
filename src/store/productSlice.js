@@ -17,7 +17,7 @@ const productSlice = createSlice({
             brandName: '',
             size: [],
             variation: [],
-            tags: []
+            tags: [],
         },
         tempProductState: {
             size: false,
@@ -70,7 +70,7 @@ const productSlice = createSlice({
         });
         builder.addCase(getAll.fulfilled, (state, {meta, payload}) => {
             switch (meta.arg.collection) {
-                case 'tests'://change to products later
+                case 'products'://change to products later
                     state.product = payload;
                     state.productState.loading = false;
                     state.productState.loaded = true;
@@ -111,7 +111,7 @@ const productSlice = createSlice({
         //update
         builder.addCase(update.pending, (state, {meta}) => {
             switch (meta.arg.collection) {
-                case 'tests'://products
+                case 'products'://products
                     state.productState.loading = true;
                     break;
                 default:
@@ -120,7 +120,7 @@ const productSlice = createSlice({
         });
         builder.addCase(update.fulfilled, (state, {meta, payload}) => {
             switch (meta.arg.collection) {
-                case 'tests'://products
+                case 'products'://products
                     const indexToUpdate = state.product.findIndex(i => i.id === meta.arg.id)
                     state.product[indexToUpdate] = {...meta.arg.data}
                     state.productState.loading = false;

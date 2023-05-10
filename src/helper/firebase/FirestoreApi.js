@@ -21,7 +21,7 @@ export const create = createAsyncThunk(
             const res = await addDoc(firestoreCollection(db, collection), data);
             window.displayNotification({type: 'info', content: 'Product Created Successfully'})
             //get the update data from the server
-            window.dispatch(getAll({collection: 'tests', filter: null, lim: null}))
+            window.dispatch(getAll({collection: 'products', filter: null, lim: null}))
             return res.id;
         } catch (err) {
             debugger
@@ -96,7 +96,7 @@ export const getAll = createAsyncThunk(
 
 export const updateProductApi = (id, product) => {
     try {                                     //products
-        setDoc(doc(firestoreCollection(db, 'tests'), id), product, {merge: true})
+        setDoc(doc(firestoreCollection(db, 'products'), id), product, {merge: true})
             .then(_ => {
                 window.displayNotification({type: 'info', content: 'Product Updated Successfully'})
             })
@@ -108,7 +108,7 @@ export const updateProductApi = (id, product) => {
 };
 
 export const checkProductNameApi = async (name) => {
-    const productRef = firestoreCollection(db, 'tests')//products
+    const productRef = firestoreCollection(db, 'products')//products or tests
     const q = query(productRef, where('name', '==', name))
     try {
         const querySnapshot = await getDocs(q)
@@ -124,7 +124,7 @@ export const checkProductNameApi = async (name) => {
 export const uploadDummyData = async (data) => {
     debugger
     try {
-        const collectionRef = firestoreCollection(db, 'tests');
+        const collectionRef = firestoreCollection(db, 'products');
         const batch = writeBatch(db);
 
         data.forEach((item) => {
@@ -144,7 +144,7 @@ export const getDummyData = async (searchParams, setData) => {
         if(Object.keys(searchParams).length) {
             const querySnapshot = await getDocs(
                 query(
-                    firestoreCollection(db, 'tests'),
+                    firestoreCollection(db, 'products'),
                     where('tags', 'array-contains', searchParams)
                 )
             );
@@ -152,7 +152,7 @@ export const getDummyData = async (searchParams, setData) => {
                 data.push({...doc.data(), id: doc.id})
             })
         } else {
-            const querySnapshot = await getDocs(firestoreCollection(db, 'tests'));
+            const querySnapshot = await getDocs(firestoreCollection(db, 'products'));
             querySnapshot.docs.map(doc => {
                 data.push({...doc.data(), id: doc.id})
             })

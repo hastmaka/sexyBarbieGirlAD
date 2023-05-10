@@ -62,7 +62,7 @@ export const handleDeleteImage = (img, item, hiddenInputRef, setProgress, tempPr
                 window.dispatch(update({
                     id: tempProductDeepCopy.id,
                     data: tempProductDeepCopy,
-                    collection: 'tests'//products
+                    collection: 'products'//products
                 }))
             }
             //reset input refs to accept more files

@@ -43,6 +43,7 @@ export default function VariationGridToolBar({setRows, tempProduct, columns, ...
         <RootStyle>
             <Stack flexDirection='row' alignItems='center'>
                 <EzIconButton
+                    disabled={rest.isAddActive}
                     toolTipTitle={'Add Variation'}
                     icon={<AddIcon/>}
                     onClick={_ => handleAddRow().then()}

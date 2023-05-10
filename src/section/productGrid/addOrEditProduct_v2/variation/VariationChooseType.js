@@ -25,20 +25,20 @@ export default function VariationChooseType({handleCheckbox, tempProductState}) 
             <AOEPChild_2>
                 <FormGroup sx={{flexDirection: 'row'}} gap='24px'>
                     <FormControlLabel
-                        label="Size"
-                        control={
-                            <Checkbox
-                                checked={tempProductState.size}
-                                onChange={_ => handleCheckbox('size')}
-                            />
-                        }
-                    />
-                    <FormControlLabel
                         label="Color"
                         control={
                             <Checkbox
                                 checked={tempProductState.color}
                                 onChange={_ => handleCheckbox('color')}
+                            />
+                        }
+                    />
+                    <FormControlLabel
+                        label="Size"
+                        control={
+                            <Checkbox
+                                checked={tempProductState.size}
+                                onChange={_ => handleCheckbox('size')}
                             />
                         }
                     />

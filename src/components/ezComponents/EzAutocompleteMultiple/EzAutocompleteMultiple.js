@@ -35,7 +35,7 @@ export default function EzAutocompleteMultiple({
                     setValue(existedValue !== -1 ? [...value] :
                         valueForIteration === 'size' ?
                             [...value, {...option.option}] :
-                            [...value, {...option.option, image: []}]
+                            [...value, {color: option.option.color, image: []}]
                     )
                 }
                 break;

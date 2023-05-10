@@ -24,13 +24,13 @@ export default function Variation({tempProductState, tempProduct, editMode}) {
                         tempProductState={tempProductState}
                     />
 
-                    {tempProductState.size && <VariationSize tempProduct={tempProduct}/>}
-
                     {tempProductState.color && <VariationColor tempProduct={tempProduct}/>}
+
+                    {tempProductState.size && <VariationSize tempProduct={tempProduct}/>}
 
                     <Button
                         variant='outlined'
-                        disabled={!tempProduct.size.length || !tempProduct.color.length}
+                        disabled={!tempProduct?.size?.length || !tempProduct?.color?.length}
                         onClick={_ => handleClickVariation(tempProduct)}
                     >Create Variation</Button>
                 </>
@@ -39,9 +39,10 @@ export default function Variation({tempProductState, tempProduct, editMode}) {
             {tempProduct.variation.length > 0 &&
                 <VariationGrid
                     editMode={editMode}
-                    variation={tempProduct.variation}
+                    tempProduct={tempProduct}
                 />
             }
         </RootStyle>
     );
 }
+

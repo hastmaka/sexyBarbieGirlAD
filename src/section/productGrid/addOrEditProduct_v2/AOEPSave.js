@@ -23,7 +23,7 @@ export default function AOEPSave({tempProduct, editMode}) {
         <RootStyle>
             <CustomButton
                 variant='outlined'
-                onClick={_ => editMode ? handleProductUpdate(tempProduct) : handleProductSave(tempProduct)}
+                onClick={_ => handleProductSave(tempProduct, editMode)}
             >{editMode ? 'Update' : 'Save'}</CustomButton>
         </RootStyle>
     );

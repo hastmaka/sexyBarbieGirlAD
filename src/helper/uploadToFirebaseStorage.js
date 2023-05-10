@@ -21,7 +21,7 @@ export const uploadToFirebaseStorage = async (item, setProgress, editMode, tempP
         itemsWithUrl = tempData.filter(item => item.url);
     //check if the image was already uploaded
     const noUploadedImages = item.image.filter(item => !item.uploaded);
-    const timeStamp = (editMode && !!item.refs) ? item.refs : new Date().getTime();
+    const timeStamp = (editMode && !!item.firebaseStoreRefs) ? item.firebaseStoreRefs : new Date().getTime();
     // const folder_name = item.image[0].File.name.split('.')[0];
     const promises = [];
     noUploadedImages.map((image) => {
@@ -64,7 +64,7 @@ export const uploadToFirebaseStorage = async (item, setProgress, editMode, tempP
     tempProductDeepCopy.color[indexToUpdate] = {
         ...tempProductDeepCopy.color[indexToUpdate],
         image: !!itemsWithUrl.length ? [...updateImages, ...itemsWithUrl] : [...updateImages],
-        refs: timeStamp
+        firebaseStoreRefs: timeStamp
     }
     // debugger
     window.dispatch(productSliceActions.setTempProduct(tempProductDeepCopy))
@@ -72,7 +72,7 @@ export const uploadToFirebaseStorage = async (item, setProgress, editMode, tempP
         window.dispatch(update({
             id: tempProductDeepCopy.id,
             data: tempProductDeepCopy,
-            collection: 'tests'//products
+            collection: 'products'//products
         }))
     }
 };

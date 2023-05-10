@@ -9,15 +9,14 @@ import {openModal} from "./openModal";
 import {updateFilter} from "./updateFilter";
 import {checkImageNameBeforeUpload} from "./checkImageNameBeforeUpload";
 import {handleAddImageToVariation} from "./handleAddImageToVariation";
-import {sanitizeTempProduct} from "./sanitizeTempProduct";
+import {sanitizeProduct} from "./sanitizeProduct";
 import {areArrayOfObjectsEqual} from "./areArrayOfObjectsEqual";
 import {capitalizeFirstLetter} from "./capitalizeFirstLetter";
 import {createAccountProcess, loginProcess, logOut} from './helper';
 import {getColumnDataToRenderNewRow} from "./getColumnDataToRenderNewRow";
-import {updateColorAfterAddAVariation} from "./updateColorAfterAddAVariation";
-import {updateSizeAfterAddAVariation} from "./updateSizeAfterAddAVariation";
 import {deepCopy} from "./deepCopy";
 import {findFirst} from "./findFirst";
+import {checkValidFields} from "./checkValidFields";
 
 export {
     createId,
@@ -31,15 +30,14 @@ export {
     updateFilter,
     checkImageNameBeforeUpload,
     handleAddImageToVariation,
-    sanitizeTempProduct,
+    sanitizeProduct,
     areArrayOfObjectsEqual,
     capitalizeFirstLetter,
     createAccountProcess,
     loginProcess,
     logOut,
     getColumnDataToRenderNewRow,
-    updateColorAfterAddAVariation,
-    updateSizeAfterAddAVariation,
     deepCopy,
-    findFirst
+    findFirst,
+    checkValidFields
 }

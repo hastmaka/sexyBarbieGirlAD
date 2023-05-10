@@ -26,10 +26,10 @@ export default function App() {
     const [runApp, setRunApp] = useState(false);
 
     //delete firebase emulator warning
-    useEffect(_ => {
-        const firebaseWarning = document.getElementsByClassName('firebase-emulator-warning');
-        firebaseWarning[0].style.display = 'none'
-    }, [])
+    // useEffect(_ => {
+    //     const firebaseWarning = document.getElementsByClassName('firebase-emulator-warning');
+    //     firebaseWarning[0].style.display = 'none'
+    // }, [])
 
     // check if the user is logged in and has credentials
     useEffect(_ => {

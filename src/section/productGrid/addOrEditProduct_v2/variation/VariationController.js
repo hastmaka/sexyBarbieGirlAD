@@ -20,7 +20,7 @@ export const handleClickVariation = (tempProduct) => {
         date_on_sale_to: '',
         sales: {},
         total_review: 0
-    }
+    };
 
     let variant = [];
     for (const col of color) {
@@ -39,16 +39,15 @@ export const handleClickVariation = (tempProduct) => {
     }
     window.dispatch(
         productSliceActions.setTempProduct({
-            active: active,
-            category: category,
-            color: color,
-            size: size,
-            description: description,
-            name: name,
-            statistic: statistic,
-            stock: true,
+            ...rest,
+            active,
+            category,
+            description,
+            name,
+            statistic,
+            color,
+            size,
             variation: sortArray([...variant]),
-            ...rest
         })
     )
 }

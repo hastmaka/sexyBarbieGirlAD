@@ -1,20 +1,21 @@
-import {useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from "react";
 // material
-import {Box} from "@mui/material";
+import {Box, capitalize} from "@mui/material";
 import ChildWrapper from "../../../../../components/ChildWrapper/ChildWrapper";
 import EzMuiGrid from "../../../../../components/EzMuiGrid/EzMuiGrid";
 import EzText from "../../../../../components/ezComponents/EzText/EzText";
 import {productSliceActions} from "../../../../../store/productSlice";
-import {sortArray, updateColorAfterAddAVariation} from "../../../../../helper";
-import {updateProductApi} from "../../../../../helper/firebase/FirestoreApi";
+import {checkValidFields, sortArray} from "../../../../../helper";
+import {update} from "../../../../../helper/firebase/FirestoreApi";
 import {tableSx} from "../../../../../helper/sx/Sx";
 import VariationGridToolBar from "./VariationGridToolBar";
+import {colorArray, sizeArray} from "../../../../../helper/staticData/StaticData";
+import EzSelect from "../../../../../components/ezComponents/EzSelect/EzSelect";
 
 //----------------------------------------------------------------
 
-export default function VariationGrid({variation, editMode}) {
-    const {tempProduct} = useSelector(slice => slice.product);
+export default function VariationGrid({editMode, tempProduct}) {
+    const {variation, id, color, size, ...rest} = tempProduct;
     const [rows, setRows] = useState([]);
     const [rowModesModel, setRowModesModel] = useState({});
     const [isAddActive, setIsAddActive] = useState(false);
@@ -25,22 +26,29 @@ export default function VariationGrid({variation, editMode}) {
 
     const processRowUpdate = useCallback(
         async (newRow, oldRow, rows) => {
+            //need to crate the variables outside to get the scope
+            let tempVariation = rows.filter(item => !item.isNew),
+                tempColor = [...color],
+                tempSize = [...size];
+
             await new Promise((resolve, reject) => {
+                //if isNew is true the row is added it, and we have the make a workaround to get the data
+                if(newRow.isNew) {
+                    const colorFromRow = rows.find(item => item.isNew)
+                    newRow = {...newRow, color: colorFromRow.color, size: colorFromRow.size}
+                }
                 //check empty field
-                if(!(!!newRow.color) || !(!!newRow.size)) {
-                    return reject({type: 'error', content: 'No empty field allowed'});
+                const response = checkValidFields(newRow)
+                if (response !== true) {
+                    return reject({type: 'error', content: response.message});
                 }
                 //check if variation exist
-                if(newRow.isNew) {
-                    let tempRows = [...rows];
-                    // tempRows.splice(0,1);
-                    const existVariation = tempRows.find(item => (
-                        item.color.toLowerCase() === newRow.color.toLowerCase() &&
-                        item.size.toLowerCase() === newRow.size.toLowerCase()
-                    ));
-                    if(!!existVariation) {
-                        return reject({type: 'error', content: 'Variant already exit'});
-                    }
+                const existVariation = tempVariation.find(item => (
+                    item.color.toLowerCase() === newRow.color.toLowerCase() &&
+                    item.size.toLowerCase() === newRow.size.toLowerCase()
+                ));
+                if(!!existVariation) {
+                    return reject({type: 'error', content: 'Variant already exit'});
                 }
                 resolve()
             })
@@ -48,39 +56,58 @@ export default function VariationGrid({variation, editMode}) {
             if(JSON.stringify(newRow) === JSON.stringify(oldRow)) {
                 return oldRow
             } else {
-                const {id, variation, color, size, ...rest} = {...tempProduct};
-                let tempVariation = [...variation],
-                    tempColor = [],
-                    tempSize = [];
-                // debugger
-                let indexTempVariation = variation.findIndex(item => item.id === newRow.id);
-                if(indexTempVariation >= 0) {
-                    // variation[indexTempVariation] = newRow;
-                    // debugger
-                    // if(dataToUpdateProduct) {
-                    // debugger
-                    //update variation when product is in creating mode
-                    //     dataToUpdateProduct(sortArray(tempRows))
-                    // }
-                } else {
+                if(newRow.isNew) {
                     //new variation
                     //need to update variation, color and size
-                    const {isNew, ...rest} = newRow;
-                    tempVariation = [...tempVariation, rest]
-                    tempColor = updateColorAfterAddAVariation(color, rest.color);
-                    // const updatedSize = updateColorAfterAddAVariation(size, rest.size);
-                    debugger
+                    const {isNew, ...restFromNewVariation} = newRow;
+                    //check if color exist, in case Yes update color
+                    const existedColor = tempVariation.findIndex(item => item.color === restFromNewVariation.color);
+                    if(existedColor === -1) {
+                        tempColor = [...tempColor, {color: restFromNewVariation.color, image: []}]
+                    }
+                    //check if size exist, in case Yes update size
+                    const existedSize = tempSize.findIndex(item => item.size === restFromNewVariation.size);
+                    if(existedSize === -1) {
+                        const size = sizeArray.find(item => item.size === restFromNewVariation.size)
+                        tempSize = [...tempSize, size]
+                    }
+                    tempVariation = [...tempVariation, restFromNewVariation]
+                    //update redux store
+                    window.dispatch(
+                        productSliceActions.setTempProduct({
+                            ...rest,
+                            color: tempColor,
+                            size: tempSize,
+                            variation: sortArray(tempVariation)
+                        })
+                    )
+                } else {
+                    //edit mode
+                    let indexTempVariation = tempVariation.findIndex(item => item.id === newRow.id);
+                    tempVariation[indexTempVariation] = newRow;
+                    //update redux store
+                    window.dispatch(
+                        productSliceActions.setTempProduct({
+                            ...rest, color, size,
+                            variation: sortArray(tempVariation)
+                        })
+                    )
                 }
-                window.dispatch(
-                    productSliceActions.setTempProduct({
-                        ...rest,
-                        id,
-                        color: tempColor,
-                        variation: sortArray(tempVariation)
-                    })
-                )
+
                 //if no id, the product was not uploaded yet
-                // if(id) updateProductApi(id, {id, variation: tempRows, ...rest})
+                if(id) {
+                    window.dispatch(update({
+                        id,
+                        data: {
+                            ...rest,
+                            id,
+                            color: editMode ? tempColor : color,
+                            size: editMode ? tempSize : size,
+                            variation: tempVariation,
+                        },
+                        collection: 'products'
+                    }))
+                }
                 return newRow
             }
         },[]
@@ -105,6 +132,27 @@ export default function VariationGrid({variation, editMode}) {
             align: 'center',
             headerAlign: 'center',
             editable: true,
+            renderEditCell: (params) => {
+                if(params.row.isNew) {
+                    return <EzSelect
+                        initialData={colorArray}
+                        value={params.row.color}
+                        valueToIterate='color'
+                        setValue={value => {
+                            setRows(prev => {
+                                const tempPrev = [...prev]
+                                const indexToUpdate = tempPrev.findIndex(item => item.id === params.row.id);
+                                tempPrev[indexToUpdate] = {
+                                    ...tempPrev[indexToUpdate],
+                                    color: value
+                                }
+                                params.row.color = value
+                                return tempPrev
+                            })
+                        }}
+                    />
+                }
+            },
         }, {
             field: 'size',
             headerName: 'Size',
@@ -112,11 +160,33 @@ export default function VariationGrid({variation, editMode}) {
             align: 'center',
             headerAlign: 'center',
             editable: true,
+            renderEditCell: (params) => {
+                if(params.row.isNew) {
+                    return <EzSelect
+                        initialData={sizeArray}
+                        value={params.row.size}
+                        valueToIterate='size'
+                        setValue={value => {
+                            setRows(prev => {
+                                const tempPrev = [...prev]
+                                const indexToUpdate = tempPrev.findIndex(item => item.id === params.row.id);
+                                tempPrev[indexToUpdate] = {
+                                    ...tempPrev[indexToUpdate],
+                                    size: value
+                                }
+                                params.row.size = value
+                                return tempPrev
+                            })
+                        }}
+                    />
+                }
+            },
         }, {
             field: 'price',
             headerName: 'Price',
             flex: 1,
             align: 'center',
+            type: 'number',
             headerAlign: 'center',
             editable: true,
             valueFormatter: ({value}) => `$ ${value}`
@@ -194,6 +264,15 @@ export default function VariationGrid({variation, editMode}) {
                     }}
                     disableSelectionOnClick
                     sx={({palette}) => tableSx(palette)}
+
+                    onCellEditStop={(params) => {
+                        debugger
+                        const { id, field, value } = params;
+                        const updatedRows = [...rows];
+                        const index = updatedRows.findIndex((row) => row.id === id);
+                        updatedRows[index] = { ...updatedRows[index], [field]: value };
+                        setRows(updatedRows);
+                    }}
                 />
             </Box>
         </ChildWrapper>

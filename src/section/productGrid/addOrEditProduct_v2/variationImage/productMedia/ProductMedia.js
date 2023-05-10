@@ -44,7 +44,7 @@ export default function ProductMedia({item, editMode, tempProduct}) {
                 let existedImageIndex = item.image.findIndex(item =>
                     (editMode ? getNameFromUrl(item.url) : item.File.name) === e.target.files[i].name
                 )
-                if(!existedImageIndex) continue;
+                if(existedImageIndex !== -1) continue;
             }
             // if(newImage.size > 50000) return alert('Img size must be less than 50k');
             tempImg.push({

@@ -1,30 +1,19 @@
-import {create} from "../../../helper/firebase/FirestoreApi";
+import {create, update} from "../../../helper/firebase/FirestoreApi";
 import {productSliceActions} from "../../../store/productSlice";
 import {adminSliceActions} from "../../../store/adminSlice";
+import {sanitizeProduct} from "../../../helper";
 
-export const handleProductSave = (tempProduct) => {
-    // const sanitizedProduct = sanitizeTempProduct(tempProduct)
-    try{
-        window.dispatch(create({collection: 'tests', data: tempProduct}));
-        window.dispatch(
-            productSliceActions.setTempProduct({
-                active: true,
-                category: [],
-                color: [],
-                description: [],
-                name: '',
-                brandName: '',
-                size: [],
-                variation: [],
-                tags: []
-            }
-        ));
-        window.dispatch(adminSliceActions.closeModal());
-    } catch (err) {
-        console.log(err);
+export const handleProductSave = (tempProduct, editMode) => {
+    // const sanitizedProduct = sanitizeProduct(tempProduct, 'to-server');
+    if(editMode) {
+        window.dispatch(update({
+            id: tempProduct.id,
+            data: tempProduct,
+            collection: 'products'
+        }));
+    } else {
+        window.dispatch(create({collection: 'products', data: tempProduct}));
     }
-}
-
-export const handleProductUpdate = (tempProduct) => {
-    debugger
+    window.dispatch(productSliceActions.resetTempProductAndTempProductState())
+    window.dispatch(adminSliceActions.closeModal());
 }

@@ -649,14 +649,14 @@ export const swimwearTypesArray = [
 
 export const tempProduct = {
     active: true,
-        category: [],
-        color: [],
-        description: [],
-        name: '',
-        brandName: '',
-        size: [],
-        variation: [],
-        tags: []
+    category: [],
+    color: [],
+    description: [],
+    name: '',
+    brandName: '',
+    size: [],
+    variation: [],
+    tags: []
 };
 
 export const tempProductState = {

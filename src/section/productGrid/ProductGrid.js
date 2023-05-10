@@ -48,7 +48,7 @@ export default function ProductGrid() {
 
     useEffect(() => {
         if (!productState.loading && !productState.loaded) {
-            window.dispatch(getAll({collection: 'tests', filter: null, lim: null}))
+            window.dispatch(getAll({collection: 'products', filter: null, lim: null}))
         }
     }, [productState]);
 

@@ -1,180 +1,233 @@
-const dummyProduct = {
-    "active": true,
-    "category": [
-        "bikini"
-    ],
-    "color": [
+const ProductWithVariation = {
+    active: true,
+    id: "FSpgkPguN66fUf1wJw8z",
+    category: ['bikini'],
+    tags: ['bikini'],
+    size: [
         {
-            color: "INDIANRED",
-            image: []
+            size: 'xxs',
+            bust: 76,
+            waist: 56,
+            hips: 81
         },
         {
-            color: "LIGHTCORAL",
-            image: []
-        }
-
-    ],
-    "description": [
-        {
-            "name": "Style",
-            "value": "bikini"
+            size: 'xs',
+            bust: 81,
+            waist: 61,
+            hips: 86
         }
     ],
-    "image": [
+    description: [
         {
-            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2Fnob%2Fnob.jpg?alt=media&token=c5e464cf-9b7d-4cee-b5c5-e376d34799fc",
-            "id": "RhJS2ZlXKzFkG1KqT7Ow",
-            "name": "nob.jpg"
-        },
-        {
-            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2Fnob%2Fnob_1.jpg?alt=media&token=3d17c3da-9ff4-4b77-b9e6-a9a8ac374fcb",
-            "id": "xPSRmz08dFYlpEsWkByJ",
-            "name": "nob_1.jpg"
-        },
-        {
-            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2Fnob%2Fnob_2.jpg?alt=media&token=e4fafeda-954d-4e3d-aeb2-4d2e3f57db32",
-            "id": "d9RBLRlwCjIaRNSZDgdv",
-            "name": "nob_2.jpg"
-        },
-        {
-            "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2Fnob%2Fnob_3.jpg?alt=media&token=2c59da6e-0240-49e2-b86b-2c6de8001357",
-            "id": "modL4uHVeUDKgwVIgDzJ",
-            "name": "nob_3.jpg"
+            name: 'Style',
+            value: 'bikini'
         }
     ],
-    "name": "Second Test",
-    "price": 25.99,
-    "size": [
-        "XXS",
-        "XS"
-    ],
-    "statistic": {
-        "average_rating": 0,
-        "date_on_sale_from": "",
-        "date_on_sale_to": "",
-        "sales": {},
-        "total_review": 0
+    name: 'Second Test',
+    statistic: {
+        average_rating: 0,
+        date_on_sale_from: '',
+        date_on_sale_to: '',
+        sales: {},
+        total_review: 0
     },
-    "stock": true,
-    "variation": [
+    color: [
         {
-            "id": "TRywYTbg5TydJvshD8AZ",
-            "price": 25.99,
-            "color": "INDIANRED",
-            "size": "XXS",
-            "stock": 10,
-            "discount": 0,
-            "checked": true,
-            "varImage": []
-        },
-        {
-            "id": "tR0JfTz4smGblyRskKNs",
-            "price": 25.99,
-            "color": "INDIANRED",
-            "size": "XS",
-            "stock": 10,
-            "discount": 0,
-            "checked": true,
-            "varImage": []
-        },
-        {
-            "id": "T2P5tYb2l5YSzHzh5jcS",
-            "price": 25.99,
-            "color": "LIGHTCORAL",
-            "size": "XXS",
-            "stock": 10,
-            "discount": 0,
-            "checked": true,
-            "varImage": []
-        },
-        {
-            "id": "UdjtTwWCOYjDKQPZkzGR",
-            "price": 25.99,
-            "color": "LIGHTCORAL",
-            "size": "XS",
-            "stock": 10,
-            "discount": 0,
-            "checked": true,
-            "varImage": []
-        }
-    ]
-}
-
-const tempProduct = {
-    "active": true,
-    "category": [
-        "bikini"
-    ],
-    "color": [
-        {
-            "color": "INDIANRED",
-            "hex": "#CD5C5C",
-            "image": [
+            color: 'red',
+            firebaseStoreRefs: 1683277835805,
+            image: [
                 {
-                    "File": {},
-                    "id": "ACGe4Ha9L7Y21wkNHjbY",
-                    "uploaded": true,
-                    "url": "https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2Fbikini%2FINDIANRED%2Fnob.jpg?alt=media&token=02db5dca-6a46-40a4-8910-07f85bfbb6fc"
+                    id: 'SlhqIBmFcHMGH8YeN7fI',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                },
+                {
+                    id: 'HMGH8YeN7fISlhqIBmFc',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                }
+            ]
+        },
+        {
+            color: 'blue',
+            firebaseStoreRefs: 1683277835805,
+            image: [
+                {
+                    id: 'SlhqIBmFcHMGH8YeN7fI',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                },
+                {
+                    id: 'HMGH8YeN7fISlhqIBmFc',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                }
+            ]
+        },
+        {
+            color: 'green',
+            firebaseStoreRefs: 1683277835805,
+            image: [
+                {
+                    id: 'SlhqIBmFcHMGH8YeN7fI',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                },
+                {
+                    id: 'HMGH8YeN7fISlhqIBmFc',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
                 }
             ]
         }
     ],
-    "description": [
+    variation: [
         {
-            "name": "Style",
-            "value": "bikini"
-        }
-    ],
-    "name": "Second Test",
-    "price": 25.99,
-    "size": [
-        "XXS"
-    ],
-    "statistic": {
-        "average_rating": 0,
-        "date_on_sale_from": "",
-        "date_on_sale_to": "",
-        "sales": {},
-        "total_review": 0
-    },
-    "stock": true,
-    "variation": [
+            id: "FSpgkPguN66fUf1wJw8z",
+            price: 0,
+            color: "blue",
+            size: "xxs",
+            stock: 10,
+            discount: 0,
+            checked: true,
+            active: true
+        },
         {
-            "id": "r1E0YPCmnMCQnZmEwGyl",
-            "price": 25.99,
-            "color": "INDIANRED",
-            "size": "XXS",
-            "stock": 10,
-            "discount": 0,
-            "checked": true
+            id: "A45OONWabu06iP6VufDr",
+            price: 0,
+            color: "blue",
+            size: "xs",
+            stock: 10,
+            discount: 0,
+            checked: true,
+            active: true
+        },
+        {
+            id: "UGhu6Owxfx0oUMuO8P6H",
+            price: 0,
+            color: "red",
+            size: "xxs",
+            stock: 10,
+            discount: 0,
+            checked: true,
+            active: true
+        },
+        {
+            id: "IAFNPwOEA8b6hWG5Qlho",
+            price: 0,
+            color: "red",
+            size: "xs",
+            stock: 10,
+            discount: 0,
+            checked: true,
+            active: true
+        },
+        {
+            id: "JAMJ6gCheQsdevVdf7ak",
+            price: 0,
+            color: "green",
+            size: "xxs",
+            stock: 10,
+            discount: 0,
+            checked: true,
+            active: true
+        },
+        {
+            id: "yfSYUDIP2iF8sXZt9v7l",
+            price: 0,
+            color: "green",
+            size: "xs",
+            stock: 10,
+            discount: 0,
+            checked: true,
+            active: true
         }
     ]
 }
 
-
-// const san = (t) => {
-//     const {color, ...rest} = t;
-//     let temp = [];
-//     for (let i = 0; i < color.length; i++) {
-//         const {color: name, ...rest} = color[i];
-//         let img = []
-//         for (let j = 0; j < color[i].image.length; j++) {
-//             const {id, url, ...rest} = color[i].image[j]
-//             img.push({id, url})
-//             temp.push({image: [...img], color: name})
-//         }
-//     }
-//     return {color: temp, ...rest}
-// }
-//
-// console.log(san(tempProduct))
-
-
-
-
-
-
-
+const ProductWithoutVariation = {
+    active: true,
+    category: ['bikini'],
+    tags: ['bikini'],
+    sizeChart: [
+        {
+            size: 'xxs',
+            bust: 76,
+            waist: 56,
+            hips: 81
+        },
+        {
+            size: 'xs',
+            bust: 81,
+            waist: 61,
+            hips: 86
+        }
+    ],
+    description: [
+        {
+            name: 'Style',
+            value: 'bikini'
+        }
+    ],
+    name: 'Second Test',
+    statistic: {
+        average_rating: 0,
+        date_on_sale_from: '',
+        date_on_sale_to: '',
+        sales: {},
+        total_review: 0
+    },
+    image: [
+        {
+            color: 'red',
+            firebaseStoreRefs: 1683277835805,
+            image: [
+                {
+                    id: 'SlhqIBmFcHMGH8YeN7fI',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                },
+                {
+                    id: 'HMGH8YeN7fISlhqIBmFc',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                }
+            ]
+        },
+        {
+            color: 'blue',
+            firebaseStoreRefs: 1683277835805,
+            image: [
+                {
+                    id: 'SlhqIBmFcHMGH8YeN7fI',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                },
+                {
+                    id: 'HMGH8YeN7fISlhqIBmFc',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                }
+            ]
+        },
+        {
+            color: 'green',
+            firebaseStoreRefs: 1683277835805,
+            image: [
+                {
+                    id: 'SlhqIBmFcHMGH8YeN7fI',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                },
+                {
+                    id: 'HMGH8YeN7fISlhqIBmFc',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/sexybarbiegirl-f6068.appspot.com/o/products%2F1683277835805%2Fnob.jpg?alt=media&token=a5884fbd-ed8e-454f-8e14-2ac645039ce1',
+                    uploaded: true
+                }
+            ]
+        }
+    ],
+}
 
 
 

@@ -17,6 +17,7 @@ export const registerUser = async (email, password) => {
         .then(userCredential => {
             return userCredential.user
         }).catch(e => {
+            debugger
             switch (e.code) {
                 case 'auth/email-already-in-use':
                     return window.displayNotification({
